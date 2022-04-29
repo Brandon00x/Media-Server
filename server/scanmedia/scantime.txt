@@ -1,0 +1,9 @@
+New Movies Scan. 4/29/2022 12:24:39 PM
+4/29/2022 12:24:39 PM - Media Type Movies. Function: checkPathEnding. Time eplasted: 12831 seconds. v3
+4/29/2022 12:24:39 PM - Media Type Movies. Function: findMediaDirectories. Time eplasted: 12831 seconds. v3
+4/29/2022 12:24:39 PM - Media Type Movies. Function: verifyFinalDirectory. Time eplasted: 12831 seconds. v3
+4/29/2022 12:24:51 PM - Media Type Movies. Function: readDirectoryContents. Time eplasted: 12843 seconds. v3
+4/29/2022 12:24:51 PM - Media Type Movies. Function: sendCategoryFixes. Time eplasted: 12843 seconds. v3
+ 
+4/29/2022 12:24:51 PM - Media Type Movies. Function: sanitizeMovieTitles. Time eplasted: 12843 seconds. v3
+4/29/2022 12:24:51 PM - Media Type Movies. Function: createJson. Time eplasted: 12843 seconds. v3

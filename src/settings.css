@@ -1,0 +1,90 @@
+/* Global */
+.settingsContainer {
+  color: white;
+  padding-top: 40px;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.settingsComponents {
+  margin: 20px 10px 10px 50px;
+  display: block;
+}
+/* End Global */
+
+/* Scan Options */
+.mediaRootDirectory {
+  display: block;
+  margin-top: 5px;
+}
+
+.mediaDirectoryTitle {
+  font-size: 17px;
+  width: 115px;
+  display: inline-block;
+}
+
+.rootDirectoryInput {
+  margin-left: 10px;
+  width: 300px;
+}
+
+.settingsScanButton {
+  margin-left: 10px;
+  width: 100px;
+}
+/* End Scan Options */
+
+/* Program Options */
+.settingsProgramItem {
+  font-size: 17px;
+  display: inline-block;
+}
+
+.settingsPortInput {
+  width: 40px;
+}
+
+.settingsProgramButton {
+  margin-left: 10px;
+  width: 50px;
+}
+
+.settingsProgramTitle {
+  margin-right: 10px;
+  margin-top: 5px;
+  width: 160px;
+  display: inline-block;
+}
+
+.settingsApiKey {
+  width: 300px;
+}
+/* End Program Options */
+
+/* Server Response */
+.settingsServerResponseContainer {
+  display: flex;
+  position: fixed;
+  right: 10%;
+  top: 8%;
+  width: 40vw;
+  max-height: 500px;
+}
+
+.serverMessages {
+  position: fixed;
+  top: 16%;
+  max-width: 37vw;
+  max-height: 500px;
+  overflow: scroll;
+}
+/* End Server Response */
+
+/* Settings Information */
+
+.settingsDescription {
+  margin-top: 20px;
+  width: 500px;
+  height: 100vh;
+}

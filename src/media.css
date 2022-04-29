@@ -1,0 +1,327 @@
+body {
+  background-color: black;
+  width: 100vw;
+  height: 100%;
+  overflow-y: hidden;
+}
+
+.templateRoot {
+  width: 100vw;
+  height: 100vh;
+  overflow-y: scroll;
+}
+
+.marginTop {
+  margin-top: 30px;
+}
+
+.mediaLoading {
+  color: white;
+  overflow-y: hidden;
+}
+
+.mediaLoadingTitle {
+  padding-top: 40px;
+  width: 100vw;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.mediaNotFound {
+  color: white;
+  width: 100vw;
+  height: 100vh;
+}
+
+.mediaNotFoundTitle {
+  display: flex;
+  justify-content: center;
+}
+
+.scanMediaButton {
+  height: 30px;
+  margin-top: 30px;
+  margin-left: 10px;
+  text-decoration: none;
+  background-color: white;
+  text-align: center;
+  width: 75px;
+  border-radius: 5px;
+}
+
+.scanMessages {
+  margin-left: 120px;
+  font-size: 15px;
+  width: 800px;
+  height: 500px;
+  overflow: scroll;
+}
+
+.mediaRow {
+  display: flex;
+  width: 100vw;
+  height: 550px;
+  flex-wrap: nowrap;
+  justify-content: center;
+}
+
+.showFullSizeImage {
+  height: 90vh;
+  width: 90vw;
+  border: 4px solid white;
+}
+
+/* MEDIA CARDS  */
+
+.mediaCard {
+  display: flex;
+  height: 530px;
+  width: 300px;
+  background-color: burlywood;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  margin: 50px 30px 50px 30px;
+  border: 2px solid white;
+  border-radius: 5%;
+}
+
+/* MEDIA CARD TOP */
+
+.mediaCardTop {
+  width: 300px;
+  max-height: 395px;
+}
+
+.mediaTitle {
+  /* font-size: 27px; */
+  font-size: 1.5vw;
+  height: 65px;
+  width: 285px;
+  margin: 3px 6px 3px 6px;
+  font-weight: bold;
+  overflow: hidden;
+  display: flex;
+  justify-content: safe center;
+  align-items: center;
+  text-align: center;
+}
+
+.mediaImg {
+  max-width: 210px;
+  height: 300px;
+  padding-left: 45px;
+}
+
+/* MEDIA CARD MIDDLE */
+
+.mediaCardMiddle {
+  height: 115px;
+  display: flex;
+  flex-direction: column;
+  bottom: -1%;
+}
+
+.mediaCreator {
+  font-size: 1.2vw;
+  max-height: 36px;
+  margin: 3px 6px 3px 6px;
+  text-align: left;
+  font-weight: 500;
+}
+
+.mediaCategories {
+  margin: 3px 6px 3px 6px;
+  font-size: 1vw;
+}
+
+.mediaCategoriesGenre {
+  max-height: 40px;
+  margin: 3px 6px 3px 6px;
+  font-size: 1vw;
+  overflow: hidden;
+}
+
+.mediaTimeInfo {
+  margin: 3px 6px 3px 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mediaLength {
+  text-align: left;
+}
+
+.mediaItemNumber {
+  text-align: right;
+}
+
+.mediaDescription {
+  width: 290px;
+  height: 419px;
+  margin-left: 5px;
+  margin-right: 5px;
+  overflow: scroll;
+}
+
+/* MEDIA CARD BOTTOM */
+.mediaButtonSpan {
+  align-self: center;
+  margin-bottom: 10px;
+  width: 312px;
+  display: flex;
+  justify-content: center;
+}
+
+.mediaButton {
+  border: 1px solid black;
+  width: 90px;
+  height: 30px;
+  margin-left: 5px;
+  margin-right: 5px;
+  border: none;
+  background-color: burlywood;
+}
+
+/* TV Seasons Popup */
+.seasonsPreview {
+  width: 870px;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin-bottom: -50px;
+  margin-top: 20px;
+}
+
+.seasonsShowTitle {
+  font-size: 40px;
+  font-weight: bolder;
+  margin-bottom: 10px;
+}
+
+.seasonsShowSubTitle {
+  font-size: 30px;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.seasonsShowSubTitle2 {
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 20px;
+  margin-bottom: 10px;
+  width: 670px;
+}
+
+.seasonsPreviewImgDiv {
+  display: flex;
+  width: 175px;
+  height: 250px;
+  flex-direction: column;
+}
+
+.seasonsPreviewImg {
+  height: 250px;
+  border: 2px solid white;
+}
+
+.seasonsPreviewTitleDiv {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.seasonsOpenRootButton {
+  width: 100px;
+  margin-top: -20px;
+}
+
+.episodesJsx {
+  display: flex;
+  border: 1px solid white;
+  flex-direction: row;
+  align-items: center;
+  width: 869px;
+  height: 112px;
+}
+
+.episodesJsxButtonDiv {
+  display: flex;
+  flex-direction: column;
+  width: 120px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  margin-right: 10px;
+}
+
+.episodeJsxButton {
+  width: auto;
+  height: 30px;
+  justify-content: center;
+}
+
+.episodeJsxUlPath {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Music Card Descriptions */
+.mediaDescriptionTitle {
+  text-align: center;
+  margin-top: -3px;
+}
+
+.musicTrackHolder {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 10px;
+}
+
+.musicTracks {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  border: 1px solid;
+}
+
+.musicTrack {
+  width: 197px;
+}
+
+.musicOpenFolderButton {
+  border: none;
+  font-weight: bold;
+}
+
+.musicButtonDiv {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.musicDescriptionButtonDiv {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+/* Music Player */
+.musicPlayer {
+  display: flex;
+  width: 99.8vw;
+  height: 54px;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-top: 60px;
+  border: 2px solid white;
+  position: absolute;
+}
+
+.musicControls {
+  margin-left: 5px;
+  margin-right: 5px;
+}

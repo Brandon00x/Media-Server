@@ -1,0 +1,56 @@
+.navBar {
+  color: black;
+  background-color: goldenrod;
+  height: 50px;
+  font-size: 40px;
+  display: flex;
+  justify-content: space-between;
+  position: fixed;
+  width: 100vw;
+  top: 0%;
+  border-bottom: 2px solid white;
+}
+
+.navbarTitle {
+  margin-left: 15px;
+  font-weight: bold;
+}
+
+/* Nav Drop Downs */
+.navbar-collapse {
+  text-align: right;
+  margin-right: 15px;
+}
+
+.dropdown-toggle {
+  text-decoration: none !important;
+  color: black;
+}
+
+.navLink {
+  color: black;
+  font-size: 25px;
+  text-decoration: none;
+  text-align: right;
+  display: block;
+  background-color: goldenrod;
+  border: 2px solid black;
+  text-align: left;
+}
+
+.navMediaOptions {
+  color: black;
+  font-size: 1.5vw;
+  text-decoration: none;
+  text-align: right;
+  display: block;
+  background-color: goldenrod;
+  border: 2px solid black;
+  text-align: left;
+}
+
+.navTitleRight {
+  display: flex;
+  font-weight: 400;
+}
+/* END Nav Drop Downs */
