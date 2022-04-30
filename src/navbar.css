@@ -1,7 +1,7 @@
 .navBar {
   color: black;
   background-color: goldenrod;
-  height: 50px;
+  height: 55px;
   font-size: 40px;
   display: flex;
   justify-content: space-between;
@@ -22,35 +22,68 @@
   margin-right: 15px;
 }
 
+.navTitleRight {
+  display: flex;
+  font-weight: 400;
+}
+
 .dropdown-toggle {
   text-decoration: none !important;
   color: black;
 }
 
-.navLink {
+.navOptions {
+  border: none;
+  background: none;
+  font-size: 33px;
+  font-weight: 500;
+}
+
+.navbarDropDown {
+  color: black;
+  display: block;
+  text-align: left;
+  position: absolute;
+  top: 54px;
+}
+
+.navbarLinkButton {
+  width: 110px;
+  display: flex;
+  text-decoration: none;
+  font-size: 1.5vw;
+  border: 2px solid black;
+  color: black;
+  background-color: goldenrod;
+}
+
+.navMediaOptions {
+  display: flex;
+  width: 225px;
+  font-size: 1.2vw;
+  background-color: goldenrod;
+  border: 2px solid black;
+}
+
+.navbarDropDown1 {
+  color: black;
+  display: block;
+  text-align: left;
+  position: absolute;
+  top: 54px;
+  right: 0%;
+}
+
+/* OLD BOOTSTRAP */
+/* .navLink {
   color: black;
   font-size: 25px;
   text-decoration: none;
   text-align: right;
   display: block;
   background-color: goldenrod;
-  border: 2px solid black;
+  border: 2px solid white;
   text-align: left;
-}
+} */
 
-.navMediaOptions {
-  color: black;
-  font-size: 1.5vw;
-  text-decoration: none;
-  text-align: right;
-  display: block;
-  background-color: goldenrod;
-  border: 2px solid black;
-  text-align: left;
-}
-
-.navTitleRight {
-  display: flex;
-  font-weight: 400;
-}
 /* END Nav Drop Downs */

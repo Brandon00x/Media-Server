@@ -26,6 +26,9 @@ export default class Template extends Component {
       showInBrowserObject: null, // Set Media Object Used in Show in Browser Component
       showInSameWindow: false, // Toggle Show Media Object in Same Browser Window
       showInSameWindowObject: null, // Set Media Object used in Show in Same Window Object
+      musicPlaying: false, // Toggle Play/Pause Music
+      albumColors: null,
+      musicPlayer: null,
     };
     // See Comments Above Functions
     this.getMedia = this.getMedia.bind(this);
@@ -78,45 +81,28 @@ export default class Template extends Component {
     // Loop Through Artists
     for (let i = 0; i < data.length; i++) {
       // Stop Looping
-      if (i === data.length - 1) {
+      if (i === data.length) {
         break;
       }
       // While Albums + 1 !== Undefined => Create Cards
       do {
         if (data[i].Albums.length >= 1) {
           // Assign Data
-          this.albumColor1 = data[i].Albums[x].Attributes.textColor1;
-          this.albumColor2 = data[i].Albums[x].Attributes.textColor2;
-          this.albumColor3 = data[i].Albums[x].Attributes.textColor3;
-          this.albumColor4 = data[i].Albums[x].Attributes.textColor4;
+          this.albumColor1 = `#${data[i].Albums[x].Attributes.textColor1}`;
+          this.albumColor2 = `#${data[i].Albums[x].Attributes.textColor2}`;
+          this.albumColor3 = `#${data[i].Albums[x].Attributes.textColor3}`;
+          this.albumColor4 = `#${data[i].Albums[x].Attributes.textColor4}`;
           this.albumColors.push({
             color1: this.albumColor1,
             color2: this.albumColor2,
             color3: this.albumColor3,
             color4: this.albumColor4,
           });
-          this.albumId = data[i].Albums[x].id;
+          //this.albumId = data[i].Albums[x].id;
           this.localTrackCount = data[i].Albums[x].LocalTrackCount;
 
           // Get Song Data for Album
           for (let y = 0; y < data[i].Albums[x].Tracks.length; y++) {
-            // TODO: Add Database Push for Album / Songs
-            // Push Inital Song Track for Next Songs
-            if (y === 0) {
-              this.songPaths.push({
-                Song: data[i].Albums[x].Tracks[y].Track,
-                Track: data[i].Albums[x].Tracks[y].TrackNumber,
-                Path: data[i].Albums[x].Tracks[y].Path,
-              });
-            }
-            // Push Song Tracks for Next Songs
-            if (y <= data[i].Albums[x].Tracks.length - 2) {
-              this.songPaths.push({
-                Song: data[i].Albums[x].Tracks[y + 1].Track,
-                Track: data[i].Albums[x].Tracks[y + 1].TrackNumber,
-                Path: data[i].Albums[x].Tracks[y + 1].Path,
-              });
-            }
             this.trackKey = data[i].Result;
             this.trackNumber = data[i].Albums[x].Tracks[y].TrackNumber;
             this.trackName = data[i].Albums[x].Tracks[y].Track;
@@ -133,8 +119,8 @@ export default class Template extends Component {
                     onClick={this.openMedia}
                     value={JSON.stringify({ Path: this.trackPath })}
                     style={{
-                      backgroundColor: `#${this.albumColor1}`,
-                      color: `#${this.albumColor4}`,
+                      backgroundColor: this.albumColor1,
+                      color: this.albumColor4,
                       border: "none",
                     }}
                   >
@@ -144,17 +130,18 @@ export default class Template extends Component {
                     id="musicPlaySong"
                     className="musicOpenTrack"
                     onClick={this.playLocalSong}
-                    name={this.trackName}
-                    title={this.trackNumber}
-                    value={JSON.stringify(this.songPaths)}
+                    title={this.trackName}
                     music={JSON.stringify({
                       artist: data[i].Artist,
                       album: data[i].Albums[x].Album,
+                      tracknumber: data[i].Albums[x].Tracks[y].TrackNumber,
+                      song: this.trackName,
+                      path: this.trackPath,
+                      colors: this.albumColors,
                     })}
-                    colors={JSON.stringify(this.albumColors)}
                     style={{
-                      backgroundColor: `#${this.albumColor1}`,
-                      color: `#${this.albumColor4}`,
+                      backgroundColor: this.albumColor1,
+                      color: this.albumColor4,
                       border: "none",
                     }}
                   >
@@ -174,8 +161,8 @@ export default class Template extends Component {
               year={data[i].Albums[x].Year}
               length={data[i].Albums[x].TrackCount}
               style={{
-                backgroundColor: `#${this.albumColor1}`,
-                color: `#${this.albumColor4}`,
+                backgroundColor: this.albumColor1,
+                color: this.albumColor4,
               }}
             >
               {this.cardTop(
@@ -228,8 +215,8 @@ export default class Template extends Component {
               year={data[i].Albums[x].Year}
               length={data[i].Albums[x].TrackCount}
               style={{
-                backgroundColor: `#${this.albumColor1}`,
-                color: `#${this.albumColor4}`,
+                backgroundColor: this.albumColor1,
+                color: this.albumColor4,
               }}
             >
               <div className="mediaTitle">{data[i].Albums[x].Album}</div>
@@ -257,8 +244,8 @@ export default class Template extends Component {
                     value={JSON.stringify({ Path: data[i].Path })}
                     onClick={this.openMedia}
                     style={{
-                      backgroundColor: `#${this.albumColor1}`,
-                      color: `#${this.albumColor4}`,
+                      backgroundColor: this.albumColor1,
+                      color: this.albumColor4,
                     }}
                   >
                     Artist Folder
@@ -268,8 +255,8 @@ export default class Template extends Component {
                     value={JSON.stringify({ Path: data[i].Albums[x].Path })}
                     onClick={this.openMedia}
                     style={{
-                      backgroundColor: `#${this.albumColor1}`,
-                      color: `#${this.albumColor4}`,
+                      backgroundColor: this.albumColor1,
+                      color: this.albumColor4,
                     }}
                   >
                     Album Folder
@@ -297,8 +284,10 @@ export default class Template extends Component {
         }
       } while (x <= data[i].Albums.length - 1);
       // Reset Next Artist Loop
-      if (data[i].Result !== data[i + 1].Result) {
-        x = 0;
+      if (i < data.length - 1) {
+        if (data[i].Result !== data[i + 1].Result) {
+          x = 0;
+        }
       }
     }
     this.createRows();
@@ -308,116 +297,174 @@ export default class Template extends Component {
   // Play Local Song in Browser
   async playLocalSong(e) {
     // Music Player Styling and Information
-    this.colors = JSON.parse(e.target.attributes.colors.value);
-    this.trackNumber = parseInt(e.target.title);
-    this.trackName = e.target.name;
-    this.albumInfo = JSON.parse(e.target.attributes.music.value);
+    this.albumInfo = JSON.parse(e.target.attributes.music.value); // Album Info
+    this.colors = this.albumInfo.colors;
+    this.songName = this.albumInfo.song;
+    this.songPath = this.albumInfo.path;
     this.artist = this.albumInfo.artist;
     this.album = this.albumInfo.album;
-    this.songPath = JSON.parse(e.target.value);
+    this.trackNumber = parseInt(this.albumInfo.tracknumber);
 
     // Next Song Load Place Holder JSX
     this.nextSongPlaceHolder = (
       <div
         className="musicPlayer"
         style={{
-          borderColor: `#${this.colors[0].color4}`,
-          backgroundColor: `#${this.colors[0].color1}`,
+          borderColor: this.colors[0].color4,
+          backgroundColor: this.colors[0].color1,
         }}
       ></div>
     );
     this.setState({
       showInSameWindowObject: this.nextSongPlaceHolder,
+      musicPlaying: true,
+      albumColors: this.colors,
     });
 
-    // Get Song Path Matching Track Number (Used for Prev/Next)
-    for (let i = 0; i < this.songPath.length; i++) {
+    // Set Song Path / Get Album Tracks from DB.
+    let res = await axios.get(`http://localhost:3020/setmusic`, {
+      params: { path: this.songPath, song: this.songName, album: this.album },
+    });
+    this.albumSongList = JSON.parse(res.data);
+
+    // Set Previous / Next Song Values
+    for (let i = 0; i < this.albumSongList.length; i++) {
       // Match Track Number to Track Path
-      if (this.trackNumber === this.songPath[i].Track) {
-        //console.log(`Matched: ${this.songPath[i].Path} `);
-        this.songPath = this.songPath[i].Path;
-        // Set Prev Song Path (If Defined)
+      if (this.trackNumber === this.albumSongList[i].TrackNumber) {
+        //console.log(`Matched: ${this.albumSongList[i].Path} `);
+        this.songPath = this.albumSongList[i].Path;
+        // Set Prev Song Values (If Defined)
         if (i >= 1) {
-          this.prevSong = this.songPath[i - 1].Song;
-          this.prevSongTrack = this.songPath[i - 1].Track;
-          this.prevSongPath = this.songPath[i - 1];
+          this.prevSong = this.albumSongList[i - 1].Song;
+          this.prevSongTrack = this.albumSongList[i - 1].TrackNumber;
+          this.prevSongPath = this.albumSongList[i - 1];
         }
-        // Set Next Song Path (If Defined)
-        if (i <= this.songPath.length) {
-          this.nextSong = this.songPath[i + 1].Song;
-          this.nextSongTrack = this.songPath[i + 1].Track;
-          this.nextSongPath = this.songPath[i + 1].Path;
+        // Set Next Song Values (If Defined)
+        try {
+          if (i <= this.albumSongList.length) {
+            this.nextSong = this.albumSongList[i + 1].Song;
+            this.nextSongTrack = this.albumSongList[i + 1].TrackNumber;
+            this.nextSongPath = this.albumSongList[i + 1].Path;
+          }
+        } catch (err) {
+          //Last Song
         }
         break;
       }
     }
-    // Set Song Path
-    await axios.get(`http://localhost:3020/setmusic`, {
-      params: { path: this.songPath, song: this.trackName },
-    });
-
     // Create Music Player JSX
     this.musicPlayer = (
       <div
         className="musicPlayer"
         style={{
-          borderColor: `#${this.colors[0].color4}`,
-          backgroundColor: `#${this.colors[0].color1}`,
+          borderColor: this.colors[0].color4,
+          backgroundColor: this.colors[0].color1,
         }}
       >
-        <div
-          style={{ color: `#${this.colors[0].color4}`, marginRight: "20px" }}
-        >
-          <h1 style={{ marginBottom: "-25px" }}>{this.trackName}</h1>
+        <div className="musicTitleDiv" style={{ color: this.colors[0].color4 }}>
+          <h1 className="musicPlayerTitle">{this.songName}</h1>
           <h4>
             {this.album} | {this.artist}
           </h4>
         </div>
         <div className="musicControlsDiv">
           {/* Prev Icon */}
-          <i
-            className="fas fa-angle-double-left fa-2x musicControls"
-            id="musicPrev"
-            onClick={this.musicControls}
-            style={{
-              color: `#${this.colors[0].color2}`,
-              position: "relative",
-            }}
-          />
-          {/* Play Icon */}
-          <i
-            className="fas fa-play fa-2x musicControls"
-            id="musicPlay"
-            onClick={this.musicControls}
-            style={{
-              color: `#${this.colors[0].color2}`,
-              position: "relative",
-            }}
-          />
-          {/* Pause Icon */}
-          <i
-            className="fas fa-pause fa-2x musicControls"
-            id="musicPause"
-            onClick={this.musicControls}
-            style={{
-              color: `#${this.colors[0].color2}`,
-              position: "relative",
-            }}
-          />
+          {this.trackNumber === 1 ? (
+            // Hidden Icon for Spacing
+            <i
+              className="fas fa-pause fa-2x musicControls"
+              style={{
+                color: this.colors[0].color1,
+                position: "relative",
+              }}
+            />
+          ) : (
+            <button
+              className="fas fa-angle-double-left fa-2x musicControls"
+              id="musicPrev"
+              onClick={this.playLocalSong}
+              style={{
+                color: this.colors[0].color4,
+                position: "relative",
+                background: "none",
+                border: "none",
+              }}
+              music={JSON.stringify({
+                artist: this.artist,
+                album: this.album,
+                tracknumber: this.prevSongTrack,
+                song: this.prevSong,
+                path: this.nextSongPath,
+                colors: this.colors,
+              })}
+            />
+          )}
+          {this.state.musicPlaying ? (
+            <i
+              className="fas fa-pause fa-2x musicControls"
+              onClick={this.musicControls}
+              style={{
+                color: this.colors[0].color4,
+                position: "relative",
+              }}
+              music={JSON.stringify({
+                artist: this.artist,
+                album: this.album,
+                tracknumber: this.prevSongTrack,
+                song: this.prevSong,
+                path: this.nextSongPath,
+                colors: this.colors,
+              })}
+            />
+          ) : (
+            <i
+              className="fas fa-play fa-2x musicControls"
+              id="musicPlay"
+              onClick={this.musicControls}
+              style={{
+                color: this.colors[0].color4,
+                position: "relative",
+              }}
+              music={JSON.stringify({
+                artist: this.artist,
+                album: this.album,
+                tracknumber: this.prevSongTrack,
+                song: this.prevSong,
+                path: this.nextSongPath,
+                colors: this.colors,
+              })}
+            />
+          )}
           {/* Next Icon */}
-          <button
-            className="fas fa-angle-double-right fa-2x musicControls"
-            id="musicNext"
-            onClick={this.playLocalSong}
+          {this.trackNumber === this.albumSongList.length ? null : (
+            <button
+              className="fas fa-angle-double-right fa-2x musicControls"
+              id="musicNext"
+              onClick={this.playLocalSong}
+              style={{
+                color: this.colors[0].color4,
+                position: "relative",
+                background: "none",
+                border: "none",
+              }}
+              title={this.nextSong}
+              music={JSON.stringify({
+                artist: this.artist,
+                album: this.album,
+                tracknumber: this.nextSongTrack,
+                song: this.nextSong,
+                path: this.nextSongPath,
+                colors: this.colors,
+              })}
+            />
+          )}
+          <i
+            onClick={this.closeMediaPlayer}
+            className="fas fa-stop fa-2x musicControls"
             style={{
-              color: `#${this.colors[0].color2}`,
+              color: this.colors[0].color4,
               position: "relative",
-              background: "none",
-              border: "none",
             }}
-            name={this.nextSong}
-            title={this.nextSongTrack}
-            value={e.target.value}
           />
         </div>
         <audio id="musicPlayer" autoPlay>
@@ -425,40 +472,29 @@ export default class Template extends Component {
           <source src="http://localhost:3020/streammusic" type="audio/mpeg" />
           Your browser does not support the audio element.
         </audio>
-        <span>
-          <i
-            onClick={this.closeMediaPlayer}
-            className="fas fa-stop fa-2x"
-            style={{
-              color: `#${this.colors[0].color2}`,
-              position: "relative",
-            }}
-          />
-        </span>
       </div>
     );
 
     this.setState({
       showInSameWindow: true,
       showInSameWindowObject: this.musicPlayer,
+      albumColors: this.colors,
+      musicPlayer: this.musicPlayer,
     });
     this.scrollToTop();
   }
 
   // Music Controls for Media Type Music
-  musicControls(e) {
-    this.mediaEvent = e.target.id;
+  musicControls() {
     this.musicSource = document.getElementById("musicPlayer");
-    console.log(this.mediaEvent);
-    if (this.mediaEvent === "musicPause") {
+    if (this.state.musicPlaying === true) {
       this.musicSource.pause();
-    } else if (this.mediaEvent === "musicPlay") {
+    } else if (this.state.musicPlaying === false) {
       this.musicSource.play();
-    } else if (this.mediaEvent === "musicNext") {
-      //this.musicSource.next();
-    } else if (this.mediaEvent === "musicPrev") {
-      //this.musicSource.prev();
     }
+    this.setState((prevState) => ({
+      musicPlaying: !prevState.musicPlaying,
+    }));
   }
 
   // Get Media Items from JSON and Make Display Cards
@@ -914,8 +950,8 @@ export default class Template extends Component {
         id={title}
         name={title}
         style={{
-          backgroundColor: `#${this.albumColor1}`,
-          color: `#${this.albumColor4}`,
+          backgroundColor: this.albumColor1,
+          color: this.albumColor4,
           border: "none",
           fontWeight: "bold",
         }}
@@ -999,8 +1035,8 @@ export default class Template extends Component {
       this.color = "black";
     } else if (mediaType === "Music") {
       this.streamButton = this.listenButton;
-      this.backgroundColor = `#${this.albumColor1}`;
-      this.color = `#${this.albumColor4}`;
+      this.backgroundColor = this.albumColor1;
+      this.color = this.albumColor4;
     } else if (mediaType === "TV Shows") {
       this.streamButton = this.showTvSeason;
       this.backgroundColor = "burlywood";

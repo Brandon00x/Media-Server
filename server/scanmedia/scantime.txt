@@ -7,3 +7,668 @@ New Movies Scan. 4/29/2022 12:24:39 PM
  
 4/29/2022 12:24:51 PM - Media Type Movies. Function: sanitizeMovieTitles. Time eplasted: 12843 seconds. v3
 4/29/2022 12:24:51 PM - Media Type Movies. Function: createJson. Time eplasted: 12843 seconds. v3
+New Music Scan. 4/29/2022 3:53:21 PM
+4/29/2022 3:53:34 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 83 seconds. v3
+4/29/2022 3:53:21 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 83 seconds. v3
+4/29/2022 3:53:21 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 83 seconds. v3
+4/29/2022 3:53:44 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 93 seconds. v3
+4/29/2022 3:53:44 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 94 seconds. v3
+4/29/2022 3:53:44 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 94 seconds. v3
+4/29/2022 3:53:44 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 94 seconds. v3
+4/29/2022 3:53:44 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 94 seconds. v3
+New Music Scan. 4/29/2022 3:58:03 PM
+4/29/2022 3:58:15 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 6 seconds. v3
+4/29/2022 3:58:03 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 6 seconds. v3
+4/29/2022 3:58:03 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 6 seconds. v3
+4/29/2022 3:58:25 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 17 seconds. v3
+4/29/2022 3:58:26 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 17 seconds. v3
+4/29/2022 3:58:26 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 17 seconds. v3
+4/29/2022 3:58:26 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 17 seconds. v3
+4/29/2022 3:58:26 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 17 seconds. v3
+New Music Scan. 4/29/2022 3:58:46 PM
+4/29/2022 3:58:58 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 4 seconds. v3
+4/29/2022 3:58:46 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 4 seconds. v3
+4/29/2022 3:58:46 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 4 seconds. v3
+4/29/2022 3:59:08 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 15 seconds. v3
+4/29/2022 3:59:09 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 15 seconds. v3
+4/29/2022 3:59:09 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 15 seconds. v3
+4/29/2022 3:59:09 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 15 seconds. v3
+4/29/2022 3:59:09 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 15 seconds. v3
+New Music Scan. 4/29/2022 4:00:49 PM
+4/29/2022 4:01:01 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 9 seconds. v3
+4/29/2022 4:00:49 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 9 seconds. v3
+4/29/2022 4:00:49 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 9 seconds. v3
+4/29/2022 4:01:11 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 19 seconds. v3
+4/29/2022 4:01:11 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 20 seconds. v3
+4/29/2022 4:01:11 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 20 seconds. v3
+4/29/2022 4:01:11 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 20 seconds. v3
+4/29/2022 4:01:11 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 20 seconds. v3
+New Music Scan. 4/29/2022 4:02:04 PM
+4/29/2022 4:02:15 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 15 seconds. v3
+4/29/2022 4:02:04 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 15 seconds. v3
+4/29/2022 4:02:04 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 15 seconds. v3
+4/29/2022 4:02:25 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 25 seconds. v3
+4/29/2022 4:02:26 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 26 seconds. v3
+4/29/2022 4:02:26 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 26 seconds. v3
+4/29/2022 4:02:26 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 26 seconds. v3
+4/29/2022 4:02:26 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 26 seconds. v3
+4/29/2022 4:02:26 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 26 seconds. v3
+ 
+4/29/2022 4:02:26 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 26 seconds. v3
+4/29/2022 4:02:26 PM - Media Type Music. Function: createJson. Time eplasted: 26 seconds. v3
+New Music Scan. 4/29/2022 4:03:55 PM
+4/29/2022 4:04:07 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 14 seconds. v3
+4/29/2022 4:03:55 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 14 seconds. v3
+4/29/2022 4:03:55 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 14 seconds. v3
+4/29/2022 4:04:17 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 24 seconds. v3
+4/29/2022 4:04:17 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 25 seconds. v3
+4/29/2022 4:04:17 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 25 seconds. v3
+4/29/2022 4:04:17 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 25 seconds. v3
+4/29/2022 4:04:17 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 25 seconds. v3
+4/29/2022 4:04:18 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 25 seconds. v3
+ 
+4/29/2022 4:04:18 PM - Media Type Music. Function: createJson. Time eplasted: 25 seconds. v3
+4/29/2022 4:04:18 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 25 seconds. v3
+New Music Scan. 4/29/2022 4:11:29 PM
+4/29/2022 4:11:41 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 339 seconds. v3
+4/29/2022 4:11:29 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 339 seconds. v3
+4/29/2022 4:11:29 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 339 seconds. v3
+4/29/2022 4:11:51 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 349 seconds. v3
+4/29/2022 4:11:51 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 350 seconds. v3
+4/29/2022 4:11:51 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 350 seconds. v3
+4/29/2022 4:11:51 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 350 seconds. v3
+4/29/2022 4:11:51 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 350 seconds. v3
+4/29/2022 4:11:51 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 350 seconds. v3
+ 
+4/29/2022 4:11:51 PM - Media Type Music. Function: createJson. Time eplasted: 350 seconds. v3
+4/29/2022 4:11:51 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 350 seconds. v3
+New Music Scan. 4/29/2022 4:15:16 PM
+4/29/2022 4:15:28 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 38 seconds. v3
+4/29/2022 4:15:16 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 38 seconds. v3
+4/29/2022 4:15:16 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 38 seconds. v3
+4/29/2022 4:15:38 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 48 seconds. v3
+4/29/2022 4:15:38 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 49 seconds. v3
+4/29/2022 4:15:38 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 49 seconds. v3
+4/29/2022 4:15:38 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 49 seconds. v3
+4/29/2022 4:15:38 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 49 seconds. v3
+4/29/2022 4:15:38 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 49 seconds. v3
+4/29/2022 4:15:38 PM - Media Type Music. Function: createJson. Time eplasted: 49 seconds. v3
+4/29/2022 4:15:38 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 49 seconds. v3
+ 
+New Music Scan. 4/29/2022 4:20:41 PM
+4/29/2022 4:20:54 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 50 seconds. v3
+4/29/2022 4:20:42 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 50 seconds. v3
+4/29/2022 4:20:41 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 50 seconds. v3
+4/29/2022 4:21:04 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 60 seconds. v3
+4/29/2022 4:21:05 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 61 seconds. v3
+4/29/2022 4:21:05 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 61 seconds. v3
+4/29/2022 4:21:05 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 61 seconds. v3
+4/29/2022 4:21:05 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 61 seconds. v3
+4/29/2022 4:21:05 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 61 seconds. v3
+ 
+4/29/2022 4:21:05 PM - Media Type Music. Function: createJson. Time eplasted: 61 seconds. v3
+4/29/2022 4:21:05 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 61 seconds. v3
+New Music Scan. 4/29/2022 5:38:59 PM
+4/29/2022 5:39:11 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 44 seconds. v3
+4/29/2022 5:38:59 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 44 seconds. v3
+4/29/2022 5:38:59 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 44 seconds. v3
+4/29/2022 5:39:20 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 54 seconds. v3
+4/29/2022 5:39:21 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 55 seconds. v3
+4/29/2022 5:39:21 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 55 seconds. v3
+4/29/2022 5:39:21 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 55 seconds. v3
+4/29/2022 5:39:21 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 55 seconds. v3
+New Music Scan. 4/29/2022 5:40:58 PM
+4/29/2022 5:40:58 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 6 seconds. v3
+4/29/2022 5:40:58 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 6 seconds. v3
+4/29/2022 5:41:10 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 6 seconds. v3
+4/29/2022 5:41:20 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 16 seconds. v3
+4/29/2022 5:41:20 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 17 seconds. v3
+4/29/2022 5:41:20 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 17 seconds. v3
+4/29/2022 5:41:20 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 17 seconds. v3
+4/29/2022 5:41:20 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 17 seconds. v3
+New Music Scan. 4/29/2022 5:43:46 PM
+4/29/2022 5:43:58 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 17 seconds. v3
+4/29/2022 5:43:46 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 17 seconds. v3
+4/29/2022 5:43:46 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 17 seconds. v3
+4/29/2022 5:44:08 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 27 seconds. v3
+4/29/2022 5:44:08 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 28 seconds. v3
+4/29/2022 5:44:08 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 28 seconds. v3
+4/29/2022 5:44:08 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 28 seconds. v3
+4/29/2022 5:44:08 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 28 seconds. v3
+New Music Scan. 4/29/2022 5:45:40 PM
+4/29/2022 5:45:52 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 22 seconds. v3
+4/29/2022 5:45:40 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 22 seconds. v3
+4/29/2022 5:45:40 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 22 seconds. v3
+4/29/2022 5:46:02 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 32 seconds. v3
+4/29/2022 5:46:02 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 33 seconds. v3
+4/29/2022 5:46:02 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 33 seconds. v3
+4/29/2022 5:46:02 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 33 seconds. v3
+4/29/2022 5:46:02 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 33 seconds. v3
+New Music Scan. 4/29/2022 5:47:17 PM
+4/29/2022 5:47:29 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 2 seconds. v3
+4/29/2022 5:47:17 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 2 seconds. v3
+4/29/2022 5:47:17 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 2 seconds. v3
+4/29/2022 5:47:39 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 12 seconds. v3
+New Music Scan. 4/29/2022 5:49:50 PM
+4/29/2022 5:49:50 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 4 seconds. v3
+4/29/2022 5:49:50 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 4 seconds. v3
+4/29/2022 5:50:04 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 4 seconds. v3
+4/29/2022 5:50:19 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 20 seconds. v3
+New Music Scan. 4/29/2022 5:57:46 PM
+4/29/2022 5:57:59 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 3 seconds. v3
+4/29/2022 5:57:46 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 3 seconds. v3
+4/29/2022 5:57:46 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 3 seconds. v3
+4/29/2022 5:58:08 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 13 seconds. v3
+4/29/2022 5:58:09 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 14 seconds. v3
+4/29/2022 5:58:09 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 14 seconds. v3
+4/29/2022 5:58:09 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 14 seconds. v3
+4/29/2022 5:58:09 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 14 seconds. v3
+New Music Scan. 4/29/2022 5:58:51 PM
+4/29/2022 5:59:04 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 13 seconds. v3
+4/29/2022 5:58:51 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 13 seconds. v3
+4/29/2022 5:58:51 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 13 seconds. v3
+4/29/2022 5:59:14 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 24 seconds. v3
+4/29/2022 5:59:14 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 24 seconds. v3
+4/29/2022 5:59:14 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 24 seconds. v3
+4/29/2022 5:59:14 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 24 seconds. v3
+4/29/2022 5:59:14 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 24 seconds. v3
+New Music Scan. 4/29/2022 6:00:26 PM
+4/29/2022 6:00:39 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 14 seconds. v3
+4/29/2022 6:00:26 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 14 seconds. v3
+4/29/2022 6:00:26 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 14 seconds. v3
+4/29/2022 6:00:48 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 24 seconds. v3
+4/29/2022 6:00:49 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 25 seconds. v3
+4/29/2022 6:00:49 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 25 seconds. v3
+4/29/2022 6:00:49 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 25 seconds. v3
+4/29/2022 6:00:49 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 25 seconds. v3
+New Music Scan. 4/29/2022 6:01:04 PM
+4/29/2022 6:01:16 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 3 seconds. v3
+4/29/2022 6:01:04 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 3 seconds. v3
+4/29/2022 6:01:04 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 3 seconds. v3
+4/29/2022 6:01:27 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 14 seconds. v3
+New Music Scan. 4/29/2022 6:01:48 PM
+4/29/2022 6:01:48 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 2 seconds. v3
+4/29/2022 6:02:01 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 2 seconds. v3
+4/29/2022 6:01:48 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 2 seconds. v3
+4/29/2022 6:02:11 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 13 seconds. v3
+4/29/2022 6:02:11 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 13 seconds. v3
+4/29/2022 6:02:11 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 13 seconds. v3
+4/29/2022 6:02:11 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 13 seconds. v3
+4/29/2022 6:02:11 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 13 seconds. v3
+New Music Scan. 4/29/2022 6:02:57 PM
+4/29/2022 6:03:10 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 4 seconds. v3
+4/29/2022 6:02:57 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 4 seconds. v3
+4/29/2022 6:02:57 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 4 seconds. v3
+4/29/2022 6:03:19 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 14 seconds. v3
+4/29/2022 6:03:20 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 15 seconds. v3
+4/29/2022 6:03:20 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 15 seconds. v3
+4/29/2022 6:03:20 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 15 seconds. v3
+4/29/2022 6:03:20 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 15 seconds. v3
+New Music Scan. 4/29/2022 6:04:19 PM
+4/29/2022 6:04:31 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 13 seconds. v3
+4/29/2022 6:04:19 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 13 seconds. v3
+4/29/2022 6:04:19 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 13 seconds. v3
+4/29/2022 6:04:41 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 24 seconds. v3
+4/29/2022 6:04:42 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 24 seconds. v3
+4/29/2022 6:04:42 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 24 seconds. v3
+4/29/2022 6:04:42 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 24 seconds. v3
+4/29/2022 6:04:42 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 24 seconds. v3
+New Music Scan. 4/29/2022 6:06:04 PM
+4/29/2022 6:06:16 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 7 seconds. v3
+4/29/2022 6:06:04 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 7 seconds. v3
+4/29/2022 6:06:04 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 7 seconds. v3
+4/29/2022 6:06:26 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 17 seconds. v3
+4/29/2022 6:06:27 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 18 seconds. v3
+4/29/2022 6:06:27 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 18 seconds. v3
+4/29/2022 6:06:27 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 18 seconds. v3
+4/29/2022 6:06:27 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 18 seconds. v3
+New Music Scan. 4/29/2022 6:06:51 PM
+4/29/2022 6:07:03 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 2 seconds. v3
+4/29/2022 6:06:51 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 2 seconds. v3
+4/29/2022 6:06:51 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 2 seconds. v3
+4/29/2022 6:07:13 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 12 seconds. v3
+4/29/2022 6:07:14 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 13 seconds. v3
+4/29/2022 6:07:14 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 13 seconds. v3
+4/29/2022 6:07:14 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 13 seconds. v3
+4/29/2022 6:07:14 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 13 seconds. v3
+4/29/2022 6:07:14 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 13 seconds. v3
+ 
+4/29/2022 6:07:14 PM - Media Type Music. Function: createJson. Time eplasted: 13 seconds. v3
+4/29/2022 6:07:14 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 13 seconds. v3
+New Music Scan. 4/29/2022 6:08:35 PM
+4/29/2022 6:08:48 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 9 seconds. v3
+4/29/2022 6:08:35 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 9 seconds. v3
+4/29/2022 6:08:35 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 9 seconds. v3
+4/29/2022 6:08:58 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 19 seconds. v3
+4/29/2022 6:08:58 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 20 seconds. v3
+4/29/2022 6:08:58 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 20 seconds. v3
+4/29/2022 6:08:58 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 20 seconds. v3
+4/29/2022 6:08:58 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 20 seconds. v3
+New Music Scan. 4/29/2022 6:11:14 PM
+4/29/2022 6:11:26 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 16 seconds. v3
+4/29/2022 6:11:14 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 16 seconds. v3
+4/29/2022 6:11:14 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 16 seconds. v3
+4/29/2022 6:11:36 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 27 seconds. v3
+4/29/2022 6:11:37 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 27 seconds. v3
+4/29/2022 6:11:37 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 27 seconds. v3
+4/29/2022 6:11:37 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 27 seconds. v3
+4/29/2022 6:11:37 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 27 seconds. v3
+New Music Scan. 4/29/2022 6:12:09 PM
+4/29/2022 6:12:21 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 3 seconds. v3
+4/29/2022 6:12:09 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 3 seconds. v3
+4/29/2022 6:12:09 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 3 seconds. v3
+4/29/2022 6:12:31 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 14 seconds. v3
+4/29/2022 6:12:32 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 14 seconds. v3
+4/29/2022 6:12:32 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 14 seconds. v3
+4/29/2022 6:12:32 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 14 seconds. v3
+4/29/2022 6:12:32 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 14 seconds. v3
+New Music Scan. 4/29/2022 6:13:49 PM
+4/29/2022 6:14:01 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 28 seconds. v3
+4/29/2022 6:13:49 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 28 seconds. v3
+4/29/2022 6:13:49 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 28 seconds. v3
+4/29/2022 6:14:11 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 38 seconds. v3
+4/29/2022 6:14:11 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 39 seconds. v3
+4/29/2022 6:14:11 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 39 seconds. v3
+4/29/2022 6:14:11 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 39 seconds. v3
+4/29/2022 6:14:11 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 39 seconds. v3
+4/29/2022 6:14:12 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 39 seconds. v3
+ 
+4/29/2022 6:14:12 PM - Media Type Music. Function: createJson. Time eplasted: 39 seconds. v3
+4/29/2022 6:14:12 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 39 seconds. v3
+New Music Scan. 4/29/2022 6:15:37 PM
+4/29/2022 6:15:49 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 57 seconds. v3
+4/29/2022 6:15:37 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 57 seconds. v3
+4/29/2022 6:15:37 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 57 seconds. v3
+4/29/2022 6:15:59 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 67 seconds. v3
+4/29/2022 6:15:59 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 68 seconds. v3
+4/29/2022 6:15:59 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 68 seconds. v3
+4/29/2022 6:15:59 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 68 seconds. v3
+4/29/2022 6:15:59 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 68 seconds. v3
+New Music Scan. 4/29/2022 6:17:47 PM
+4/29/2022 6:17:47 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 7 seconds. v3
+4/29/2022 6:17:47 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 7 seconds. v3
+4/29/2022 6:17:59 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 7 seconds. v3
+4/29/2022 6:18:09 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 18 seconds. v3
+4/29/2022 6:18:09 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 18 seconds. v3
+4/29/2022 6:18:09 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 18 seconds. v3
+4/29/2022 6:18:09 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 18 seconds. v3
+4/29/2022 6:18:09 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 18 seconds. v3
+4/29/2022 6:18:10 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 18 seconds. v3
+ 
+4/29/2022 6:18:10 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 18 seconds. v3
+4/29/2022 6:18:10 PM - Media Type Music. Function: createJson. Time eplasted: 18 seconds. v3
+New Music Scan. 4/29/2022 6:19:03 PM
+4/29/2022 6:19:03 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 53 seconds. v3
+4/29/2022 6:19:03 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 53 seconds. v3
+4/29/2022 6:19:16 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 53 seconds. v3
+4/29/2022 6:19:26 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 64 seconds. v3
+4/29/2022 6:19:27 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 65 seconds. v3
+4/29/2022 6:19:27 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 65 seconds. v3
+4/29/2022 6:19:27 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 65 seconds. v3
+4/29/2022 6:19:27 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 65 seconds. v3
+4/29/2022 6:19:27 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 65 seconds. v3
+ 
+4/29/2022 6:19:27 PM - Media Type Music. Function: createJson. Time eplasted: 65 seconds. v3
+4/29/2022 6:19:27 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 65 seconds. v3
+New Music Scan. 4/30/2022 11:09:15 AM
+4/30/2022 11:09:27 AM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 117 seconds. v3
+4/30/2022 11:09:15 AM - Media Type Music. Function: findMediaDirectories. Time eplasted: 117 seconds. v3
+4/30/2022 11:09:15 AM - Media Type Music. Function: checkPathEnding. Time eplasted: 117 seconds. v3
+New Music Scan. 4/30/2022 11:09:42 AM
+4/30/2022 11:09:53 AM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 5 seconds. v3
+4/30/2022 11:09:42 AM - Media Type Music. Function: checkPathEnding. Time eplasted: 5 seconds. v3
+4/30/2022 11:09:42 AM - Media Type Music. Function: findMediaDirectories. Time eplasted: 5 seconds. v3
+4/30/2022 11:10:05 AM - Media Type Music. Function: readDirectoryContents. Time eplasted: 17 seconds. v3
+4/30/2022 11:10:05 AM - Media Type Music. Function: sanitizeMusic. Time eplasted: 18 seconds. v3
+4/30/2022 11:10:05 AM - Media Type Music. Function: setMusicAlbum. Time eplasted: 18 seconds. v3
+4/30/2022 11:10:05 AM - Media Type Music. Function: setMusicAlbum. Time eplasted: 18 seconds. v3
+4/30/2022 11:10:05 AM - Media Type Music. Function: setMusicArtist. Time eplasted: 18 seconds. v3
+4/30/2022 11:10:06 AM - Media Type Music. Function: setMusicAlbum. Time eplasted: 18 seconds. v3
+4/30/2022 11:10:06 AM - Media Type Music. Function: createJson. Time eplasted: 18 seconds. v3
+4/30/2022 11:10:06 AM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 18 seconds. v3
+ 
+New Music Scan. 4/30/2022 11:28:05 AM
+4/30/2022 11:28:17 AM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 40 seconds. v3
+4/30/2022 11:28:05 AM - Media Type Music. Function: findMediaDirectories. Time eplasted: 40 seconds. v3
+4/30/2022 11:28:05 AM - Media Type Music. Function: checkPathEnding. Time eplasted: 40 seconds. v3
+New Music Scan. 4/30/2022 11:28:17 AM
+4/30/2022 11:28:17 AM - Media Type Music. Function: checkPathEnding. Time eplasted: 41 seconds. v3
+4/30/2022 11:28:18 AM - Media Type Music. Function: findMediaDirectories. Time eplasted: 41 seconds. v3
+4/30/2022 11:28:28 AM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 41 seconds. v3
+4/30/2022 11:28:39 AM - Media Type Music. Function: readDirectoryContents. Time eplasted: 53 seconds. v3
+4/30/2022 11:28:39 AM - Media Type Music. Function: readDirectoryContents. Time eplasted: 53 seconds. v3
+New Music Scan. 4/30/2022 11:32:22 AM
+4/30/2022 11:32:34 AM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 13 seconds. v3
+4/30/2022 11:32:22 AM - Media Type Music. Function: checkPathEnding. Time eplasted: 13 seconds. v3
+4/30/2022 11:32:22 AM - Media Type Music. Function: findMediaDirectories. Time eplasted: 13 seconds. v3
+4/30/2022 11:32:44 AM - Media Type Music. Function: readDirectoryContents. Time eplasted: 24 seconds. v3
+4/30/2022 11:32:45 AM - Media Type Music. Function: sanitizeMusic. Time eplasted: 24 seconds. v3
+4/30/2022 11:32:45 AM - Media Type Music. Function: setMusicAlbum. Time eplasted: 24 seconds. v3
+4/30/2022 11:32:45 AM - Media Type Music. Function: setMusicArtist. Time eplasted: 24 seconds. v3
+4/30/2022 11:32:45 AM - Media Type Music. Function: setMusicAlbum. Time eplasted: 24 seconds. v3
+New Music Scan. 4/30/2022 11:39:20 AM
+4/30/2022 11:39:33 AM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 63 seconds. v3
+4/30/2022 11:39:20 AM - Media Type Music. Function: checkPathEnding. Time eplasted: 63 seconds. v3
+4/30/2022 11:39:20 AM - Media Type Music. Function: findMediaDirectories. Time eplasted: 63 seconds. v3
+4/30/2022 11:39:44 AM - Media Type Music. Function: readDirectoryContents. Time eplasted: 74 seconds. v3
+4/30/2022 11:39:44 AM - Media Type Music. Function: sanitizeMusic. Time eplasted: 75 seconds. v3
+4/30/2022 11:39:44 AM - Media Type Music. Function: setMusicAlbum. Time eplasted: 75 seconds. v3
+4/30/2022 11:39:44 AM - Media Type Music. Function: setMusicArtist. Time eplasted: 75 seconds. v3
+4/30/2022 11:39:44 AM - Media Type Music. Function: setMusicAlbum. Time eplasted: 75 seconds. v3
+New Music Scan. 4/30/2022 11:40:59 AM
+4/30/2022 11:41:12 AM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 40 seconds. v3
+4/30/2022 11:40:59 AM - Media Type Music. Function: checkPathEnding. Time eplasted: 40 seconds. v3
+4/30/2022 11:40:59 AM - Media Type Music. Function: findMediaDirectories. Time eplasted: 40 seconds. v3
+4/30/2022 11:41:22 AM - Media Type Music. Function: readDirectoryContents. Time eplasted: 51 seconds. v3
+4/30/2022 11:41:22 AM - Media Type Music. Function: sanitizeMusic. Time eplasted: 51 seconds. v3
+4/30/2022 11:41:22 AM - Media Type Music. Function: setMusicAlbum. Time eplasted: 51 seconds. v3
+4/30/2022 11:41:22 AM - Media Type Music. Function: setMusicAlbum. Time eplasted: 51 seconds. v3
+4/30/2022 11:41:22 AM - Media Type Music. Function: setMusicArtist. Time eplasted: 51 seconds. v3
+4/30/2022 11:41:23 AM - Media Type Music. Function: saveMusicToDb. Time eplasted: 52 seconds. v3
+ 
+4/30/2022 11:41:23 AM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 52 seconds. v3
+4/30/2022 11:41:23 AM - Media Type Music. Function: createJson. Time eplasted: 52 seconds. v3
+New Music Scan. 4/30/2022 11:42:54 AM
+4/30/2022 11:43:07 AM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 17 seconds. v3
+4/30/2022 11:42:54 AM - Media Type Music. Function: checkPathEnding. Time eplasted: 17 seconds. v3
+4/30/2022 11:42:54 AM - Media Type Music. Function: findMediaDirectories. Time eplasted: 17 seconds. v3
+4/30/2022 11:43:17 AM - Media Type Music. Function: readDirectoryContents. Time eplasted: 28 seconds. v3
+4/30/2022 11:43:18 AM - Media Type Music. Function: sanitizeMusic. Time eplasted: 28 seconds. v3
+4/30/2022 11:43:18 AM - Media Type Music. Function: setMusicAlbum. Time eplasted: 28 seconds. v3
+4/30/2022 11:43:18 AM - Media Type Music. Function: setMusicArtist. Time eplasted: 28 seconds. v3
+4/30/2022 11:43:18 AM - Media Type Music. Function: setMusicAlbum. Time eplasted: 28 seconds. v3
+4/30/2022 11:43:18 AM - Media Type Music. Function: saveMusicToDb. Time eplasted: 29 seconds. v3
+ 
+4/30/2022 11:43:18 AM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 29 seconds. v3
+4/30/2022 11:43:18 AM - Media Type Music. Function: createJson. Time eplasted: 29 seconds. v3
+New Music Scan. 4/30/2022 11:48:58 AM
+4/30/2022 11:49:11 AM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 10 seconds. v3
+4/30/2022 11:48:58 AM - Media Type Music. Function: checkPathEnding. Time eplasted: 10 seconds. v3
+4/30/2022 11:48:58 AM - Media Type Music. Function: findMediaDirectories. Time eplasted: 10 seconds. v3
+4/30/2022 11:49:21 AM - Media Type Music. Function: readDirectoryContents. Time eplasted: 21 seconds. v3
+4/30/2022 11:49:22 AM - Media Type Music. Function: sanitizeMusic. Time eplasted: 21 seconds. v3
+4/30/2022 11:49:22 AM - Media Type Music. Function: setMusicAlbum. Time eplasted: 21 seconds. v3
+4/30/2022 11:49:22 AM - Media Type Music. Function: setMusicAlbum. Time eplasted: 21 seconds. v3
+4/30/2022 11:49:22 AM - Media Type Music. Function: setMusicArtist. Time eplasted: 21 seconds. v3
+4/30/2022 11:49:22 AM - Media Type Music. Function: saveMusicToDb. Time eplasted: 21 seconds. v3
+4/30/2022 11:49:22 AM - Media Type Music. Function: createJson. Time eplasted: 21 seconds. v3
+4/30/2022 11:49:22 AM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 21 seconds. v3
+ 
+New Music Scan. 4/30/2022 11:50:31 AM
+4/30/2022 11:50:44 AM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 6 seconds. v3
+4/30/2022 11:50:31 AM - Media Type Music. Function: findMediaDirectories. Time eplasted: 6 seconds. v3
+4/30/2022 11:50:31 AM - Media Type Music. Function: checkPathEnding. Time eplasted: 6 seconds. v3
+4/30/2022 11:50:54 AM - Media Type Music. Function: readDirectoryContents. Time eplasted: 17 seconds. v3
+4/30/2022 11:50:54 AM - Media Type Music. Function: sanitizeMusic. Time eplasted: 17 seconds. v3
+4/30/2022 11:50:55 AM - Media Type Music. Function: setMusicAlbum. Time eplasted: 17 seconds. v3
+4/30/2022 11:50:55 AM - Media Type Music. Function: setMusicAlbum. Time eplasted: 17 seconds. v3
+4/30/2022 11:50:55 AM - Media Type Music. Function: setMusicArtist. Time eplasted: 17 seconds. v3
+4/30/2022 11:50:55 AM - Media Type Music. Function: saveMusicToDb. Time eplasted: 18 seconds. v3
+ 
+4/30/2022 11:50:55 AM - Media Type Music. Function: createJson. Time eplasted: 18 seconds. v3
+4/30/2022 11:50:55 AM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 18 seconds. v3
+New Music Scan. 4/30/2022 11:55:10 AM
+4/30/2022 11:55:22 AM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 254 seconds. v3
+4/30/2022 11:55:10 AM - Media Type Music. Function: findMediaDirectories. Time eplasted: 254 seconds. v3
+4/30/2022 11:55:10 AM - Media Type Music. Function: checkPathEnding. Time eplasted: 254 seconds. v3
+4/30/2022 11:55:32 AM - Media Type Music. Function: readDirectoryContents. Time eplasted: 265 seconds. v3
+4/30/2022 11:55:33 AM - Media Type Music. Function: sanitizeMusic. Time eplasted: 265 seconds. v3
+4/30/2022 11:55:33 AM - Media Type Music. Function: setMusicAlbum. Time eplasted: 265 seconds. v3
+4/30/2022 11:55:33 AM - Media Type Music. Function: setMusicArtist. Time eplasted: 265 seconds. v3
+4/30/2022 11:55:33 AM - Media Type Music. Function: setMusicAlbum. Time eplasted: 265 seconds. v3
+4/30/2022 11:55:33 AM - Media Type Music. Function: saveMusicToDb. Time eplasted: 265 seconds. v3
+ 
+4/30/2022 11:55:33 AM - Media Type Music. Function: createJson. Time eplasted: 265 seconds. v3
+4/30/2022 11:55:33 AM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 265 seconds. v3
+New Music Scan. 4/30/2022 12:03:04 PM
+4/30/2022 12:03:17 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 20 seconds. v3
+4/30/2022 12:03:04 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 20 seconds. v3
+4/30/2022 12:03:04 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 20 seconds. v3
+4/30/2022 12:03:27 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 31 seconds. v3
+4/30/2022 12:03:27 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 31 seconds. v3
+4/30/2022 12:03:27 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 31 seconds. v3
+4/30/2022 12:03:27 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 31 seconds. v3
+4/30/2022 12:03:27 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 31 seconds. v3
+New Music Scan. 4/30/2022 12:03:55 PM
+4/30/2022 12:04:07 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 11 seconds. v3
+4/30/2022 12:03:55 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 11 seconds. v3
+4/30/2022 12:03:55 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 11 seconds. v3
+4/30/2022 12:04:17 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 22 seconds. v3
+4/30/2022 12:04:17 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 22 seconds. v3
+4/30/2022 12:04:17 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 22 seconds. v3
+4/30/2022 12:04:17 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 22 seconds. v3
+4/30/2022 12:04:17 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 22 seconds. v3
+4/30/2022 12:04:18 PM - Media Type Music. Function: saveMusicToDb. Time eplasted: 23 seconds. v3
+ 
+4/30/2022 12:04:18 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 23 seconds. v3
+4/30/2022 12:04:18 PM - Media Type Music. Function: createJson. Time eplasted: 23 seconds. v3
+New Music Scan. 4/30/2022 12:07:20 PM
+4/30/2022 12:07:32 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 17 seconds. v3
+4/30/2022 12:07:20 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 17 seconds. v3
+4/30/2022 12:07:20 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 17 seconds. v3
+4/30/2022 12:07:42 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 28 seconds. v3
+New Music Scan. 4/30/2022 12:10:25 PM
+4/30/2022 12:10:38 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 3 seconds. v3
+4/30/2022 12:10:25 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 3 seconds. v3
+4/30/2022 12:10:25 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 3 seconds. v3
+4/30/2022 12:10:48 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 14 seconds. v3
+4/30/2022 12:10:48 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 14 seconds. v3
+4/30/2022 12:10:48 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 14 seconds. v3
+4/30/2022 12:10:48 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 14 seconds. v3
+4/30/2022 12:10:48 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 14 seconds. v3
+New Music Scan. 4/30/2022 12:11:05 PM
+4/30/2022 12:11:17 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 7 seconds. v3
+4/30/2022 12:11:05 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 7 seconds. v3
+4/30/2022 12:11:05 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 7 seconds. v3
+4/30/2022 12:11:28 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 18 seconds. v3
+4/30/2022 12:11:28 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 18 seconds. v3
+4/30/2022 12:11:28 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 18 seconds. v3
+4/30/2022 12:11:28 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 18 seconds. v3
+4/30/2022 12:11:28 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 18 seconds. v3
+New Music Scan. 4/30/2022 12:12:59 PM
+4/30/2022 12:13:12 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 8 seconds. v3
+4/30/2022 12:12:59 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 8 seconds. v3
+4/30/2022 12:12:59 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 8 seconds. v3
+4/30/2022 12:13:22 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 19 seconds. v3
+4/30/2022 12:13:22 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 19 seconds. v3
+4/30/2022 12:13:22 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 19 seconds. v3
+4/30/2022 12:13:22 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 19 seconds. v3
+4/30/2022 12:13:22 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 19 seconds. v3
+New Music Scan. 4/30/2022 12:16:18 PM
+4/30/2022 12:16:18 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 49 seconds. v3
+4/30/2022 12:16:18 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 49 seconds. v3
+4/30/2022 12:16:30 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 49 seconds. v3
+4/30/2022 12:16:41 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 60 seconds. v3
+4/30/2022 12:16:41 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 60 seconds. v3
+4/30/2022 12:16:41 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 60 seconds. v3
+4/30/2022 12:16:41 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 60 seconds. v3
+4/30/2022 12:16:41 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 60 seconds. v3
+4/30/2022 12:16:42 PM - Media Type Music. Function: saveMusicToDb. Time eplasted: 61 seconds. v3
+ 
+4/30/2022 12:16:42 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 61 seconds. v3
+4/30/2022 12:16:42 PM - Media Type Music. Function: createJson. Time eplasted: 61 seconds. v3
+New Music Scan. 4/30/2022 12:17:16 PM
+4/30/2022 12:17:29 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 34 seconds. v3
+4/30/2022 12:17:16 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 34 seconds. v3
+4/30/2022 12:17:16 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 34 seconds. v3
+4/30/2022 12:17:40 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 45 seconds. v3
+4/30/2022 12:17:40 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 46 seconds. v3
+4/30/2022 12:17:40 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 46 seconds. v3
+4/30/2022 12:17:40 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 46 seconds. v3
+4/30/2022 12:17:40 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 46 seconds. v3
+4/30/2022 12:17:41 PM - Media Type Music. Function: saveMusicToDb. Time eplasted: 46 seconds. v3
+ 
+4/30/2022 12:17:41 PM - Media Type Music. Function: createJson. Time eplasted: 46 seconds. v3
+4/30/2022 12:17:41 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 46 seconds. v3
+New Music Scan. 4/30/2022 12:22:05 PM
+4/30/2022 12:22:17 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 6 seconds. v3
+4/30/2022 12:22:05 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 6 seconds. v3
+4/30/2022 12:22:05 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 6 seconds. v3
+4/30/2022 12:22:28 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 17 seconds. v3
+4/30/2022 12:22:28 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 17 seconds. v3
+4/30/2022 12:22:28 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 17 seconds. v3
+4/30/2022 12:22:28 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 17 seconds. v3
+4/30/2022 12:22:28 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 17 seconds. v3
+4/30/2022 12:22:28 PM - Media Type Music. Function: saveMusicToDb. Time eplasted: 17 seconds. v3
+4/30/2022 12:22:28 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 17 seconds. v3
+ 
+4/30/2022 12:22:28 PM - Media Type Music. Function: createJson. Time eplasted: 17 seconds. v3
+New Music Scan. 4/30/2022 12:23:37 PM
+4/30/2022 12:23:49 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 6 seconds. v3
+4/30/2022 12:23:37 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 6 seconds. v3
+4/30/2022 12:23:37 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 6 seconds. v3
+4/30/2022 12:23:59 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 17 seconds. v3
+4/30/2022 12:24:00 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 17 seconds. v3
+4/30/2022 12:24:00 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 17 seconds. v3
+4/30/2022 12:24:00 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 17 seconds. v3
+4/30/2022 12:24:00 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 17 seconds. v3
+New Music Scan. 4/30/2022 12:24:52 PM
+4/30/2022 12:25:04 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 16 seconds. v3
+4/30/2022 12:24:52 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 16 seconds. v3
+4/30/2022 12:24:52 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 16 seconds. v3
+4/30/2022 12:25:14 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 27 seconds. v3
+4/30/2022 12:25:15 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 27 seconds. v3
+4/30/2022 12:25:15 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 27 seconds. v3
+4/30/2022 12:25:15 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 27 seconds. v3
+4/30/2022 12:25:15 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 27 seconds. v3
+New Music Scan. 4/30/2022 12:26:10 PM
+4/30/2022 12:26:22 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 3 seconds. v3
+4/30/2022 12:26:10 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 3 seconds. v3
+4/30/2022 12:26:10 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 3 seconds. v3
+4/30/2022 12:26:32 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 14 seconds. v3
+4/30/2022 12:26:32 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 14 seconds. v3
+4/30/2022 12:26:32 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 14 seconds. v3
+4/30/2022 12:26:32 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 14 seconds. v3
+4/30/2022 12:26:32 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 14 seconds. v3
+New Music Scan. 4/30/2022 12:27:40 PM
+4/30/2022 12:27:52 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 3 seconds. v3
+4/30/2022 12:27:40 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 3 seconds. v3
+4/30/2022 12:27:40 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 3 seconds. v3
+4/30/2022 12:28:02 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 14 seconds. v3
+4/30/2022 12:28:03 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 14 seconds. v3
+4/30/2022 12:28:03 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 14 seconds. v3
+4/30/2022 12:28:03 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 14 seconds. v3
+4/30/2022 12:28:03 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 14 seconds. v3
+New Music Scan. 4/30/2022 12:37:54 PM
+4/30/2022 12:38:06 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 12 seconds. v3
+4/30/2022 12:37:54 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 12 seconds. v3
+4/30/2022 12:37:54 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 12 seconds. v3
+4/30/2022 12:38:16 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 23 seconds. v3
+4/30/2022 12:38:17 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 23 seconds. v3
+4/30/2022 12:38:17 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 23 seconds. v3
+4/30/2022 12:38:17 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 23 seconds. v3
+4/30/2022 12:38:17 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 23 seconds. v3
+New Music Scan. 4/30/2022 12:40:23 PM
+4/30/2022 12:40:35 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 9 seconds. v3
+4/30/2022 12:40:23 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 9 seconds. v3
+4/30/2022 12:40:23 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 9 seconds. v3
+4/30/2022 12:40:46 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 20 seconds. v3
+4/30/2022 12:40:46 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 21 seconds. v3
+4/30/2022 12:40:46 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 21 seconds. v3
+4/30/2022 12:40:46 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 21 seconds. v3
+4/30/2022 12:40:46 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 21 seconds. v3
+New Music Scan. 4/30/2022 12:41:30 PM
+4/30/2022 12:41:42 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 4 seconds. v3
+4/30/2022 12:41:30 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 4 seconds. v3
+4/30/2022 12:41:30 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 4 seconds. v3
+4/30/2022 12:41:52 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 15 seconds. v3
+4/30/2022 12:41:53 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 15 seconds. v3
+4/30/2022 12:41:53 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 15 seconds. v3
+4/30/2022 12:41:53 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 15 seconds. v3
+4/30/2022 12:41:53 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 15 seconds. v3
+New Music Scan. 4/30/2022 12:42:36 PM
+4/30/2022 12:42:49 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 17 seconds. v3
+4/30/2022 12:42:36 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 17 seconds. v3
+4/30/2022 12:42:36 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 17 seconds. v3
+4/30/2022 12:43:00 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 28 seconds. v3
+4/30/2022 12:43:00 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 29 seconds. v3
+4/30/2022 12:43:00 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 29 seconds. v3
+4/30/2022 12:43:00 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 29 seconds. v3
+4/30/2022 12:43:00 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 29 seconds. v3
+New Music Scan. 4/30/2022 12:52:36 PM
+4/30/2022 12:52:36 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 10 seconds. v3
+4/30/2022 12:52:36 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 10 seconds. v3
+4/30/2022 12:52:48 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 10 seconds. v3
+4/30/2022 12:52:58 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 21 seconds. v3
+4/30/2022 12:52:59 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 21 seconds. v3
+4/30/2022 12:52:59 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 21 seconds. v3
+4/30/2022 12:52:59 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 21 seconds. v3
+4/30/2022 12:52:59 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 21 seconds. v3
+New Music Scan. 4/30/2022 12:53:43 PM
+4/30/2022 12:53:43 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 2 seconds. v3
+4/30/2022 12:53:43 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 2 seconds. v3
+4/30/2022 12:53:56 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 2 seconds. v3
+4/30/2022 12:54:07 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 13 seconds. v3
+4/30/2022 12:54:07 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 14 seconds. v3
+4/30/2022 12:54:07 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 14 seconds. v3
+4/30/2022 12:54:07 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 14 seconds. v3
+4/30/2022 12:54:07 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 14 seconds. v3
+4/30/2022 12:54:07 PM - Media Type Music. Function: saveMusicToDb. Time eplasted: 14 seconds. v3
+4/30/2022 12:54:07 PM - Media Type Music. Function: createJson. Time eplasted: 14 seconds. v3
+ 
+4/30/2022 12:54:07 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 14 seconds. v3
+New Music Scan. 4/30/2022 12:54:56 PM
+4/30/2022 12:55:08 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 17 seconds. v3
+4/30/2022 12:54:56 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 17 seconds. v3
+4/30/2022 12:54:56 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 17 seconds. v3
+4/30/2022 12:55:19 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 28 seconds. v3
+4/30/2022 12:55:19 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 28 seconds. v3
+4/30/2022 12:55:19 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 28 seconds. v3
+4/30/2022 12:55:19 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 28 seconds. v3
+4/30/2022 12:55:19 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 28 seconds. v3
+4/30/2022 12:55:20 PM - Media Type Music. Function: saveMusicToDb. Time eplasted: 29 seconds. v3
+4/30/2022 12:55:20 PM - Media Type Music. Function: createJson. Time eplasted: 29 seconds. v3
+4/30/2022 12:55:20 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 29 seconds. v3
+ 
+New Music Scan. 4/30/2022 12:55:37 PM
+4/30/2022 12:55:50 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 5 seconds. v3
+4/30/2022 12:55:37 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 5 seconds. v3
+4/30/2022 12:55:37 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 5 seconds. v3
+4/30/2022 12:56:00 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 16 seconds. v3
+4/30/2022 12:56:00 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 16 seconds. v3
+4/30/2022 12:56:00 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 16 seconds. v3
+4/30/2022 12:56:00 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 16 seconds. v3
+4/30/2022 12:56:00 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 16 seconds. v3
+4/30/2022 12:56:01 PM - Media Type Music. Function: saveMusicToDb. Time eplasted: 17 seconds. v3
+4/30/2022 12:56:01 PM - Media Type Music. Function: createJson. Time eplasted: 17 seconds. v3
+4/30/2022 12:56:01 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 17 seconds. v3
+ 
+New Music Scan. 4/30/2022 12:56:50 PM
+4/30/2022 12:56:50 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 48 seconds. v3
+4/30/2022 12:56:50 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 48 seconds. v3
+4/30/2022 12:57:03 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 48 seconds. v3
+4/30/2022 12:57:13 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 59 seconds. v3
+4/30/2022 12:57:13 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 59 seconds. v3
+4/30/2022 12:57:14 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 59 seconds. v3
+4/30/2022 12:57:13 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 59 seconds. v3
+4/30/2022 12:57:14 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 59 seconds. v3
+4/30/2022 12:57:14 PM - Media Type Music. Function: saveMusicToDb. Time eplasted: 60 seconds. v3
+ 
+4/30/2022 12:57:14 PM - Media Type Music. Function: createJson. Time eplasted: 60 seconds. v3
+4/30/2022 12:57:14 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 60 seconds. v3
+New Music Scan. 4/30/2022 2:40:52 PM
+4/30/2022 2:41:05 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 27 seconds. v3
+4/30/2022 2:40:52 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 27 seconds. v3
+4/30/2022 2:40:52 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 27 seconds. v3
+4/30/2022 2:41:15 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 37 seconds. v3
+4/30/2022 2:41:15 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 38 seconds. v3
+4/30/2022 2:41:15 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 38 seconds. v3
+4/30/2022 2:41:15 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 38 seconds. v3
+4/30/2022 2:41:15 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 38 seconds. v3
+4/30/2022 2:41:16 PM - Media Type Music. Function: saveMusicToDb. Time eplasted: 38 seconds. v3
+4/30/2022 2:41:16 PM - Media Type Music. Function: createJson. Time eplasted: 38 seconds. v3
+4/30/2022 2:41:16 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 38 seconds. v3
+ 
+New Music Scan. 4/30/2022 2:41:40 PM
+4/30/2022 2:41:40 PM - Media Type Music. Function: checkPathEnding. Time eplasted: 24 seconds. v3
+4/30/2022 2:41:52 PM - Media Type Music. Function: verifyFinalDirectory. Time eplasted: 24 seconds. v3
+4/30/2022 2:41:40 PM - Media Type Music. Function: findMediaDirectories. Time eplasted: 24 seconds. v3
+4/30/2022 2:42:03 PM - Media Type Music. Function: readDirectoryContents. Time eplasted: 35 seconds. v3
+4/30/2022 2:42:03 PM - Media Type Music. Function: sanitizeMusic. Time eplasted: 36 seconds. v3
+4/30/2022 2:42:03 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 36 seconds. v3
+4/30/2022 2:42:03 PM - Media Type Music. Function: setMusicArtist. Time eplasted: 36 seconds. v3
+4/30/2022 2:42:03 PM - Media Type Music. Function: setMusicAlbum. Time eplasted: 36 seconds. v3
+4/30/2022 2:42:04 PM - Media Type Music. Function: saveMusicToDb. Time eplasted: 36 seconds. v3
+ 
+4/30/2022 2:42:04 PM - Media Type Music. Function: createJson. Time eplasted: 36 seconds. v3
+4/30/2022 2:42:04 PM - Media Type Music. Function: sendCategoryFixes. Time eplasted: 36 seconds. v3

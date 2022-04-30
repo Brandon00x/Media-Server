@@ -6,6 +6,7 @@ const path = require("path");
 const { readdir } = require("fs/promises");
 const { createJson } = require("../apicalls/createjson");
 const sizeOf = require("image-size");
+const { databaseAction } = require("../database/mongodb");
 
 // Arrays Used for Media.
 let initialFolderPaths = []; //Initial First Level Folders
@@ -184,6 +185,9 @@ async function startScan(response, mediaCategory, mediaPath) {
 
       await sortMusic();
       saveScanTime("setMusicAlbum");
+
+      await saveMusicToDb();
+      saveScanTime("saveMusicToDb");
 
       createJson(musicJson, JSON.stringify(mediaArr), res);
       saveScanTime("createJson");
@@ -629,6 +633,7 @@ async function verifyFileExtension(files, paths, mediaCategory, reject) {
 /////////// SANITIZE DATA | ALL MEDIA | Sanitize Titles for API
 // Sanitize | Music | Sanitize Music Titles for API
 async function sanitizeMusic() {
+  console.log(`Sanitizing Music Titles`);
   return new Promise(async (resolve, reject) => {
     let done = false;
     let musicSanitize = setInterval(() => {
@@ -662,6 +667,7 @@ async function sanitizeMusic() {
 
 // Sanitize | Music | Set Music Artist Based on Folder Name
 async function setMusicArtist() {
+  console.info(`Setting Music Artist`);
   for (let i = 0; i < mediaArr.length; i++) {
     let lastIndexPath = mediaArr[i].path.lastIndexOf(
       "/",
@@ -676,6 +682,7 @@ async function setMusicArtist() {
 
 // Sanitize | Music | Set Music Album Based on Folder Name
 async function setMusicAlbum() {
+  console.log(`Setting Music Album`);
   for (let i = 0; i < mediaArr.length; i++) {
     // Get Album
     let lastIndexPath = mediaArr[i].path.lastIndexOf("/");
@@ -694,6 +701,7 @@ async function setMusicAlbum() {
 
 // Sanitize | Music | Sort Music By Artist > Album > Songs
 async function sortMusic() {
+  console.log(`Sorting Music`);
   let songArray = [];
   let albumArray = [];
   let artistArray = [];
@@ -764,8 +772,65 @@ async function sortMusic() {
   mediaArr = artistArray;
 }
 
+async function saveMusicToDb() {
+  console.log(`Saving Music To Database`);
+  let x = 0;
+  let albumSongs = [];
+  let songs = [];
+  let cmd = {
+    cmd: "createIndex",
+    collection: "music",
+    key: "key",
+  };
+
+  // Create Database Index on Key
+  await databaseAction(cmd);
+
+  for (let i = 0; i < mediaArr.length; i++) {
+    if (i === mediaArr.length) {
+      console.log("Breaking");
+      break;
+    }
+    do {
+      if (mediaArr[i].Albums.length >= 1) {
+        for (let y = 0; y < mediaArr[i].Albums[x].Tracks.length; y++) {
+          // Push Songs / Track Numbers
+          songs.push({
+            TrackNumber: mediaArr[i].Albums[x].Tracks[y].TrackNumber,
+            Song: mediaArr[i].Albums[x].Tracks[y].Track,
+            Path: mediaArr[i].Albums[x].Tracks[y].Path,
+          });
+        }
+        albumSongs.push({
+          Album: mediaArr[i].Albums[x].Album,
+          Artist: mediaArr[i].Artist,
+          Songs: JSON.stringify(songs),
+        });
+        let cmd = {
+          cmd: "insertOne",
+          collection: "music",
+          key: mediaArr[i].Albums[x].Album,
+          data: albumSongs,
+        };
+        await databaseAction(cmd);
+        songs = [];
+        albumSongs = [];
+      }
+      x = x + 1;
+    } while (x <= mediaArr[i].Albums.length - 1);
+
+    // Reset X
+    if (i < mediaArr.length - 1) {
+      if (mediaArr[i].Result !== mediaArr[i + 1].Result) {
+        x = 0;
+      }
+    }
+  }
+}
+
 // Sanitize | Books | Sanitize book titles and removes junk.
 async function removeAuthorFromTitle() {
+  console.log(`Removing Author From Title`);
   try {
     for (let i = 0; i < mediaArr.length; i++) {
       let authorReversedLowerCase =

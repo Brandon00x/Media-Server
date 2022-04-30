@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Navbar, NavDropdown } from "react-bootstrap";
+import { Navbar } from "react-bootstrap";
 import "./navbar.css";
 
 export default class NavBar extends Component {
@@ -10,6 +10,17 @@ export default class NavBar extends Component {
       toggleDropDownOptions: true,
     };
     this.toggleDropDown = this.toggleDropDown.bind(this);
+  }
+
+  componentDidUpdate() {
+    if (this.props.navtitle === "Music") {
+      if (this.props.albumColors !== null) {
+        this.color1 = this.props.albumColors[0].color1;
+        this.color2 = this.props.albumColors[0].color2;
+        this.color3 = this.props.albumColors[0].color3;
+        this.color4 = this.props.albumColors[0].color4;
+      }
+    }
   }
 
   toggleDropDown(e) {
@@ -27,110 +38,177 @@ export default class NavBar extends Component {
 
   render() {
     return (
-      <Navbar className="navBar">
+      <Navbar
+        className="navBar"
+        style={{ color: this.color4, backgroundColor: this.color1 }}
+      >
         <span className="navbarTitle">{this.props.navtitle}</span>
         <div className="navTitleRight">
-          <Navbar.Collapse id="basic-navbar-nav">
-            <NavDropdown
-              className="navOptions"
-              title="Media"
-              id="media"
-              onClick={this.toggleDropDown}
-            >
-              {this.state.toggleDropDownMedia === false ? (
-                <div>
-                  <NavDropdown.Item
-                    className="navLink"
-                    onClick={this.toggleDropDown}
-                    href="/books"
-                  >
-                    Books
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    className="navLink"
-                    onClick={this.toggleDropDown}
-                    href="/movies"
-                  >
-                    Movies
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    className="navLink"
-                    onClick={this.toggleDropDown}
-                    href="/tv"
-                  >
-                    TV Shows
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    className="navLink"
-                    onClick={this.toggleDropDown}
-                    href="/music"
-                  >
-                    Music
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    className="navLink"
-                    onClick={this.toggleDropDown}
-                    href="/photos"
-                  >
-                    Photos
-                  </NavDropdown.Item>
-                  <NavDropdown.Item
-                    className="navLink"
-                    onClick={this.toggleDropDown}
-                    href="/settings"
-                  >
-                    Settings
-                  </NavDropdown.Item>{" "}
-                </div>
-              ) : null}
-            </NavDropdown>
-          </Navbar.Collapse>
-          {this.props.navtitle === "Settings" ? null : (
-            <Navbar.Collapse id="basic-navbar-nav">
-              <NavDropdown
-                className="navOptions"
-                title="Options"
-                id="options"
-                onClick={this.toggleDropDown}
+          <button
+            id="media"
+            className="navOptions"
+            onClick={this.toggleDropDown}
+            style={{ color: this.color4, backgroundColor: this.color1 }}
+          >
+            Media
+          </button>
+          {this.state.toggleDropDownMedia === false ? (
+            <div className="navbarDropDown">
+              <div
+                className="navbarDropDownItem"
+                style={{ backgroundColor: this.color1 }}
               >
-                {this.state.toggleDropDownOptions === false ? (
-                  <div>
-                    <NavDropdown.Item
+                <a
+                  className="navbarLinkButton"
+                  href="/books"
+                  style={{
+                    color: this.color4,
+                    backgroundColor: this.color1,
+                    borderColor: this.color4,
+                  }}
+                  onClick={this.toggleDropDown}
+                >
+                  Books
+                </a>
+                <a
+                  className="navbarLinkButton"
+                  href="/movies"
+                  style={{
+                    color: this.color4,
+                    backgroundColor: this.color1,
+                    borderColor: this.color4,
+                  }}
+                  onClick={this.toggleDropDown}
+                >
+                  Movies
+                </a>
+                <a
+                  className="navbarLinkButton"
+                  href="/tv"
+                  style={{
+                    color: this.color4,
+                    backgroundColor: this.color1,
+                    borderColor: this.color4,
+                  }}
+                  onClick={this.toggleDropDown}
+                >
+                  TV Shows
+                </a>
+                <a
+                  className="navbarLinkButton"
+                  href="/music"
+                  style={{
+                    color: this.color4,
+                    backgroundColor: this.color1,
+                    borderColor: this.color4,
+                  }}
+                  onClick={this.toggleDropDown}
+                >
+                  Music
+                </a>
+                <a
+                  className="navbarLinkButton"
+                  href="/photos"
+                  style={{
+                    color: this.color4,
+                    backgroundColor: this.color1,
+                    borderColor: this.color4,
+                  }}
+                  onClick={this.toggleDropDown}
+                >
+                  Photos
+                </a>
+                <a
+                  className="navbarLinkButton"
+                  href="/settings"
+                  style={{
+                    color: this.color4,
+                    backgroundColor: this.color1,
+                    borderColor: this.color4,
+                  }}
+                  onClick={this.toggleDropDown}
+                >
+                  Settings
+                </a>
+              </div>
+            </div>
+          ) : null}
+          {this.props.navtitle === "Settings" ? null : (
+            <div className="navTitleRight">
+              <button
+                className="navOptions"
+                onClick={this.toggleDropDown}
+                style={{ color: this.color4, backgroundColor: this.color1 }}
+              >
+                Options
+              </button>
+              {this.state.toggleDropDownOptions === false ? (
+                <div className="navbarDropDown1">
+                  <div
+                    className="navbarDropDownItem"
+                    style={{ backgroundColor: this.color1 }}
+                  >
+                    <button
                       className="navMediaOptions"
-                      style={{ fontWeight: 600 }}
+                      style={{
+                        color: this.color4,
+                        backgroundColor: this.color1,
+                        borderColor: this.color4,
+                        fontWeight: 600,
+                      }}
                     >
                       Sorted - {this.props.sortedBy}
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
+                    </button>
+                    <button
                       className="navMediaOptions"
                       onClick={this.props.sort}
+                      style={{
+                        color: this.color4,
+                        backgroundColor: this.color1,
+                        borderColor: this.color4,
+                      }}
                     >
                       Title
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
+                    </button>
+                    <button
                       className="navMediaOptions"
                       onClick={this.props.sortYear}
+                      style={{
+                        color: this.color4,
+                        backgroundColor: this.color1,
+                        borderColor: this.color4,
+                      }}
                     >
                       {this.props.navtitle === "Books"
                         ? "Published"
                         : "Released"}{" "}
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
+                    </button>
+                    <button
                       className="navMediaOptions"
                       onClick={this.props.sortLength}
+                      style={{
+                        color: this.color4,
+                        backgroundColor: this.color1,
+                        borderColor: this.color4,
+                      }}
                     >
                       {this.props.navtitle === "Books" ? "Pages" : "Time"}
-                    </NavDropdown.Item>
-                    <NavDropdown.Item
+                    </button>
+                    <button
                       className="navMediaOptions"
                       onClick={this.props.resetSort}
+                      style={{
+                        color: this.color4,
+                        backgroundColor: this.color1,
+                        borderColor: this.color4,
+                      }}
                     >
                       Reset Sort
-                    </NavDropdown.Item>
+                    </button>
                   </div>
-                ) : null}
-              </NavDropdown>
-            </Navbar.Collapse>
+                </div>
+              ) : null}
+            </div>
           )}
         </div>
       </Navbar>

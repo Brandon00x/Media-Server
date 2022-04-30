@@ -11,6 +11,7 @@ const { getMediaInfo } = require("./apicalls/apicall");
 const { readMedia } = require("./readmedia/readmedia");
 const { readBook } = require("./readmedia/readbook");
 const { readTvSeason } = require("./readmedia/readtvseason");
+const { databaseAction } = require("./database/mongodb");
 
 const corsOptions = {
   origin: "*",
@@ -70,7 +71,7 @@ app.post("/update", cors(corsOptions), async function (req, res) {
     let mediaPath = await req.body.path;
     let mediaData = await startScan(res, mediaCategory, mediaPath);
     if (mediaData.length > 0 && mediaCategory !== "updatephotos") {
-      await getMediaInfo(mediaData, res, mediaCategory);
+      //await getMediaInfo(mediaData, res, mediaCategory);
     } else if (mediaData.length === 0) {
       res.write(
         `INFO: Found 0 local media items. Please check your directory and read the information section.\n`
@@ -198,8 +199,12 @@ app.get("/book", async function (req, res) {
 app.get("/setmusic", async function (req, res) {
   musicStreamPath = req.query.path;
   let song = req.query.song;
-  console.info(`Music Play Request for Song: ${song}.`);
-  res.send(`Set ${song} Streaming Path: ${musicStreamPath}.`);
+  let album = req.query.album;
+  console.info(`Music Play Request for Song: ${song} Album ${album}.`);
+  // Get Database Album Songs/Paths
+  let cmd = { cmd: "find", collection: "music", key: "key", data: album };
+  let dbSongs = await databaseAction(cmd);
+  res.json(dbSongs[0].data[0].Songs);
 });
 
 // Stream Music
@@ -207,6 +212,7 @@ app.get("/streammusic", function (req, res) {
   try {
     res.writeHead(200, { "Content-Type": "audio/mp3" });
     let musicStream = fs.createReadStream(musicStreamPath);
+    console.log(`Streaming Path ${musicStreamPath}`);
     musicStream.pipe(res);
   } catch (err) {
     console.error(`Streaming Error: ${err}`);

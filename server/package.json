@@ -4,6 +4,7 @@
     "cors": "^2.8.5",
     "epub": "^1.2.1",
     "express": "^4.17.3",
-    "image-size": "^1.0.1"
+    "image-size": "^1.0.1",
+    "mongodb": "^4.5.0"
   }
 }

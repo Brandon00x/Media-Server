@@ -104,7 +104,7 @@ My main goal for this project was to showcase my abilities writing code and obta
 Date: 4/20/22
 
 <h4>Program:</h4>
-<li>Performance - Add Database MongoDB or MS SQL Server</li>
+<li>Performance - Include All Media Types in DB.</li>
 <li>Performance - Scan Performance Improvements Based on Data Captured</li>
 <li>Performance - API Calls Performance Improvements.</li>
 <li>Performance - Modify/Remove CreateRows Function.</li>
@@ -117,9 +117,6 @@ Date: 4/20/22
 <h4>Books:</h4>
 <li>Bug - Fix View for PDF file extension to prevent reload</li>
 <li>Feature - Add Read View for DOC file extension</li>
-
-<h4>Music:</h4>
-<li>Feature - Continuous Album Playback</li>
 
 <h4>TV Shows:</h4>
 <li>Data - Transcode to support more codecs.</li>
@@ -138,7 +135,11 @@ Date: 4/20/22
 
 ## Features Added / Fixed Bugs
 
+<h4>Program</h4>
+<li>Finished 4/30 Performance - Add Database MongoDB or MS SQL Server</li>
+
 <h4>Music:</h4>
+<li>Finished 4/30 Feature - Continuous Album Playback</li>
 <li>Finished 4/29 Feature - Media Player in Browser</li>
 <li>Finished 4/29 Data - Include Artist in Apple Music API Call to prevent incorrect matches</li>
 <li>Finished 4/29 Data/Performance - Card Based on Album w/ Songs (Currently 1 Song/Card. Will Decrease Load Times)</li>
