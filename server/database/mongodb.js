@@ -26,7 +26,7 @@ async function databaseAction(cmd) {
   // Use Collection In Cmd
   let collection = db.collection(cmd.collection);
 
-  if (cmd.cmd === "createIndex") {
+  if (action === "createIndex") {
     try {
       collection.createIndex({ [key]: 1 }, { unique: true });
       console.info(`Created Index on Key: ${key}`);
@@ -36,7 +36,7 @@ async function databaseAction(cmd) {
   }
 
   // Insert One
-  if (cmd.cmd === "insertOne") {
+  if (action === "insertOne") {
     try {
       let insertResult = await collection.insertOne({
         key,
@@ -53,13 +53,13 @@ async function databaseAction(cmd) {
   }
 
   // Insert Many
-  if (cmd.cmd === "insertMany") {
+  if (action === "insertMany") {
     const insertResult = await collection.insertMany(data, { unique: true });
     console.info("Inserted Data =>", insertResult);
   }
 
   // Search By Filter
-  if (cmd.cmd === "find") {
+  if (action === "find") {
     console.info(`Searching For ${key}: ${data}`);
     const searchResult = await collection.find({ [key]: data }).toArray();
     if (searchResult.length > 0) {

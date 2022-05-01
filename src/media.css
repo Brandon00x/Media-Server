@@ -290,8 +290,14 @@ body {
   width: 197px;
 }
 
+.musicOpenTrack {
+  background: none;
+  border: none;
+}
+
 .musicOpenFolderButton {
   border: none;
+  background: none;
   font-weight: bold;
 }
 
@@ -317,7 +323,7 @@ body {
   justify-content: center;
   align-items: center;
   position: fixed;
-  left: 10%;
+  left: 15%;
 }
 
 .musicControlsDiv {

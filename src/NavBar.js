@@ -28,10 +28,12 @@ export default class NavBar extends Component {
     if (this.dropDown === "media") {
       this.setState((prevState) => ({
         toggleDropDownMedia: !prevState.toggleDropDownMedia,
+        toggleDropDownOptions: true,
       }));
     } else {
       this.setState((prevState) => ({
         toggleDropDownOptions: !prevState.toggleDropDownOptions,
+        toggleDropDownMedia: true,
       }));
     }
   }
@@ -46,6 +48,7 @@ export default class NavBar extends Component {
         <div className="navTitleRight">
           <button
             id="media"
+            title="Media Categories"
             className="navOptions"
             onClick={this.toggleDropDown}
             style={{ color: this.color4, backgroundColor: this.color1 }}
@@ -137,6 +140,7 @@ export default class NavBar extends Component {
             <div className="navTitleRight">
               <button
                 className="navOptions"
+                title="Media Options"
                 onClick={this.toggleDropDown}
                 style={{ color: this.color4, backgroundColor: this.color1 }}
               >

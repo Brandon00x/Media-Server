@@ -117,6 +117,7 @@ export default class Template extends Component {
                   <button
                     className="musicOpenTrack"
                     onClick={this.openMedia}
+                    title="Open File"
                     value={JSON.stringify({ Path: this.trackPath })}
                     style={{
                       backgroundColor: this.albumColor1,
@@ -130,7 +131,7 @@ export default class Template extends Component {
                     id="musicPlaySong"
                     className="musicOpenTrack"
                     onClick={this.playLocalSong}
-                    title={this.trackName}
+                    title="Play Song"
                     music={JSON.stringify({
                       artist: data[i].Artist,
                       album: data[i].Albums[x].Album,
@@ -241,6 +242,7 @@ export default class Template extends Component {
                 <div className="musicDescriptionButtonDiv">
                   <button
                     className="musicOpenFolderButton"
+                    title="Open Artist Folder"
                     value={JSON.stringify({ Path: data[i].Path })}
                     onClick={this.openMedia}
                     style={{
@@ -252,6 +254,7 @@ export default class Template extends Component {
                   </button>
                   <button
                     className="musicOpenFolderButton"
+                    title="Open Album Folder"
                     value={JSON.stringify({ Path: data[i].Albums[x].Path })}
                     onClick={this.openMedia}
                     style={{
@@ -352,6 +355,25 @@ export default class Template extends Component {
         break;
       }
     }
+
+    this.nextTrack = {
+      artist: this.artist,
+      album: this.album,
+      tracknumber: this.nextSongTrack,
+      song: this.nextSong,
+      path: this.nextSongPath,
+      colors: this.colors,
+    };
+
+    this.prevTrack = {
+      artist: this.artist,
+      album: this.album,
+      tracknumber: this.prevSongTrack,
+      song: this.prevSong,
+      path: this.nextSongPath,
+      colors: this.colors,
+    };
+
     // Create Music Player JSX
     this.musicPlayer = (
       <div
@@ -372,16 +394,14 @@ export default class Template extends Component {
           {this.trackNumber === 1 ? (
             // Hidden Icon for Spacing
             <i
-              className="fas fa-pause fa-2x musicControls"
-              style={{
-                color: this.colors[0].color1,
-                position: "relative",
-              }}
+              className="hiddenSpace musicControls"
+              style={{ width: "36px" }}
             />
           ) : (
             <button
               className="fas fa-angle-double-left fa-2x musicControls"
               id="musicPrev"
+              title={`Previous: ${this.prevSong}`}
               onClick={this.playLocalSong}
               style={{
                 color: this.colors[0].color4,
@@ -389,57 +409,47 @@ export default class Template extends Component {
                 background: "none",
                 border: "none",
               }}
-              music={JSON.stringify({
-                artist: this.artist,
-                album: this.album,
-                tracknumber: this.prevSongTrack,
-                song: this.prevSong,
-                path: this.nextSongPath,
-                colors: this.colors,
-              })}
+              music={JSON.stringify(this.prevTrack)}
             />
           )}
           {this.state.musicPlaying ? (
             <i
               className="fas fa-pause fa-2x musicControls"
               onClick={this.musicControls}
+              title="Pause"
               style={{
                 color: this.colors[0].color4,
                 position: "relative",
               }}
-              music={JSON.stringify({
-                artist: this.artist,
-                album: this.album,
-                tracknumber: this.prevSongTrack,
-                song: this.prevSong,
-                path: this.nextSongPath,
-                colors: this.colors,
-              })}
             />
           ) : (
             <i
               className="fas fa-play fa-2x musicControls"
               id="musicPlay"
+              title="Play"
               onClick={this.musicControls}
               style={{
                 color: this.colors[0].color4,
                 position: "relative",
               }}
-              music={JSON.stringify({
-                artist: this.artist,
-                album: this.album,
-                tracknumber: this.prevSongTrack,
-                song: this.prevSong,
-                path: this.nextSongPath,
-                colors: this.colors,
-              })}
             />
           )}
+          <i
+            onClick={this.closeMediaPlayer}
+            title="Stop"
+            className="fas fa-stop fa-2x musicControls"
+            style={{
+              color: this.colors[0].color4,
+              position: "relative",
+              marginLeft: "10px",
+            }}
+          />
           {/* Next Icon */}
           {this.trackNumber === this.albumSongList.length ? null : (
             <button
-              className="fas fa-angle-double-right fa-2x musicControls"
               id="musicNext"
+              className="fas fa-angle-double-right fa-2x musicControls"
+              title={`Next: ${this.nextSong}`}
               onClick={this.playLocalSong}
               style={{
                 color: this.colors[0].color4,
@@ -447,31 +457,28 @@ export default class Template extends Component {
                 background: "none",
                 border: "none",
               }}
-              title={this.nextSong}
-              music={JSON.stringify({
-                artist: this.artist,
-                album: this.album,
-                tracknumber: this.nextSongTrack,
-                song: this.nextSong,
-                path: this.nextSongPath,
-                colors: this.colors,
-              })}
+              music={JSON.stringify(this.nextTrack)}
             />
           )}
-          <i
-            onClick={this.closeMediaPlayer}
-            className="fas fa-stop fa-2x musicControls"
-            style={{
-              color: this.colors[0].color4,
-              position: "relative",
-            }}
-          />
         </div>
-        <audio id="musicPlayer" autoPlay>
-          <source src="http://localhost:3020/streammusic" type="audio/ogg" />
-          <source src="http://localhost:3020/streammusic" type="audio/mpeg" />
-          Your browser does not support the audio element.
-        </audio>
+        {this.albumSongList.length === this.trackNumber ? (
+          <audio id="musicPlayer" autoPlay onEnded={this.closeMediaPlayer}>
+            <source src="http://localhost:3020/streammusic" type="audio/ogg" />
+            <source src="http://localhost:3020/streammusic" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+        ) : (
+          <audio
+            id="musicPlayer"
+            autoPlay
+            onEnded={this.playLocalSong}
+            music={JSON.stringify(this.nextTrack)}
+          >
+            <source src="http://localhost:3020/streammusic" type="audio/ogg" />
+            <source src="http://localhost:3020/streammusic" type="audio/mpeg" />
+            Your browser does not support the audio element.
+          </audio>
+        )}
       </div>
     );
 
@@ -481,7 +488,6 @@ export default class Template extends Component {
       albumColors: this.colors,
       musicPlayer: this.musicPlayer,
     });
-    this.scrollToTop();
   }
 
   // Music Controls for Media Type Music
@@ -949,6 +955,7 @@ export default class Template extends Component {
         value={descriptionOn}
         id={title}
         name={title}
+        title={`Listen to ${title}`}
         style={{
           backgroundColor: this.albumColor1,
           color: this.albumColor4,
@@ -966,6 +973,7 @@ export default class Template extends Component {
         onClick={this.getSeason}
         value={JSON.stringify(downloadValue)}
         name={title}
+        title={`View ${title} Seasons`}
         style={{
           border: "none",
           backgroundColor: "burlywood",
@@ -982,6 +990,7 @@ export default class Template extends Component {
         onClick={this.playInBrowser}
         value={JSON.stringify(downloadValue)}
         name={title}
+        title={`Watch ${title}`}
         style={{
           border: "none",
           backgroundColor: "burlywood",
@@ -998,6 +1007,7 @@ export default class Template extends Component {
         onClick={this.showPhoto}
         value={`data:image/${imgType};base64,${photo}`}
         name={title}
+        title={`View Full Size Image`}
         style={{
           border: "none",
           backgroundColor: "burlywood",
@@ -1014,6 +1024,7 @@ export default class Template extends Component {
         onClick={this.readInBrowser}
         value={JSON.stringify(downloadValue)}
         name={title}
+        title={`Read ${title}`}
         style={{
           border: "none",
           backgroundColor: "burlywood",
@@ -1053,6 +1064,7 @@ export default class Template extends Component {
         <Button
           onClick={this.showDescription}
           value={descriptionOn}
+          title="Description"
           id={title}
           key={i}
           className="mediaButton"
@@ -1067,6 +1079,7 @@ export default class Template extends Component {
         </Button>
         <Button
           className="mediaButton"
+          title={`Open ${title} Locally`}
           onClick={this.openMedia}
           value={JSON.stringify(downloadValue)}
           style={{
