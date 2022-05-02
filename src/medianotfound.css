@@ -1,0 +1,37 @@
+.mediaNotFoundPage {
+  height: fit-content;
+  display: block;
+  width: 100vw;
+  height: 100vh;
+  color: white;
+  overflow-y: scroll;
+}
+
+.mediaNotFoundContainer {
+  margin-top: 60px;
+}
+
+.mediaNotFoundList {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mediaNotFoundCategory {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.missingMediaItem {
+  border: 1px solid white;
+  width: 800px;
+}
+
+.missingMediaItemText {
+  margin-left: 10px;
+}
+
+.notFoundButton {
+  margin: 3px 3px 3px 10px;
+}

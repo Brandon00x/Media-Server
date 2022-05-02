@@ -12,6 +12,7 @@ const { readMedia } = require("./readmedia/readmedia");
 const { readBook } = require("./readmedia/readbook");
 const { readTvSeason } = require("./readmedia/readtvseason");
 const { databaseAction } = require("./database/mongodb");
+const { missingMedia } = require("./missingmedia/missingmedia");
 
 const corsOptions = {
   origin: "*",
@@ -23,7 +24,7 @@ app.use(cors());
 let videoSreamPath;
 let musicStreamPath;
 
-//TODO REPLACE WITH DATABASE.
+// TODO: REPLACE WITH DATABASE.
 //Sends Keys and Folder Locations When Settings is Loaded
 app.get("/settings", cors(corsOptions), async function (req, res) {
   try {
@@ -71,7 +72,7 @@ app.post("/update", cors(corsOptions), async function (req, res) {
     let mediaPath = await req.body.path;
     let mediaData = await startScan(res, mediaCategory, mediaPath);
     if (mediaData.length > 0 && mediaCategory !== "updatephotos") {
-      //await getMediaInfo(mediaData, res, mediaCategory);
+      await getMediaInfo(mediaData, res, mediaCategory);
     } else if (mediaData.length === 0) {
       res.write(
         `INFO: Found 0 local media items. Please check your directory and read the information section.\n`
@@ -82,6 +83,12 @@ app.post("/update", cors(corsOptions), async function (req, res) {
     console.error(`Error: Unable to finish scan request: ${err}`);
     res.end();
   }
+});
+
+// Send Missing Media Information
+app.get("/missingmedia", async function (req, res) {
+  let missingItems = await missingMedia();
+  res.json(missingItems);
 });
 
 // Send Base64 Encoded Photo for Photos Page.

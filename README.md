@@ -109,7 +109,6 @@ Date: 4/20/22
 <li>Performance - API Calls Performance Improvements.</li>
 <li>Performance - Modify/Remove CreateRows Function.</li>
 <li>Design - Better Design and CSS Improvements</li>
-<li>Data - Section for Media Not Found API Call</li>
 <li>Feature - Search.</li>
 
 <h4>Features to be added by Media Type</h4>
@@ -137,6 +136,7 @@ Date: 4/20/22
 
 <h4>Program</h4>
 <li>Finished 4/30 Performance - Add Database MongoDB or MS SQL Server</li>
+<li>Finished 5/1 Data - Section for Media Not Found API Call</li>
 
 <h4>Music:</h4>
 <li>Finished 4/30 Feature - Continuous Album Playback</li>

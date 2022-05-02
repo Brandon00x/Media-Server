@@ -7,6 +7,7 @@ import Tv from "./TVShows";
 import Music from "./Music";
 import Photos from "./Photos";
 import Settings from "./Settings";
+import MediaNotFound from "./MediaNotFound";
 
 export default class App extends Component {
   render() {
@@ -21,6 +22,7 @@ export default class App extends Component {
             <Route path="/music" element={<Music />} />
             <Route path="/tv" element={<Tv />} />
             <Route path="/settings" element={<Settings />} />
+            <Route path="/missingmedia" element={<MediaNotFound />} />
           </Routes>
         </BrowserRouter>
       </div>

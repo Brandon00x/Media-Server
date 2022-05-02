@@ -170,6 +170,7 @@ export default class Settings extends Component {
         <div className="settingsContainer">
           <div className="settingsComponents">
             <div className="scanFolderOptions">
+              {/* SCAN OPTIONS */}
               <h4>Media Folder Locations</h4>
               <span className="mediaRootDirectory">
                 <span className="mediaDirectoryTitle">Books Folder:</span>
@@ -302,6 +303,8 @@ export default class Settings extends Component {
                 </button>
               </span>
             </div>
+
+            {/* PROGRAM OPTIONS */}
             <div>
               <div className="settingsProgramOptions">
                 <h4>Program Options</h4>
@@ -384,6 +387,33 @@ export default class Settings extends Component {
                   </button>
                 </span>
               </div>
+              {/* MEDIA NOT FOUND */}
+              <div className="settingsProgramOptions">
+                <h4>Media Items with Zero API Results:</h4>
+                <span>
+                  View media items whose results were not found by the API and
+                  fix their names.
+                  <a
+                    style={{
+                      marginLeft: "10px",
+                      backgroundColor: "rgb(239, 239, 239)",
+                      textDecoration: "none",
+                      color: "black",
+                      borderWidth: "2px",
+                      borderStyle: "outset",
+                      borderColor: "rgb(118, 118, 118)",
+                      padding: "1px 6px",
+                      borderImage: "initial",
+                      fontSize: "14px",
+                    }}
+                    href="/missingmedia"
+                  >
+                    View Missing Media
+                  </a>
+                </span>
+              </div>
+
+              {/* SCAN INSTRUCTIONS */}
               <div className="settingsDescription">
                 <h4>Scan Information</h4>
                 <p>Root Folder Acceptable Names:</p>
