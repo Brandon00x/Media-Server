@@ -70,10 +70,15 @@ app.post("/update", cors(corsOptions), async function (req, res) {
   try {
     let mediaCategory = await req.body.type;
     let mediaPath = await req.body.path;
+    // Scan | Set Local Results
     let mediaData = await startScan(res, mediaCategory, mediaPath);
+
+    // Call API with Results
     if (mediaData.length > 0 && mediaCategory !== "updatephotos") {
       await getMediaInfo(mediaData, res, mediaCategory);
-    } else if (mediaData.length === 0) {
+    }
+    // API Found 0 Results
+    else if (mediaData.length === 0) {
       res.write(
         `INFO: Found 0 local media items. Please check your directory and read the information section.\n`
       );
@@ -92,7 +97,6 @@ app.get("/missingmedia", async function (req, res) {
 });
 
 // Send Base64 Encoded Photo for Photos Page.
-// Todo: Use Database for this later
 app.post("/photo", cors(corsOptions), async function (req, res) {
   let photoPath = await req.body.data;
   fs.readFile(photoPath, function (err, data) {
@@ -109,7 +113,7 @@ app.post("/photo", cors(corsOptions), async function (req, res) {
   });
 });
 
-// Send Local Book Data Saved From API Call. Does not call API.
+// Send Media Data Saved From API Call.
 app.post("/getmedia", cors(corsOptions), async function (req, res) {
   let mediaType = await req.body.data;
   console.info(`Media Data Requested for ${mediaType}`);

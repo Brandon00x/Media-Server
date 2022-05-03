@@ -387,30 +387,30 @@ export default class Settings extends Component {
                   </button>
                 </span>
               </div>
+
               {/* MEDIA NOT FOUND */}
               <div className="settingsProgramOptions">
-                <h4>Media Items with Zero API Results:</h4>
-                <span>
+                <h4>View Media Items With API Errors:</h4>
+                <p>
                   View media items whose results were not found by the API and
                   fix their names.
-                  <a
-                    style={{
-                      marginLeft: "10px",
-                      backgroundColor: "rgb(239, 239, 239)",
-                      textDecoration: "none",
-                      color: "black",
-                      borderWidth: "2px",
-                      borderStyle: "outset",
-                      borderColor: "rgb(118, 118, 118)",
-                      padding: "1px 6px",
-                      borderImage: "initial",
-                      fontSize: "14px",
-                    }}
-                    href="/missingmedia"
-                  >
-                    View Missing Media
-                  </a>
-                </span>
+                </p>
+                <a
+                  style={{
+                    backgroundColor: "rgb(239, 239, 239)",
+                    textDecoration: "none",
+                    color: "black",
+                    borderWidth: "2px",
+                    borderStyle: "outset",
+                    borderColor: "rgb(118, 118, 118)",
+                    padding: "1px 6px",
+                    borderImage: "initial",
+                    fontSize: "14px",
+                  }}
+                  href="/missingmedia"
+                >
+                  View Missing Media
+                </a>
               </div>
 
               {/* SCAN INSTRUCTIONS */}

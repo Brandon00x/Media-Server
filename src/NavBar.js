@@ -136,7 +136,8 @@ export default class NavBar extends Component {
               </div>
             </div>
           ) : null}
-          {this.props.navtitle === "Settings" ? null : (
+          {this.props.navtitle === "Settings" ||
+          this.props.navtitle === "Missing Media" ? null : (
             <div className="navTitleRight">
               <button
                 className="navOptions"

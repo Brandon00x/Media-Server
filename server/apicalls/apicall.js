@@ -1,6 +1,6 @@
 const axios = require("axios");
-const { createJson } = require("./createjson");
 const { readProps } = require("../start/start");
+const { saveToDatabase } = require("../database/saveToDatabase");
 let mediaResults = [];
 let mediaNotFound = [];
 let counter = 1;
@@ -123,8 +123,13 @@ async function getMediaInfo(data, response, mediaType) {
     mediaResults = mediaValues;
   }
 
-  // Create JSON File Based on Properties.
-  dataToJson(fileName, fileNameNotFound, response, mediaName);
+  // Save to Database
+  if (mediaResults.length >= 1) {
+    await saveToDatabase(mediaName, mediaResults);
+    await saveToDatabase(`${mediaName} Not Found`, mediaNotFound);
+  } else {
+    response.write(`${counter++}. ${mediaName} API Found 0 Results.`);
+  }
 
   // Write missed items in API.
   for (let i = 0; i < mediaNotFound.length; i++) {
@@ -257,20 +262,6 @@ async function mapData(mediaInfo, mediaValues, response, i, mediaName) {
     } else if (mediaName === "TV Shows") {
       mapTvData(mediaInfo, mediaValues, i, response, mediaName);
     }
-  }
-}
-
-// Create JSON File with Media Array Data
-async function dataToJson(fileName, fileNameNotFound, response, mediaName) {
-  // Create JSON with Results
-  if (mediaResults.length >= 1) {
-    let media = JSON.stringify(mediaResults);
-    //Create JSON Found Movies
-    createJson(fileName, media, res);
-    //Create JSON Not Found Movies
-    createJson(fileNameNotFound, JSON.stringify(mediaNotFound), res);
-  } else {
-    response.write(`${counter++}. ${mediaName} API Found 0 Results.`);
   }
 }
 

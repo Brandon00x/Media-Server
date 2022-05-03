@@ -4,9 +4,9 @@ const fs = require("fs");
 const { readdirSync } = require("fs");
 const path = require("path");
 const { readdir } = require("fs/promises");
-const { createJson } = require("../apicalls/createjson");
 const sizeOf = require("image-size");
 const { databaseAction } = require("../database/mongodb");
+const { saveToDatabase } = require("../database/saveToDatabase");
 
 // Arrays Used for Media.
 let initialFolderPaths = []; //Initial First Level Folders
@@ -64,10 +64,10 @@ let scan = setInterval(() => {
 }, 1000);
 
 // JSON Files Names
-const bookJson = "localbooks.json";
-const movieJson = "localmovies.json";
-const TvJson = "localtvshows.json";
-const musicJson = "localmusic.json";
+// const bookJson = "localbooks.json";
+// const movieJson = "localmovies.json";
+// const TvJson = "localtvshows.json";
+// const musicJson = "localmusic.json";
 const photosJson = "photos.json";
 
 //////////// Main Program Loop
@@ -80,6 +80,21 @@ async function startScan(response, mediaCategory, mediaPath) {
   resetGlobalVariables();
   saveScanTime("start");
   res = response;
+
+  //TODO: Future Versions Drop Entry
+  // Drop Database for New Entries
+  let cmd = {
+    cmd: "dropCollection",
+    collection: mediaCategory,
+    key: "key",
+  };
+  await databaseAction(cmd);
+  let cmd2 = {
+    cmd: "dropCollection",
+    collection: mediaType,
+    key: "key",
+  };
+  await databaseAction(cmd2);
 
   return new Promise(async (resolve, reject) => {
     // Path | All Media | Make Sure Path ends with forward slash.
@@ -135,18 +150,12 @@ async function startScan(response, mediaCategory, mediaPath) {
       // Sanitize | Books | Makes Book Titles API Searchable
       await makeSearchable();
       saveScanTime("makeSearchable");
-
-      createJson(bookJson, JSON.stringify(mediaArr), res);
-      saveScanTime("createJson");
     }
     // Sanitize - Create JSON | Movies | Sanitize Movie Titles
     else if (mediaCategory === "updatemovies") {
       // Sanitize | Movies | Sanitizes Movies for API Call
       await sanitizeMovieTvTitles();
       saveScanTime("sanitizeMovieTitles");
-
-      createJson(movieJson, JSON.stringify(mediaArr), res);
-      saveScanTime("createJson");
     }
     // Sanitize - Create JSON | TV Shows
     else if (mediaCategory === "updatetv") {
@@ -165,9 +174,6 @@ async function startScan(response, mediaCategory, mediaPath) {
       // Order TV Shows by Show > Season > Episodes
       await orderBySeason();
       saveScanTime("OrderBySeason");
-
-      createJson(TvJson, JSON.stringify(mediaArr), res);
-      saveScanTime("createJson");
     }
     // Sanitize - Create JSON | Music | Sanitize Music Data for API
     else if (mediaCategory === "updatemusic") {
@@ -183,14 +189,13 @@ async function startScan(response, mediaCategory, mediaPath) {
       await setMusicAlbum();
       saveScanTime("setMusicAlbum");
 
+      // Sort Music Artist A-Z
       await sortMusic();
       saveScanTime("setMusicAlbum");
 
+      // Save Music Album > Tracks to Database
       await saveMusicToDb();
       saveScanTime("saveMusicToDb");
-
-      createJson(musicJson, JSON.stringify(mediaArr), res);
-      saveScanTime("createJson");
     }
     // Sanitize - Get Image Info | Photos | Get Image Properties
     else if (mediaCategory === "updatephotos") {
@@ -200,24 +205,31 @@ async function startScan(response, mediaCategory, mediaPath) {
 
       await getFileCreatedDate();
       saveScanTime("getFileCreatedDate");
-
-      createJson(photosJson, JSON.stringify(mediaArr), res);
-      saveScanTime("createJson");
     }
-
     // Finish | All Media | Scan Media Completes.
     // Data | All Media | Log Categories Fixed to Browser Window
     await sendCategoryFixes(res);
     saveScanTime("sendCategoryFixes");
 
+    // Save Media Array to DB
+    if (mediaCategory === "updatephotos") {
+      await saveToDatabase("Photos", mediaArr);
+    } else {
+      await saveToDatabase(mediaCategory, mediaArr);
+      saveScanTime("saveToDatabase");
+    }
+
+    // Write Final Stats
     res.write(
       `Finished: Found ${mediaArr.length} media items. Media Path Searched: ${mediaPath}.\nChecked Root Directories: true Checked Super Directories: ${superDirectoriesCheck}`
     );
-    saveScanTime("end");
-    clearInterval(scan);
     console.info(
       `Finished: Found ${mediaArr.length} media items. Media Path Searched: ${mediaPath}.\nChecked Root Directories: true Checked Super Directories: ${superDirectoriesCheck}`
     );
+
+    // Clear Scan Time
+    saveScanTime("end");
+    clearInterval(scan);
     resolve(mediaArr);
   });
 }
@@ -782,7 +794,6 @@ async function saveMusicToDb() {
     collection: "music",
     key: "key",
   };
-
   // Create Database Index on Key
   await databaseAction(cmd);
 
@@ -1208,7 +1219,6 @@ async function sanitizeMovieTvTitles() {
         );
       }
     }
-    //let indexFirstNumber = await replaceExtra.search(/\\(([^()])\\)/);
   }
 }
 

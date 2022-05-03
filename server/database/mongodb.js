@@ -14,16 +14,12 @@ async function databaseAction(cmd) {
   let action = cmd.cmd; // Action To Preform
   let key = cmd.key; // Key
   let data = cmd.data; // Data
-  try {
-    console.info(
-      `Performing Database Action: ${action} Collection: ${
-        cmd.collection
-      }\nKey: ${key} \nData Type: ${typeof data} Data Length: ${data.length}\n`
-    );
-  } catch (err) {}
+
+  console.info(
+    `Performing Database Action: ${action} Collection: ${cmd.collection}`
+  );
 
   const db = client.db(dbName);
-  // Use Collection In Cmd
   let collection = db.collection(cmd.collection);
 
   if (action === "createIndex") {
@@ -35,21 +31,38 @@ async function databaseAction(cmd) {
     }
   }
 
+  if (action === "dropCollection") {
+    collection
+      .drop()
+      .then(() => {
+        console.log(`Successfully Dropped Collection: ${cmd.collection}`);
+      })
+      .catch((e) => {
+        if (e.code === 26) {
+          console.info(`Drop Collection: ${cmd.collection} was not found.`);
+        } else {
+          console.error("Drop Collection Error: ", e.message);
+        }
+      });
+  }
+
   // Insert One
   if (action === "insertOne") {
-    try {
-      let insertResult = await collection.insertOne({
+    await collection
+      .insertOne({
         key,
         data,
+      })
+      .then((insertResult) => {
+        console.info("Inserted Data =>", insertResult);
+      })
+      .catch((err) => {
+        if (err.code === 11000) {
+          console.log(`Duplicate Record Not Inserted`);
+        } else {
+          console.error("Insert One Error: ", err);
+        }
       });
-      console.info("Inserted Data =>", insertResult);
-    } catch (err) {
-      if (err.code === 11000) {
-        console.log(`Duplicate Record Not Inserted`);
-      } else {
-        console.error("Insert One Error: ", err);
-      }
-    }
   }
 
   // Insert Many
@@ -63,10 +76,10 @@ async function databaseAction(cmd) {
     console.info(`Searching For ${key}: ${data}`);
     const searchResult = await collection.find({ [key]: data }).toArray();
     if (searchResult.length > 0) {
-      console.log(`Search Results => ${searchResult}`);
+      console.log(`Search Results => ${searchResult}\n`);
       return searchResult;
     } else {
-      console.warn(`No Search Results Found for ${key}`);
+      console.warn(`No Search Results Found for ${key}: ${data}\n`);
     }
   }
 

@@ -1,19 +1,17 @@
-const fs = require("fs");
-function readMedia(mediaType, response) {
-  let res = response;
-  fs.readFile(`./json/${mediaType}.json`, "utf8", function (err, data) {
-    if (err) {
-      console.error(`ERROR: Cannot find ${mediaType}.json.`);
-      res.send({ message: `No ${mediaType} Found` });
-    } else if (data.length > 0) {
-      let media = JSON.parse(data);
-      console.info(
-        `Sending ${mediaType} Information for ${media.length} ${mediaType}\n`
-      );
-      res.json(media);
-      res.end();
-    }
-  });
+const { databaseAction } = require("../database/mongodb");
+
+// Get Media Data from Database
+async function readMedia(mediaType, res) {
+  console.log(mediaType);
+  let cmd = { cmd: "find", collection: mediaType, key: "key", data: mediaType };
+  let media = await databaseAction(cmd);
+  if (media === "done.") {
+    console.warn(`WARN: No ${mediaType} Found.`);
+    res.send({ message: `No ${mediaType} Found` });
+  } else {
+    let sendData = media[0].data;
+    res.json(sendData);
+  }
 }
 
 module.exports = { readMedia };
