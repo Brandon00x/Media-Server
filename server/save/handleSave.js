@@ -1,37 +1,18 @@
-const fs = require("fs");
-const properties = require("../private/properties");
-const { changePort } = require("../port/port");
+const { saveToDatabase } = require("../database/savetoDatabase");
+const { databaseAction } = require("../database/mongodb");
 
-async function handleSave(property, value, response) {
-  let res = response;
-  if (Object.keys(properties.properties).includes(property) === true) {
-    writeToTxt(property, value, res);
-  } else {
-    console.error(`Error: Property: ${property}, Value: ${value} are invalid.`);
-    res.write(
-      `Error: Property: ${property} and Value: ${value} are invalid.\n`
-    );
-  }
-}
-
-//Todo: Replace Later With Database...
-function writeToTxt(prop, value, res) {
-  if (prop === "port") {
-    changePort(value, res);
-  } else {
-    fs.writeFile(`./private/${prop}.txt`, value, function (err) {
-      if (err) {
-        console.error(`Error: Unable to create file: ${err}`);
-      } else {
-        console.info(
-          `Successfully updated Proptery: ${prop} with Value: ${value}\n`
-        );
-        res.write(
-          `Successfully updated Proptery: ${prop} with Value: ${value}\n`
-        );
-        res.end();
-      }
-    });
+async function handleSave(property, value) {
+  // Try Update First
+  let cmd = {
+    cmd: "updateOne",
+    collection: "Properties",
+    key: property,
+    data: value,
+  };
+  let updateProp = await databaseAction(cmd);
+  // Save If Update Did not Occur.
+  if (updateProp === "notUpdated") {
+    saveToDatabase("Properties", property, value);
   }
 }
 

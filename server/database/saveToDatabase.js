@@ -1,19 +1,19 @@
 const { databaseAction } = require("../database/mongodb");
 
-async function saveToDatabase(mediaType, data) {
+async function saveToDatabase(collection, key, data) {
+  // Create Database Index on Key
   let cmd = {
     cmd: "createIndex",
-    collection: mediaType,
+    collection: collection,
     key: "key",
   };
-  // Create Database Index on Key
   await databaseAction(cmd);
 
-  // Save Media Array to DB
+  // Save Data to DB
   let cmd2 = {
     cmd: "insertOne",
-    collection: mediaType,
-    key: mediaType,
+    collection: collection,
+    key: key,
     data: data,
   };
   await databaseAction(cmd2);

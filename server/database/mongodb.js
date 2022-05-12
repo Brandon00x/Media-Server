@@ -21,6 +21,7 @@ async function databaseAction(cmd) {
 
   const db = client.db(dbName);
   let collection = db.collection(cmd.collection);
+  let resultCmd = "done.";
 
   if (action === "createIndex") {
     try {
@@ -43,6 +44,24 @@ async function databaseAction(cmd) {
         } else {
           console.error("Drop Collection Error: ", e.message);
         }
+      });
+  }
+
+  if (action === "updateOne") {
+    await collection
+      .updateOne({ key: key }, { $set: { data: data } })
+      .then((result) => {
+        if (result.modifiedCount > 0) {
+          console.log(
+            `Updated ${key}. Results Modified: ${result.modifiedCount}`
+          );
+        } else {
+          console.log(`No Result Updated for Key: ${key}.`);
+          resultCmd = "notUpdated";
+        }
+      })
+      .catch((err) => {
+        console.error(`Unable To Update ${key}. Error: ${err}`);
       });
   }
 
@@ -71,7 +90,7 @@ async function databaseAction(cmd) {
     console.info("Inserted Data =>", insertResult);
   }
 
-  // Search By Filter
+  // Search Many by Filter
   if (action === "find") {
     console.info(`Searching For ${key}: ${data}`);
     const searchResult = await collection.find({ [key]: data }).toArray();
@@ -83,7 +102,19 @@ async function databaseAction(cmd) {
     }
   }
 
-  return "done.";
+  // Search One by Key
+  if (action === "findOne") {
+    console.info(`Searching For One Result. Key: ${key}`);
+    const searchResult = await collection.find({ key }).toArray();
+    if (searchResult.length > 0) {
+      console.log(`Search Results => ${searchResult}\n`);
+      return searchResult;
+    } else {
+      console.warn(`No Search Results Found for ${key}\n`);
+    }
+  }
+
+  return resultCmd;
 }
 
 module.exports = { databaseAction };

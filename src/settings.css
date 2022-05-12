@@ -14,7 +14,7 @@
 
 /* Scan Options */
 .mediaRootDirectory {
-  display: block;
+  display: inline-flex;
   margin-top: 5px;
 }
 
@@ -29,11 +29,46 @@
   width: 300px;
 }
 
+.scanFolderOptions {
+  display: flex;
+  flex-direction: row;
+  max-height: 24vh;
+}
+
+.settingsSaveButton {
+  width: auto;
+  margin-left: 5px;
+}
+
 .settingsScanButton {
-  margin-left: 10px;
+  margin-left: 5px;
   width: 100px;
 }
 /* End Scan Options */
+
+/* Server Response */
+.settingsServerResponseContainer {
+  width: 40vw;
+  max-height: 900px;
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  right: 1%;
+  margin-left: 50px;
+}
+
+.serverMessages {
+  max-width: 37vw;
+  max-height: 35.5vh;
+  justify-content: flex-end;
+  overflow: scroll;
+}
+/* End Server Response */
+
+/* Properties Options */
+.mediaViewProperties {
+  display: flex;
+}
 
 /* Program Options */
 .settingsProgramItem {
@@ -61,25 +96,6 @@
   width: 300px;
 }
 /* End Program Options */
-
-/* Server Response */
-.settingsServerResponseContainer {
-  display: flex;
-  position: fixed;
-  right: 10%;
-  top: 8%;
-  width: 40vw;
-  max-height: 500px;
-}
-
-.serverMessages {
-  position: fixed;
-  top: 16%;
-  max-width: 37vw;
-  max-height: 500px;
-  overflow: scroll;
-}
-/* End Server Response */
 
 /* Settings Information */
 

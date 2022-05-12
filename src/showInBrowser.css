@@ -32,7 +32,7 @@
   overflow: scroll;
 }
 
-.fa-times-circle {
+.closeCircle {
   position: relative;
   left: 100%;
 }

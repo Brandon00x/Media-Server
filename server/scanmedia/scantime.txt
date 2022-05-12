@@ -1,0 +1,38 @@
+New Books Scan. 5/5/2022 10:53:59 AM
+5/5/2022 10:53:59 AM - Media Type Books. Function: checkPathEnding. Time eplasted: 3 seconds. v3
+5/5/2022 10:53:59 AM - Media Type Books. Function: findMediaDirectories. Time eplasted: 3 seconds. v3
+5/5/2022 10:53:59 AM - Media Type Books. Function: verifyFinalDirectory. Time eplasted: 3 seconds. v3
+5/5/2022 10:54:00 AM - Media Type Books. Function: readDirectoryContents. Time eplasted: 3 seconds. v3
+5/5/2022 10:54:00 AM - Media Type Books. Function: removeAuthorFromTitle. Time eplasted: 3 seconds. v3
+5/5/2022 10:54:00 AM - Media Type Books. Function: makeSearchable. Time eplasted: 3 seconds. v3
+5/5/2022 10:54:00 AM - Media Type Books. Function: sendCategoryFixes. Time eplasted: 3 seconds. v3
+5/5/2022 10:54:00 AM - Media Type Books. Function: saveToDatabase. Time eplasted: 4 seconds. v3
+ 
+New Books Scan. 5/5/2022 12:47:43 PM
+5/5/2022 12:47:43 PM - Media Type Books. Function: checkPathEnding. Time eplasted: 1579 seconds. v3
+5/5/2022 12:47:43 PM - Media Type Books. Function: findMediaDirectories. Time eplasted: 1579 seconds. v3
+5/5/2022 12:47:43 PM - Media Type Books. Function: verifyFinalDirectory. Time eplasted: 1579 seconds. v3
+5/5/2022 12:47:44 PM - Media Type Books. Function: readDirectoryContents. Time eplasted: 1580 seconds. v3
+5/5/2022 12:47:44 PM - Media Type Books. Function: removeAuthorFromTitle. Time eplasted: 1580 seconds. v3
+5/5/2022 12:47:44 PM - Media Type Books. Function: makeSearchable. Time eplasted: 1580 seconds. v3
+5/5/2022 12:47:44 PM - Media Type Books. Function: sendCategoryFixes. Time eplasted: 1580 seconds. v3
+ 
+5/5/2022 12:47:45 PM - Media Type Books. Function: saveToDatabase. Time eplasted: 1580 seconds. v3
+New Photos Scan. 5/11/2022 11:09:59 AM
+5/11/2022 11:09:59 AM - Media Type Photos. Function: verifyFinalDirectory. Time eplasted: 4772 seconds. v3
+5/11/2022 11:09:59 AM - Media Type Photos. Function: findMediaDirectories. Time eplasted: 4772 seconds. v3
+5/11/2022 11:09:59 AM - Media Type Photos. Function: checkPathEnding. Time eplasted: 4772 seconds. v3
+5/11/2022 11:09:59 AM - Media Type Photos. Function: readDirectoryContents. Time eplasted: 4772 seconds. v3
+5/11/2022 11:10:00 AM - Media Type Photos. Function: getImageSize. Time eplasted: 4772 seconds. v3
+5/11/2022 11:10:00 AM - Media Type Photos. Function: getFileCreatedDate. Time eplasted: 4773 seconds. v3
+5/11/2022 11:10:00 AM - Media Type Photos. Function: sendCategoryFixes. Time eplasted: 4773 seconds. v3
+ 
+New Photos Scan. 5/11/2022 11:10:28 AM
+5/11/2022 11:10:28 AM - Media Type Photos. Function: verifyFinalDirectory. Time eplasted: 4773 seconds. v3
+5/11/2022 11:10:28 AM - Media Type Photos. Function: findMediaDirectories. Time eplasted: 4773 seconds. v3
+5/11/2022 11:10:28 AM - Media Type Photos. Function: checkPathEnding. Time eplasted: 4773 seconds. v3
+5/11/2022 11:10:28 AM - Media Type Photos. Function: readDirectoryContents. Time eplasted: 4773 seconds. v3
+5/11/2022 11:10:28 AM - Media Type Photos. Function: getImageSize. Time eplasted: 4773 seconds. v3
+5/11/2022 11:10:29 AM - Media Type Photos. Function: getFileCreatedDate. Time eplasted: 4773 seconds. v3
+5/11/2022 11:10:29 AM - Media Type Photos. Function: sendCategoryFixes. Time eplasted: 4773 seconds. v3
+ 

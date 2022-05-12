@@ -213,9 +213,9 @@ async function startScan(response, mediaCategory, mediaPath) {
 
     // Save Media Array to DB
     if (mediaCategory === "updatephotos") {
-      await saveToDatabase("Photos", mediaArr);
+      await saveToDatabase("Photos", "Photos", mediaArr);
     } else {
-      await saveToDatabase(mediaCategory, mediaArr);
+      await saveToDatabase(mediaCategory, mediaCategory, mediaArr);
       saveScanTime("saveToDatabase");
     }
 

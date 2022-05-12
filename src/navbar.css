@@ -1,14 +1,15 @@
 .navBar {
-  color: black;
-  background-color: goldenrod;
-  height: 55px;
-  font-size: 40px;
+  position: fixed;
   display: flex;
   justify-content: space-between;
-  position: fixed;
+  height: 55px;
   width: 100vw;
   top: 0%;
+  color: black;
+  background-color: goldenrod;
+  font-size: 40px;
   border-bottom: 2px solid white;
+  z-index: 1;
 }
 
 .navbarTitle {
@@ -64,6 +65,12 @@
   background-color: goldenrod;
   border: 2px solid black;
 }
+.sliderNav {
+  display: flex;
+  height: 20px;
+  justify-content: center;
+  align-items: center;
+}
 
 .navbarDropDown1 {
   color: black;
@@ -74,16 +81,33 @@
   right: 0%;
 }
 
-/* OLD BOOTSTRAP */
-/* .navLink {
-  color: black;
-  font-size: 25px;
-  text-decoration: none;
-  text-align: right;
-  display: block;
-  background-color: goldenrod;
-  border: 2px solid white;
-  text-align: left;
-} */
+.navslider[type="range"] {
+  -webkit-appearance: none;
+  margin-right: 15px;
+  width: 200px;
+  height: 7px;
+  background: rgb(255, 255, 255);
+  border-radius: 5px;
+  background-image: linear-gradient(white, white);
+  background-size: 70% 100%;
+  background-repeat: no-repeat;
+}
 
+.navslider[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: black;
+  cursor: ew-resize;
+  box-shadow: 0 0 2px 0 white;
+  transition: background 0.3s ease-in-out;
+}
+
+.navslider[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
 /* END Nav Drop Downs */

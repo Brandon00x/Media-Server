@@ -7,6 +7,7 @@ export default class Tv extends Component {
     super(props);
     this.state = {
       navtitle: "Music",
+      address: this.props.address,
     };
   }
 

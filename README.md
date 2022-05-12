@@ -5,12 +5,13 @@ My main goal for this project was to showcase my abilities writing code and obta
 
 <p>Feedback and feature suggestions are appreciated.</p>
 
-<p>See About Me section at the bottom for why I want a developer job and my skills/background in IT.</p> <br/>
+<p>See the "About Me" section at the bottom for why I want a developer job and my skills/background in IT and past developer work.</p> <br/>
 
 ## Installation / Setup
 
 <h3>Prerequisites:</h3>
 <li>NodeJS - 16.14.0</li>
+<li>MongoDB</li>
 <br/>
 <h3>Start the Program:</h3>
 <p>Inside the App Directory Run:</p>
@@ -103,42 +104,82 @@ My main goal for this project was to showcase my abilities writing code and obta
 
 Date: 4/20/22
 
-<h4>Program:</h4>
-<li>Performance - Include All Media Types in DB.</li>
-<li>Performance - Scan Performance Improvements Based on Data Captured</li>
+<h3>ALPHA Version Changes - WIP</h3>
+<li>Add MongoDB Setup to README</li>
+<li>Windows Testing / Fixes</li>
+<li>Add Album Goto Button for Music Player NavBar</li>
+<li>Add error message for folder paths not available.</li>
+<li>Feature - Fix media items not found from browser window and retry API call for fixed item.</li>
+<li>Performance - Store 1 Item at a time from Final media array instead of whole array.</li>
+<li>Feature - Better logging</li>
+<li>Code Cleanup - Migrate Media Types into individual components. Certain functions are not reusable for all media types now. </li>
+<li>Bug Fixes - Fix scroll to top error triggered by createRows refresh.</li>
+
+<h3>BETA Version Changes - Timeline TBD</h3>
+<li>Create installer for prereqs / setup</li>
 <li>Performance - API Calls Performance Improvements.</li>
-<li>Performance - Modify/Remove CreateRows Function.</li>
-<li>Design - Better Design and CSS Improvements</li>
-<li>Feature - Search.</li>
+<li>Performance - Scan Performance Improvements Based on Data Captured</li>
+<li>Can change to BETA version after above is done.</li>
+<li>Feature - More Sort Options for Album Title / Other properties.</li>
+<li>Feature - Fix Incorrect Media Data Match</li>
+<li>Feature - Add Queue for TV/Movies</li>
+<li> Feature - Add Played Status / Play Count </li>
+<li>Feature - Continue Playback</li>
+<li>Feature - Recently Added</li>
+<li>Feature - Redesign Home Screen</li>
+<li>Feature - Add stream options from web locations.</li>
+<li>Feature - Playlists</li>
+<li>Feature - Different View Options</li>
+<li>Feature - Custom Poster / Edit Media Information</li>
+<li>Feature - Webooks<li>
+<li>Feature - CSS Changes</li>
 
-<h4>Features to be added by Media Type</h4>
+<h3>Features to be added by Media Type</h3>
 
-<h4>Books:</h4>
+<h3>Books:</h3>
 <li>Bug - Fix View for PDF file extension to prevent reload</li>
 <li>Feature - Add Read View for DOC file extension</li>
+<li>Feature - Fix EPub Links / Chapters / Images </li>
+<li>Feature - Add read by chapter </li>
+<li>Feature - Save last location when closing. </li>
 
-<h4>TV Shows:</h4>
-<li>Data - Transcode to support more codecs.</li>
+<h3>TV Shows:</h3>
 <li>Feature - Play Single Season Episode.</li>
 <li>Feature - Metadata for Single Episode.</li>
 <li>Feature - Card View for Seasons/Episodes.</li>
+<li>Data - Transcode to support more codecs.</li>
 
-<h4>Movies:</h4>
+<h3>Movies:</h3>
 <li>Data - Include Year in API call for Movies and TV to prevent incorrect matches</li>
 <li>Data - Transcode to support more codecs.</li>
 
-<h4>Photos:</h4>
-<li>Performance - Database for Images / Remove need for base64 encoding and sending images. </li>
+<h3>Photos:</h3>
+<li>Performance - Speed up photos </li>
 <li>Data - Add File Size.</li>
-<li>Data - Add more info under description.</li><br/>
+<li>Data - Add more info under description.</li>
+<li>Fix Sort for Photos</li>
+<br/>
 
 ## Features Added / Fixed Bugs
 
-<h4>Program</h4>
-<li>Finished 4/30 Performance - Add Database MongoDB or MS SQL Server</li>
+<li>Finished 5/11 - Bug Fixes - Sort: Misc sort issues caused by special characters / other issues.</li>
+<li>Finished 5/11 - Add Pin feature for all media types.</li>
+<li>Finished 5/11 - Fix crash on media path not available due to drive disconnect or change of location.</li>
+<li>Finished 5/11 - Fix double click on minimize card.</li>
+<li>Finished 5/11 - Fixed Sort Issues</li>
+<li>Finished 5/11 - Alt Image Not Found PNG</li>
+<li> Finished 5/11 Design - Better Design and CSS Improvements</li>
+<li>Finished 5/10 - Added Display Props to database for default settings.</li>
+<li>Finished 5/10 - Fix Music Volume Slider</li>
+<li>Finished 5/10 Feature - Handle Server Address for Client. Prevent VPN Lan as Double IP Address </li>
+<li>Finished 5/9 - Add Minimize/Close for Card popout.</li>
+<li>Finished 5/8 Feature - Search.</li>
+<li>Finished 5/8 Feature - Moveable Album Tiles / Multiple Album Description Cards.</li>
+<li>Finished 5/8 Add Scroll Bar</li>
+<li>Finished 5/4 Performance  - Modify CreateRows Function.</li>
+<li>Finished 5/2 Performance - Include All Media Types in DB.</li>
 <li>Finished 5/1 Data - Section for Media Not Found API Call</li>
-
-<h4>Music:</h4>
+<li>Finished 4/30 Performance - Add Database MongoDB or MS SQL Server</li>
 <li>Finished 4/30 Feature - Continuous Album Playback</li>
 <li>Finished 4/29 Feature - Media Player in Browser</li>
 <li>Finished 4/29 Data - Include Artist in Apple Music API Call to prevent incorrect matches</li>

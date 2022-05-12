@@ -5,14 +5,41 @@ body {
   overflow-y: hidden;
 }
 
+.hide {
+  display: none;
+}
+
 .templateRoot {
   width: 100vw;
   height: 100vh;
   overflow-y: scroll;
 }
 
-.marginTop {
-  margin-top: 30px;
+#mediaContentContainer {
+  margin-top: 62px;
+}
+
+.scrollBarButton {
+  background: none;
+  color: white;
+  border: none;
+  width: auto;
+  height: auto;
+  margin-bottom: 1vh;
+}
+
+.scrollBar {
+  height: 100vh;
+  width: 20px;
+  position: absolute;
+  right: 1%;
+  top: 4%;
+  color: white;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  z-index: 5;
 }
 
 .mediaLoading {
@@ -60,10 +87,13 @@ body {
 
 .mediaRow {
   display: flex;
-  width: 100vw;
-  height: 550px;
   flex-wrap: nowrap;
+  flex-direction: row;
+  align-content: center;
   justify-content: center;
+  align-items: center;
+  z-index: 0;
+  margin: 10px 0px 10px 0px;
 }
 
 .showFullSizeImage {
@@ -76,58 +106,88 @@ body {
 
 .mediaCard {
   display: flex;
-  height: 530px;
-  width: 300px;
-  background-color: burlywood;
   flex-direction: column;
   flex-wrap: nowrap;
-  margin: 50px 30px 50px 30px;
-  border: 2px solid white;
+  margin: 5px 5px 0px 5px;
+  background-color: burlywood;
   border-radius: 5%;
+  height: -webkit-fill-available;
+  position: relative;
+  background-size: cover;
 }
 
 /* MEDIA CARD TOP */
 
 .mediaCardTop {
-  width: 300px;
-  max-height: 395px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.mediaTopBar {
+  z-index: 3;
+  height: 3vw;
+  cursor: grab;
+  border-bottom: 1px solid;
+  border-top-left-radius: 19px;
+  border-top-right-radius: 19px;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.mediaTopBarButtons {
+  position: relative;
+  display: flex;
+}
+
+.mediaDescBarTitle {
+  font-size: 1.5vw;
+  font-weight: 800;
+  display: flex;
+  margin-right: 10px;
+  position: inherit;
+  justify-content: flex-end;
+  text-align: center;
+  align-items: center;
+  overflow: hidden;
 }
 
 .mediaTitle {
-  /* font-size: 27px; */
-  font-size: 1.5vw;
-  height: 65px;
-  width: 285px;
-  margin: 3px 6px 3px 6px;
-  font-weight: bold;
-  overflow: hidden;
+  width: 100vw;
+  font-size: 1.75vw;
+  font-weight: 800;
   display: flex;
-  justify-content: safe center;
-  align-items: center;
+  position: inherit;
+  justify-content: center;
   text-align: center;
-}
-
-.mediaImg {
-  max-width: 210px;
-  height: 300px;
-  padding-left: 45px;
+  /* align-items: center; */
+  overflow: hidden;
+  margin-bottom: 5px;
 }
 
 /* MEDIA CARD MIDDLE */
-
 .mediaCardMiddle {
-  height: 115px;
   display: flex;
   flex-direction: column;
-  bottom: -1%;
+  position: initial;
+  height: 8vw;
+  width: fit-content;
 }
 
 .mediaCreator {
-  font-size: 1.2vw;
-  max-height: 36px;
-  margin: 3px 6px 3px 6px;
+  bottom: 99%;
+  left: 2.2%;
+  font-size: 1.3vw;
+  font-weight: 600;
   text-align: left;
-  font-weight: 500;
+  overflow: hidden;
+  margin-left: 5px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  align-items: center;
 }
 
 .mediaCategories {
@@ -136,51 +196,67 @@ body {
 }
 
 .mediaCategoriesGenre {
-  max-height: 40px;
-  margin: 3px 6px 3px 6px;
   font-size: 1vw;
   overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  padding-left: 5px;
 }
 
 .mediaTimeInfo {
+  font-size: 1vw;
+  height: 2vh;
   margin: 3px 6px 3px 6px;
   display: flex;
   justify-content: space-between;
 }
 
 .mediaLength {
+  font-size: 1vw;
+  height: 4vh;
   text-align: left;
+  overflow: hidden;
 }
 
 .mediaItemNumber {
   text-align: right;
+  font-weight: 500;
+  font-size: 0.7vw;
+  color: floralwhite;
+  position: absolute;
+  bottom: 33%;
+  right: 17%;
 }
 
 .mediaDescription {
-  width: 290px;
-  height: 419px;
+  width: auto;
+  /* height: auto; */
   margin-left: 5px;
   margin-right: 5px;
   overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
 }
 
 /* MEDIA CARD BOTTOM */
 .mediaButtonSpan {
-  align-self: center;
-  margin-bottom: 10px;
-  width: 312px;
   display: flex;
+  align-self: center;
   justify-content: center;
+  bottom: 0;
 }
 
 .mediaButton {
   border: 1px solid black;
-  width: 90px;
+  width: 5vw;
   height: 30px;
+  font-size: 0.7vw;
+  font-weight: bold;
   margin-left: 5px;
   margin-right: 5px;
   border: none;
-  background-color: burlywood;
+  background: none;
 }
 
 /* TV Seasons Popup */
@@ -268,14 +344,35 @@ body {
 }
 
 /* Music Card Descriptions */
+.mediaDescTitleSpan {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+}
+
 .mediaDescriptionTitle {
+  font-size: 1.3vw;
   text-align: center;
-  margin-top: -3px;
+  border-bottom: 1px solid;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.descriptionHolder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.descriptionPara {
+  width: 25vw;
 }
 
 .musicTrackHolder {
   display: flex;
   flex-direction: column;
+  align-items: center;
   margin-bottom: 10px;
 }
 
@@ -283,16 +380,19 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  border: 1px solid;
+  width: 25vw;
+  /* border: 1px solid; */
 }
 
 .musicTrack {
-  width: 197px;
+  width: 23vw;
+  margin-left: 5px;
 }
 
 .musicOpenTrack {
   background: none;
   border: none;
+  height: -webkit-fill-available;
 }
 
 .musicOpenFolderButton {
@@ -324,6 +424,7 @@ body {
   align-items: center;
   position: fixed;
   left: 15%;
+  z-index: 11;
 }
 
 .musicControlsDiv {
@@ -352,4 +453,40 @@ body {
   text-align: right;
   height: 38px;
   overflow: hidden;
+}
+
+.volumeSlider[type="range"] {
+  -webkit-appearance: none;
+  width: 150px;
+  height: 4px;
+  background: white;
+  border-radius: 5px;
+  background-image: linear-gradient(white, white);
+  background-size: 90% 100%;
+  background-repeat: no-repeat;
+}
+
+.volumeSlider[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+  background: black;
+  cursor: ew-resize;
+  box-shadow: 0 0 2px 0 white;
+  transition: background 0.3s ease-in-out;
+}
+
+.volumeSlider[type="range"]::-webkit-slider-runnable-track {
+  -webkit-appearance: none;
+  box-shadow: none;
+  border: none;
+  background: transparent;
+}
+
+.pinnedItems {
+  position: absolute;
+  top: 56px;
+  left: 5px;
+  z-index: 3;
 }

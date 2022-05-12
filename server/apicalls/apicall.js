@@ -62,8 +62,8 @@ async function useMediaType(mediaType) {
 
 async function getMediaInfo(data, response, mediaType) {
   let dataProps = await useMediaType(mediaType);
-  let fileName = dataProps.FileName;
-  let fileNameNotFound = dataProps.FileNameNF;
+  // let fileName = dataProps.FileName;
+  // let fileNameNotFound = dataProps.FileNameNF;
   let apiKey = dataProps.APIKey;
   let mediaName = dataProps.MediaName;
   let mediaValues = await data;
@@ -125,8 +125,8 @@ async function getMediaInfo(data, response, mediaType) {
 
   // Save to Database
   if (mediaResults.length >= 1) {
-    await saveToDatabase(mediaName, mediaResults);
-    await saveToDatabase(`${mediaName} Not Found`, mediaNotFound);
+    await saveToDatabase(mediaName, mediaName, mediaResults);
+    await saveToDatabase(mediaName, "No API Result", mediaNotFound);
   } else {
     response.write(`${counter++}. ${mediaName} API Found 0 Results.`);
   }

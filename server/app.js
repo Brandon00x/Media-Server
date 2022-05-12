@@ -4,9 +4,8 @@ const app = express();
 const fs = require("fs");
 const exec = require("child_process").exec;
 const { startScan } = require("./scanmedia/scanmedia");
-const { getPort } = require("./port/port");
 const { handleSave } = require("./save/handleSave"); //TODO: CHANGE LATER FOR DATABASE
-const { readProps } = require("./start/start"); //TODO: REMOVE LATER FOR DATABASE
+const { setProps, setServerIp, getPort } = require("./start/start"); //TODO: REMOVE LATER FOR DATABASE
 const { getMediaInfo } = require("./apicalls/apicall");
 const { readMedia } = require("./readmedia/readmedia");
 const { readBook } = require("./readmedia/readbook");
@@ -23,35 +22,15 @@ app.use(cors());
 
 let videoSreamPath;
 let musicStreamPath;
+let serverAddress;
 
-// TODO: REPLACE WITH DATABASE.
 //Sends Keys and Folder Locations When Settings is Loaded
-app.get("/settings", cors(corsOptions), async function (req, res) {
+app.get("/props", cors(corsOptions), async function (req, res) {
   try {
-    let port = await getPort();
-    let apikeybooks = await readProps("apikeybooks");
-    let apikeymovie = await readProps("apikeymovie");
-    let apikeymusic = await readProps("apikeymusic");
-    let booksRootFolder = await readProps("booksRootFolder");
-    let moviesRootFolder = await readProps("moviesRootFolder");
-    let musicRootFolder = await readProps("musicRootFolder");
-    let tvRootFolder = await readProps("tvRootFolder");
-    let photoRootFolder = await readProps("photoRootFolder");
-
-    let startObj = {
-      keyBooks: apikeybooks,
-      keyMovies: apikeymovie,
-      keyMusic: apikeymusic,
-      folderBooks: booksRootFolder,
-      folderMovies: moviesRootFolder,
-      folderMusic: musicRootFolder,
-      folderTv: tvRootFolder,
-      folderPhotos: photoRootFolder,
-      port: port,
-    };
+    let startObj = await setProps(serverAddress);
     res.send(startObj);
   } catch (err) {
-    console.error(`Error Sending Settings Data: ${err}`);
+    console.error(`Error Sending Properties Data: ${err}`);
   }
 });
 
@@ -59,10 +38,9 @@ app.get("/settings", cors(corsOptions), async function (req, res) {
 app.post("/save", cors(corsOptions), async function (req, res) {
   let property = req.body.property;
   let data = req.body.data;
-  console.info(
-    `Save Property Requested: Propterty: ${property}. Data: ${data}`
-  );
   handleSave(property, data, res);
+  console.info(`Success: Saved Propterty: ${property}. Data: ${data}`);
+  res.send(`Success: Saved Propterty: ${property}. Data: ${data}`);
 });
 
 // Scan local media (books, movies, music) then call API for each one to update.
@@ -113,7 +91,7 @@ app.post("/photo", cors(corsOptions), async function (req, res) {
   });
 });
 
-// Send Media Data Saved From API Call.
+// Send Media API Data from Database
 app.post("/getmedia", cors(corsOptions), async function (req, res) {
   let mediaType = await req.body.data;
   console.info(`Media Data Requested for ${mediaType}`);
@@ -198,14 +176,6 @@ app.get("/video", async function (req, res) {
   }
 });
 
-// Parse Epub Book File. Append Parsed Content into Readable HTML and Send.
-app.get("/book", async function (req, res) {
-  let path = req.query.path;
-  let ext = req.query.ext;
-  console.info(`Get Book Request: Extension Type: ${ext}`);
-  readBook(path, ext, res);
-});
-
 // Set Music Stream Path
 app.get("/setmusic", async function (req, res) {
   musicStreamPath = req.query.path;
@@ -220,19 +190,31 @@ app.get("/setmusic", async function (req, res) {
 
 // Stream Music
 app.get("/streammusic", function (req, res) {
-  try {
-    res.writeHead(200, { "Content-Type": "audio/mp3" });
-    let musicStream = fs.createReadStream(musicStreamPath);
+  let musicStream = fs.createReadStream(musicStreamPath);
+  musicStream.on("error", (err) => {
+    console.log(`Streaming Error: ${err}`);
+  });
+  musicStream.on("data", () => {
     console.log(`Streaming Path ${musicStreamPath}`);
+    res.writeHead(200, { "Content-Type": "audio/mp3" });
     musicStream.pipe(res);
-  } catch (err) {
-    console.error(`Streaming Error: ${err}`);
-  }
+  });
+});
+
+// Parse Epub Book File. Append Parsed Content into Readable HTML and Send.
+app.get("/book", async function (req, res) {
+  let path = req.query.path;
+  let ext = req.query.ext;
+  console.info(`Get Book Request: Extension Type: ${ext}`);
+  readBook(path, ext, res);
 });
 
 // Start Server and Read PORT File
 const startServer = async () => {
+  console.info("Starting Server:");
+  let ip = setServerIp();
   let port = await getPort();
+  serverAddress = `http://${ip}:${port}`;
   app.listen(port, () => {
     console.info(`Media Metadata Server Listening On: ${port}.\n`);
   });
