@@ -1,145 +1,80 @@
 const axios = require("axios");
 const { readProps } = require("../start/start");
 const { saveToDatabase } = require("../database/saveToDatabase");
+const { databaseAction } = require("../database/mongodb");
 let mediaResults = [];
 let mediaNotFound = [];
 let counter = 1;
 let successCounter = 0;
 let failCount = 0;
 
-// Define | All Media | Defines media properties needed for API
-async function useMediaType(mediaType) {
-  if (mediaType === "updatemovies") {
-    let fileName = "movies.json";
-    let fileNameNotFound = "moviesNotFound.json";
-    let apikey = await readProps("apikeymovie");
-    let mediaName = "Movies";
-    let returnObj = {
-      FileName: fileName,
-      FileNameNF: fileNameNotFound,
-      APIKey: apikey,
-      MediaName: mediaName,
-    };
-    return returnObj;
-  } else if (mediaType === "updatebooks") {
-    let fileName = "books.json";
-    let fileNameNotFound = "booksnotfound.json";
-    let apikey = await readProps("apikeybooks");
-    let mediaName = "Books";
-    let returnObj = {
-      FileName: fileName,
-      FileNameNF: fileNameNotFound,
-      APIKey: apikey,
-      MediaName: mediaName,
-    };
-    return returnObj;
-  } else if (mediaType === "updatetv") {
-    let fileName = "tv shows.json";
-    let fileNameNotFound = "tvshowsnotfound.json";
-    let apikey = await readProps("apikeymovie"); //same as movies
-    let mediaName = "TV Shows";
-    let returnObj = {
-      FileName: fileName,
-      FileNameNF: fileNameNotFound,
-      APIKey: apikey,
-      MediaName: mediaName,
-    };
-    return returnObj;
-  } else if (mediaType === "updatemusic") {
-    let fileName = "music.json";
-    let fileNameNotFound = "musicnotfound.json";
-    let apikey = await readProps("apikeymusic");
-    let mediaName = "Music";
-    let returnObj = {
-      FileName: fileName,
-      FileNameNF: fileNameNotFound,
-      APIKey: apikey,
-      MediaName: mediaName,
-    };
-    return returnObj;
-  }
-}
-
 async function getMediaInfo(data, response, mediaType) {
   let dataProps = await useMediaType(mediaType);
-  // let fileName = dataProps.FileName;
-  // let fileNameNotFound = dataProps.FileNameNF;
   let apiKey = dataProps.APIKey;
   let mediaName = dataProps.MediaName;
-  let mediaValues = await data;
+  let mediaValues = data;
   mediaNotFound = [];
   mediaResults = [];
-  console.info(`Calling API for ${mediaValues.length} ${mediaName} files.`);
+  let cmd = { cmd: "find", collection: mediaName };
+  let dbMediaItems = await databaseAction(cmd); //TODO: Change All Other Media Types
+  console.info(`Calling API for ${dbMediaItems.length} ${mediaName} files.`);
 
-  for (let i = 0; i < mediaValues.length; i++) {
-    // Update Movies
-    if (mediaType === "updatemovies" || mediaType === "updatetv") {
-      let mediaInfo = await apiCallMovies(apiKey, mediaValues, i);
-      if (mediaInfo !== undefined) {
-        await mapData(mediaInfo, mediaValues, response, i, mediaName);
+  // Update Music
+  if (mediaType === "updatemusic") {
+    for (let x = 0; x < dbMediaItems.length; x++) {
+      let album = dbMediaItems[x].key;
+      let artist = dbMediaItems[x].data.Artist;
+      try {
+        await apiCallMusic(artist, album, apiKey, response);
+      } catch (err) {
+        failCount++;
+        console.error(`Error Calling Music API: ${err}`);
+        mediaNotFound.push({
+          Name: album,
+          Path: artist,
+        });
       }
     }
-    // Update TV
-    else if (mediaType === "updatetv") {
-      let mediaInfo = await apiCallTv(apiKey, mediaValues, i);
-      if (mediaInfo !== undefined) {
-        await mapData(mediaInfo, mediaValues, response, i, mediaName);
-      }
-    }
-    // Update Books
-    else if (mediaType === "updatebooks") {
-      let mediaInfo = await apiCallBooks(mediaValues, apiKey, i);
-      await mapData(mediaInfo, mediaValues, response, i, mediaName);
-    }
-    // Update Music
-    else if (mediaType === "updatemusic") {
-      for (let x = 0; x < mediaValues[i].Albums.length; x++) {
-        let album = mediaValues[i].Albums[x].Album;
-        let artist = mediaValues[i].Artist;
-        try {
-          await apiCallMusic(
-            artist,
-            album,
-            apiKey,
-            response,
-            mediaValues,
-            i,
-            x
-          );
-        } catch (err) {
-          failCount++;
-          console.error(`Error Calling Music API: ${err}`);
-          mediaNotFound.push({
-            Name: album,
-            Path: artist,
-          });
+  } else {
+    for (let i = 0; i < mediaValues.length; i++) {
+      // Update Movies
+      if (mediaType === "updatemovies" || mediaType === "updatetv") {
+        let mediaInfo = await apiCallMovies(apiKey, mediaValues, i);
+        if (mediaInfo !== undefined) {
+          await mapData(mediaInfo, mediaValues, response, i, mediaName);
         }
       }
+      // Update TV
+      else if (mediaType === "updatetv") {
+        let mediaInfo = await apiCallTv(apiKey, mediaValues, i);
+        if (mediaInfo !== undefined) {
+          await mapData(mediaInfo, mediaValues, response, i, mediaName);
+        }
+      }
+      // Update Books
+      else if (mediaType === "updatebooks") {
+        let mediaInfo = await apiCallBooks(mediaValues, apiKey, i);
+        await mapData(mediaInfo, mediaValues, response, i, mediaName);
+      }
+    }
+
+    // Save to Database
+    if (mediaResults.length >= 1) {
+      await saveToDatabase(mediaName, mediaName, mediaResults);
+      await saveToDatabase(mediaName, "No API Result", mediaNotFound);
+    } else {
+      response.write(`${counter++}. ${mediaName} API Found 0 Results.`);
+    }
+
+    // Write missed items in API.
+    for (let i = 0; i < mediaNotFound.length; i++) {
+      response.write(
+        `Name: ${Object.values(mediaNotFound)[i].Name}  Path: ${
+          Object.values(mediaNotFound)[i].Path
+        }\n \n`
+      );
     }
   }
-
-  // Set media results for music (uses same array.)
-  if (mediaName === "Music") {
-    mediaResults = mediaValues;
-  }
-
-  // Save to Database
-  if (mediaResults.length >= 1) {
-    await saveToDatabase(mediaName, mediaName, mediaResults);
-    await saveToDatabase(mediaName, "No API Result", mediaNotFound);
-  } else {
-    response.write(`${counter++}. ${mediaName} API Found 0 Results.`);
-  }
-
-  // Write missed items in API.
-  for (let i = 0; i < mediaNotFound.length; i++) {
-    response.write(
-      `Name: ${Object.values(mediaNotFound)[i].Name}  Path: ${
-        Object.values(mediaNotFound)[i].Path
-      }\n \n`
-    );
-  }
-
   response.write(
     `${counter++}. ${mediaName} API Found ${successCounter} results. ${mediaName} API Failed for ${failCount}\n`
   );
@@ -185,7 +120,7 @@ async function apiCallTv(apiKey, mediaValues, i) {
 }
 
 // Call Apple Music API
-async function apiCallMusic(artist, album, apiKey, res, mediaValues, i, x) {
+async function apiCallMusic(artist, album, apiKey, res) {
   // Abort API Call if Time Eplasted > 3 Seconds
   const controller = new AbortController();
   timeOut = setTimeout(() => {
@@ -199,7 +134,6 @@ async function apiCallMusic(artist, album, apiKey, res, mediaValues, i, x) {
   timeOut;
 
   // Begin API Call
-
   await axios
     .get(
       `https://api.music.apple.com/v1/catalog/us/search?types=albums&limit=1&term=${artist}${"+"}${album}`,
@@ -212,7 +146,6 @@ async function apiCallMusic(artist, album, apiKey, res, mediaValues, i, x) {
       try {
         clearTimeout(timeOut);
         let mediaInfo = response.data;
-
         // No Result Found
         if (!mediaInfo.results.albums) {
           res.write(
@@ -225,7 +158,7 @@ async function apiCallMusic(artist, album, apiKey, res, mediaValues, i, x) {
         }
         // Found Result
         else {
-          mapMusicData(mediaInfo, mediaValues, i, x, res);
+          mapMusicData(mediaInfo, res, album);
         }
       } catch (err) {
         failCount++;
@@ -349,37 +282,46 @@ async function mapBookData(mediaInfo, mediaValues, i, response, mediaName) {
 }
 
 // Map Music Data
-async function mapMusicData(mediaInfo, mediaValues, i, x, response) {
+async function mapMusicData(mediaInfo, response, album) {
   try {
+    let cmd = { cmd: "find", collection: "Music", key: "key", data: album };
+    let dbAlbum = await databaseAction(cmd);
     if (mediaInfo !== undefined) {
-      mediaValues[i].Albums[x].Genres =
+      dbAlbum[0].data.Genres =
         mediaInfo.results.albums.data[0].attributes.genreNames;
-      mediaValues[i].Albums[x].Year =
+      dbAlbum[0].data.Year =
         mediaInfo.results.albums.data[0].attributes.releaseDate;
-      mediaValues[i].Albums[x].Attributes =
+      dbAlbum[0].data.Attributes =
         mediaInfo.results.albums.data[0].attributes.artwork;
-      mediaValues[i].Albums[x].TrackCount =
+      dbAlbum[0].data.TrackCount =
         mediaInfo.results.albums.data[0].attributes.trackCount;
 
-      mediaValues[i].Albums[x].id =
+      dbAlbum[0].data.id =
         mediaInfo.results.albums.data[0].attributes.playParams.id;
       if (
-        mediaValues[i].Albums[x].LocalTrackCount ===
+        dbAlbum[0].data.LocalTrackCount ===
         mediaInfo.results.albums.data[0].attributes.trackCount
       ) {
-        mediaValues[i].Albums[x].HasAllTracks = true;
+        dbAlbum[0].data.HasAllTracks = true;
       } else {
-        mediaValues[i].Albums[x].HasAllTracks = false;
+        dbAlbum[0].data.HasAllTracks = false;
       }
+      let cmd2 = {
+        cmd: "updateOne",
+        collection: "Music",
+        key: album,
+        data: dbAlbum[0].data,
+      };
+      await databaseAction(cmd2);
     }
     response.write(
       `${counter++}. Music API Found Results for ${JSON.stringify(
-        mediaValues[i].Albums[x].Album
+        dbAlbum[0].data.Album
       )}\n`
     );
     successCounter++;
   } catch (err) {
-    console.log(err);
+    console.error(err);
   }
   try {
     if (
@@ -407,6 +349,43 @@ async function mediaNotFoundError(mediaValues, i, response, mediaName) {
       mediaValues[i].name
     }. Total ${mediaName} Not Found: ${failCount++}\n`
   );
+}
+
+// Define | All Media | Defines media properties needed for API
+async function useMediaType(mediaType) {
+  if (mediaType === "updatemovies") {
+    let apikey = await readProps("apikeymovie");
+    let mediaName = "Movies";
+    let returnObj = {
+      APIKey: apikey,
+      MediaName: mediaName,
+    };
+    return returnObj;
+  } else if (mediaType === "updatebooks") {
+    let apikey = await readProps("apikeybooks");
+    let mediaName = "Books";
+    let returnObj = {
+      APIKey: apikey,
+      MediaName: mediaName,
+    };
+    return returnObj;
+  } else if (mediaType === "updatetv") {
+    let apikey = await readProps("apikeymovie"); //same as movies
+    let mediaName = "TV Shows";
+    let returnObj = {
+      APIKey: apikey,
+      MediaName: mediaName,
+    };
+    return returnObj;
+  } else if (mediaType === "updatemusic") {
+    let apikey = await readProps("apikeymusic");
+    let mediaName = "Music";
+    let returnObj = {
+      APIKey: apikey,
+      MediaName: mediaName,
+    };
+    return returnObj;
+  }
 }
 
 module.exports = { getMediaInfo };

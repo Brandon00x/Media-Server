@@ -4,8 +4,8 @@ const app = express();
 const fs = require("fs");
 const exec = require("child_process").exec;
 const { startScan } = require("./scanmedia/scanmedia");
-const { handleSave } = require("./save/handleSave"); //TODO: CHANGE LATER FOR DATABASE
-const { setProps, setServerIp, getPort } = require("./start/start"); //TODO: REMOVE LATER FOR DATABASE
+const { handleSave } = require("./save/handleSave");
+const { setProps, setServerIp, getPort } = require("./start/start");
 const { getMediaInfo } = require("./apicalls/apicall");
 const { readMedia } = require("./readmedia/readmedia");
 const { readBook } = require("./readmedia/readbook");
@@ -24,7 +24,7 @@ let videoSreamPath;
 let musicStreamPath;
 let serverAddress;
 
-//Sends Keys and Folder Locations When Settings is Loaded
+// Sends Properties, Keys, and Folder Locations
 app.get("/props", cors(corsOptions), async function (req, res) {
   try {
     let startObj = await setProps(serverAddress);
@@ -34,7 +34,7 @@ app.get("/props", cors(corsOptions), async function (req, res) {
   }
 });
 
-// Save Folders, API Keys, or PORT Change.
+// Save Properties, Folders, API Keys, or PORT Change.
 app.post("/save", cors(corsOptions), async function (req, res) {
   let property = req.body.property;
   let data = req.body.data;
@@ -48,10 +48,10 @@ app.post("/update", cors(corsOptions), async function (req, res) {
   try {
     let mediaCategory = await req.body.type;
     let mediaPath = await req.body.path;
-    // Scan | Set Local Results
-    let mediaData = await startScan(res, mediaCategory, mediaPath);
 
-    // Call API with Results
+    // Scan | Find Local Media
+    let mediaData = await startScan(res, mediaCategory, mediaPath);
+    // API Call | Get Metadata Information for Media
     if (mediaData.length > 0 && mediaCategory !== "updatephotos") {
       await getMediaInfo(mediaData, res, mediaCategory);
     }
@@ -95,7 +95,13 @@ app.post("/photo", cors(corsOptions), async function (req, res) {
 app.post("/getmedia", cors(corsOptions), async function (req, res) {
   let mediaType = await req.body.data;
   console.info(`Media Data Requested for ${mediaType}`);
-  readMedia(mediaType, res);
+  if (mediaType === "Music") {
+    let cmd = { cmd: "find", collection: mediaType };
+    let dbMediaItems = await databaseAction(cmd);
+    res.send(dbMediaItems);
+  } else {
+    readMedia(mediaType, res);
+  }
 });
 
 // Send Season / Episode Data for TV Shows
@@ -183,9 +189,9 @@ app.get("/setmusic", async function (req, res) {
   let album = req.query.album;
   console.info(`Music Play Request for Song: ${song} Album ${album}.`);
   // Get Database Album Songs/Paths
-  let cmd = { cmd: "find", collection: "music", key: "key", data: album };
+  let cmd = { cmd: "find", collection: "Music", key: "key", data: album };
   let dbSongs = await databaseAction(cmd);
-  res.json(dbSongs[0].data[0].Songs);
+  res.json(dbSongs[0].data.Tracks);
 });
 
 // Stream Music
@@ -194,11 +200,8 @@ app.get("/streammusic", function (req, res) {
   musicStream.on("error", (err) => {
     console.log(`Streaming Error: ${err}`);
   });
-  musicStream.on("data", () => {
-    console.log(`Streaming Path ${musicStreamPath}`);
-    res.writeHead(200, { "Content-Type": "audio/mp3" });
-    musicStream.pipe(res);
-  });
+  res.writeHead(200, { "Content-Type": "audio/mp3" });
+  musicStream.pipe(res);
 });
 
 // Parse Epub Book File. Append Parsed Content into Readable HTML and Send.

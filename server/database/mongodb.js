@@ -15,9 +15,9 @@ async function databaseAction(cmd) {
   let key = cmd.key; // Key
   let data = cmd.data; // Data
 
-  console.info(
-    `Performing Database Action: ${action} Collection: ${cmd.collection}`
-  );
+  // console.info(
+  //   `Performing Database Action: ${action} Collection: ${cmd.collection}`
+  // );
 
   const db = client.db(dbName);
   let collection = db.collection(cmd.collection);
@@ -26,7 +26,7 @@ async function databaseAction(cmd) {
   if (action === "createIndex") {
     try {
       collection.createIndex({ [key]: 1 }, { unique: true });
-      console.info(`Created Index on Key: ${key}`);
+      //console.info(`Created Index on Key: ${key}`);
     } catch (err) {
       console.warn("Create Index Error: ", key, "\n", err);
     }
@@ -40,7 +40,9 @@ async function databaseAction(cmd) {
       })
       .catch((e) => {
         if (e.code === 26) {
-          console.info(`Drop Collection: ${cmd.collection} was not found.`);
+          console.info(
+            `Drop Collection Failure: Collection ${cmd.collection} was not found.`
+          );
         } else {
           console.error("Drop Collection Error: ", e.message);
         }
@@ -52,11 +54,13 @@ async function databaseAction(cmd) {
       .updateOne({ key: key }, { $set: { data: data } })
       .then((result) => {
         if (result.modifiedCount > 0) {
-          console.log(
-            `Updated ${key}. Results Modified: ${result.modifiedCount}`
-          );
+          // console.log(
+          //   `Updated ${key}. Results Modified: ${result.modifiedCount}`
+          // );
+        } else if (result.matchedCount >= 1) {
+          // Was Same Value Update
         } else {
-          console.log(`No Result Updated for Key: ${key}.`);
+          console.warn(`Update did not occur. Key: ${key}.`);
           resultCmd = "notUpdated";
         }
       })
@@ -73,11 +77,11 @@ async function databaseAction(cmd) {
         data,
       })
       .then((insertResult) => {
-        console.info("Inserted Data =>", insertResult);
+        //console.info("Inserted Data =>", insertResult);
       })
       .catch((err) => {
         if (err.code === 11000) {
-          console.log(`Duplicate Record Not Inserted`);
+          //console.log(`Duplicate Record Not Inserted`);
         } else {
           console.error("Insert One Error: ", err);
         }
@@ -87,27 +91,28 @@ async function databaseAction(cmd) {
   // Insert Many
   if (action === "insertMany") {
     const insertResult = await collection.insertMany(data, { unique: true });
-    console.info("Inserted Data =>", insertResult);
+    //console.info("Inserted Data =>", insertResult);
   }
 
   // Search Many by Filter
   if (action === "find") {
-    console.info(`Searching For ${key}: ${data}`);
+    //console.info(`Searching For ${key}: ${data}`);
     const searchResult = await collection.find({ [key]: data }).toArray();
     if (searchResult.length > 0) {
-      console.log(`Search Results => ${searchResult}\n`);
+      //console.log(`Search Results => ${searchResult}\n`);
       return searchResult;
     } else {
+      resultCmd = `INFO: No Search Results Found for ${key}: ${data}`;
       console.warn(`No Search Results Found for ${key}: ${data}\n`);
     }
   }
 
   // Search One by Key
   if (action === "findOne") {
-    console.info(`Searching For One Result. Key: ${key}`);
+    //console.info(`Searching For One Result. Key: ${key}`);
     const searchResult = await collection.find({ key }).toArray();
     if (searchResult.length > 0) {
-      console.log(`Search Results => ${searchResult}\n`);
+      //console.log(`Search Results => ${searchResult}\n`);
       return searchResult;
     } else {
       console.warn(`No Search Results Found for ${key}\n`);

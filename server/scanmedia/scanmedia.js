@@ -63,13 +63,6 @@ let scan = setInterval(() => {
   scanTime++;
 }, 1000);
 
-// JSON Files Names
-// const bookJson = "localbooks.json";
-// const movieJson = "localmovies.json";
-// const TvJson = "localtvshows.json";
-// const musicJson = "localmusic.json";
-const photosJson = "photos.json";
-
 //////////// Main Program Loop
 // Program | All Media | Starts Scan
 async function startScan(response, mediaCategory, mediaPath) {
@@ -89,12 +82,13 @@ async function startScan(response, mediaCategory, mediaPath) {
     key: "key",
   };
   await databaseAction(cmd);
-  let cmd2 = {
-    cmd: "dropCollection",
-    collection: mediaType,
-    key: "key",
-  };
-  await databaseAction(cmd2);
+  // TODO: Remove - Old Code
+  // let cmd2 = {
+  //   cmd: "dropCollection",
+  //   collection: mediaType,
+  //   key: "key",
+  // };
+  // await databaseAction(cmd2);
 
   return new Promise(async (resolve, reject) => {
     // Path | All Media | Make Sure Path ends with forward slash.
@@ -212,12 +206,17 @@ async function startScan(response, mediaCategory, mediaPath) {
     saveScanTime("sendCategoryFixes");
 
     // Save Media Array to DB
-    if (mediaCategory === "updatephotos") {
-      await saveToDatabase("Photos", "Photos", mediaArr);
-    } else {
-      await saveToDatabase(mediaCategory, mediaCategory, mediaArr);
-      saveScanTime("saveToDatabase");
-    }
+    // if (mediaCategory === "updatephotos") {
+    //   await saveToDatabase("Photos", "Photos", mediaArr);
+    // } else {
+    //   await saveToDatabase(mediaCategory, mediaCategory, mediaArr);
+    //   saveScanTime("saveToDatabase");
+    // }
+
+    // Save Individual Records to DB.
+    // for (let i = 0; i < mediaArr.length; i++) {
+    //   await saveToDatabase(mediaType, mediaArr[i], mediaArr[i]);
+    // }
 
     // Write Final Stats
     res.write(
@@ -707,7 +706,7 @@ async function setMusicAlbum() {
     mediaArr[i].artist = mediaArr[i].artist.replaceAll("_", "");
     mediaArr[i].album = albumNameDirty.replaceAll("&", "and");
     mediaArr[i].album = mediaArr[i].album.replaceAll("_", "");
-    mediaArr[i].album = mediaArr[i].album.replaceAll("-", " ");
+    mediaArr[i].album = mediaArr[i].album.replaceAll("-", " ").trim();
   }
 }
 
@@ -749,6 +748,7 @@ async function sortMusic() {
       let albumPath = mediaArr[i].path.slice(0, lastIndexPath);
       albumArray.push({
         Album: mediaArr[i].album,
+        Artist: mediaArr[i].artist,
         Attributes: "",
         Genres: "",
         Year: "",
@@ -791,7 +791,7 @@ async function saveMusicToDb() {
   let songs = [];
   let cmd = {
     cmd: "createIndex",
-    collection: "music",
+    collection: "Music Tracks",
     key: "key",
   };
   // Create Database Index on Key
@@ -799,11 +799,16 @@ async function saveMusicToDb() {
 
   for (let i = 0; i < mediaArr.length; i++) {
     if (i === mediaArr.length) {
-      console.log("Breaking");
       break;
     }
     do {
       if (mediaArr[i].Albums.length >= 1) {
+        // Save Music Album Info
+        await saveToDatabase(
+          mediaType,
+          mediaArr[i].Albums[x].Album,
+          mediaArr[i].Albums[x]
+        );
         for (let y = 0; y < mediaArr[i].Albums[x].Tracks.length; y++) {
           // Push Songs / Track Numbers
           songs.push({
@@ -819,10 +824,11 @@ async function saveMusicToDb() {
         });
         let cmd = {
           cmd: "insertOne",
-          collection: "music",
+          collection: "Music Tracks",
           key: mediaArr[i].Albums[x].Album,
           data: albumSongs,
         };
+        // Save Music Album Tracks
         await databaseAction(cmd);
         songs = [];
         albumSongs = [];

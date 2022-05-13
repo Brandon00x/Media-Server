@@ -162,7 +162,7 @@ export default class Template extends Component {
     // Call Map Music Data
     if (mediaType === "Music") {
       data.sort(function (a, b) {
-        return a.Artist.localeCompare(b.Artist);
+        return a.data.Artist.localeCompare(b.data.Artist);
       });
       this.mapMusic(data, mediaType);
       return;
@@ -265,6 +265,7 @@ export default class Template extends Component {
                   width: "30vw",
                   height: "30vw",
                   top: "20%",
+                  border: "1px solid black",
                 }}
               >
                 <div
@@ -372,348 +373,331 @@ export default class Template extends Component {
     this.rowCount = `rowCount${this.state.cardsPerRow}`;
     this.style = musicStyleProps[this.rowCount].cardProps;
     // Loop Through Albums To Make Cards
-    let x = 0;
+    let y = 0;
     this.albumNumber = 0;
     // Loop Through Artists
     for (let i = 0; i < data.length; i++) {
       // Stop Looping
-      if (i === data.length) {
-        break;
-      }
-      // While Albums + 1 !== Undefined => Create Cards
-      do {
-        if (data[i].Albums.length >= 1) {
-          // Assign Data
-          this.localTrackCount = data[i].Albums[x].LocalTrackCount;
-          this.albumColor1 = `#${data[i].Albums[x].Attributes.textColor1}`;
-          this.albumColor2 = `#${data[i].Albums[x].Attributes.textColor2}`;
-          this.albumColor3 = `#${data[i].Albums[x].Attributes.textColor3}`;
-          this.albumColor4 = `#${data[i].Albums[x].Attributes.textColor4}`;
-          this.albumColors.push({
-            color1: this.albumColor1,
-            color2: this.albumColor2,
-            color3: this.albumColor3,
-            color4: this.albumColor4,
-          });
+      let dataProps = data[i].data;
 
-          // Get Song Data for Album
-          for (let y = 0; y < data[i].Albums[x].Tracks.length; y++) {
-            this.trackKey = data[i].Result;
-            this.trackNumber = data[i].Albums[x].Tracks[y].TrackNumber;
-            this.trackName = data[i].Albums[x].Tracks[y].Track;
-            this.trackPath = data[i].Albums[x].Tracks[y].Path;
-            this.key = uuidv4();
-            this.songs.push(
-              <div
-                className="musicTracks"
-                key={this.key}
-                title={this.trackName}
+      this.localTrackCount = dataProps.LocalTrackCount;
+
+      this.albumColor1 = `#${dataProps.Attributes.textColor1}`;
+      this.albumColor2 = `#${dataProps.Attributes.textColor2}`;
+      this.albumColor3 = `#${dataProps.Attributes.textColor3}`;
+      this.albumColor4 = `#${dataProps.Attributes.textColor4}`;
+      this.albumColors.push({
+        color1: this.albumColor1,
+        color2: this.albumColor2,
+        color3: this.albumColor3,
+        color4: this.albumColor4,
+      });
+
+      do {
+        this.trackNumber = dataProps.Tracks[y].TrackNumber;
+        this.trackName = dataProps.Tracks[y].Track;
+        this.trackPath = dataProps.Tracks[y].Path;
+        this.key = uuidv4();
+
+        this.songs.push(
+          <div
+            className="musicTracks"
+            key={this.key}
+            title={this.trackName}
+            style={{
+              backgroundColor:
+                y % 2 === 1
+                  ? hex2rgba(this.albumColor2, 0.8)
+                  : this.albumColor2,
+            }}
+          >
+            <span className="musicTrack">{this.trackName}</span>
+            <div className="musicButtonDiv">
+              <button
+                className="fa-solid fa-folder-open"
+                onClick={this.openMedia}
+                title={`Open ${this.trackName}.`}
+                value={JSON.stringify({ Path: this.trackPath })}
                 style={{
-                  backgroundColor:
-                    y % 2 === 1
-                      ? hex2rgba(this.albumColor2, 0.8)
-                      : this.albumColor2,
+                  color: this.albumColor4,
+                  border: "none",
+                  background: "none",
                 }}
-              >
-                <span className="musicTrack">{this.trackName}</span>
-                <div className="musicButtonDiv">
-                  <button
-                    className="fa-solid fa-folder-open"
-                    onClick={this.openMedia}
-                    title={`Open ${this.trackName}.`}
-                    value={JSON.stringify({ Path: this.trackPath })}
-                    style={{
-                      color: this.albumColor4,
-                      border: "none",
-                      background: "none",
-                    }}
-                  />
-                  <button
-                    id="musicPlaySong"
-                    className="fas fa-play"
-                    onClick={this.playLocalSong}
-                    title={`Play ${this.trackName}`}
-                    music={JSON.stringify({
-                      artist: data[i].Artist,
-                      album: data[i].Albums[x].Album,
-                      tracknumber: data[i].Albums[x].Tracks[y].TrackNumber,
-                      song: this.trackName,
-                      path: this.trackPath,
-                      colors: this.albumColors,
-                    })}
-                    style={{
-                      color: this.albumColor4,
-                      border: "none",
-                      background: "none",
-                    }}
-                  />
-                </div>
-              </div>
-            );
-          }
-          let url;
-          try {
-            if (data[i].Albums[x].Attributes.url !== undefined) {
-              url = data[i].Albums[x].Attributes.url.replace(
-                "{w}x{h}",
-                "226x250"
-              );
-            } else {
-              url = "./notplaying.png";
-            }
-          } catch (err) {}
-          // Create Main Card
-          this.mediaCards.push(
-            <Card
-              id={data[i].Albums[x].Album}
-              className="mediaCard"
-              key={this.key}
-              title={data[i].Albums[x].Album}
-              artist={data[i].Artist}
-              year={data[i].Albums[x].Year}
-              length={this.localTrackCount.toString()}
-              onClick={this.showDescription}
-              value={this.noDescription}
+              />
+              <button
+                id="musicPlaySong"
+                className="fas fa-play"
+                onClick={this.playLocalSong}
+                title={`Play ${this.trackName}`}
+                music={JSON.stringify({
+                  artist: dataProps.Artist,
+                  album: dataProps.Album,
+                  tracknumber: this.trackNumber,
+                  song: this.trackName,
+                  path: this.trackPath,
+                  colors: this.albumColors,
+                })}
+                style={{
+                  color: this.albumColor4,
+                  border: "none",
+                  background: "none",
+                }}
+              />
+            </div>
+          </div>
+        );
+        y++;
+      } while (y < dataProps.Tracks.length);
+      // Reset Arrays for Next Album Loop
+
+      let url;
+      try {
+        if (dataProps.Attributes.url !== undefined) {
+          url = dataProps.Attributes.url.replace("{w}x{h}", "226x250");
+        } else {
+          url = "./notplaying.png";
+        }
+      } catch (err) {}
+
+      // Create Main Card
+      this.mediaCards.push(
+        <Card
+          id={dataProps.Album}
+          className="mediaCard"
+          key={this.key}
+          title={dataProps.Album}
+          artist={dataProps.Artist}
+          year={dataProps.Year}
+          length={this.localTrackCount.toString()}
+          onClick={this.showDescription}
+          value={this.noDescription}
+          style={{
+            zIndex: 1,
+            width: this.style.img.width,
+            backgroundColor: this.albumColor1,
+            color: this.albumColor4,
+            backgroundImage: `url(${url})`,
+          }}
+        >
+          {this.cardTop(
+            dataProps.Album,
+            mediaType,
+            null,
+            dataProps.Attributes.url,
+            null,
+            this.style
+          )}
+          {this.cardMiddle(
+            dataProps.Artist,
+            dataProps.Genres,
+            mediaType,
+            dataProps.TrackCount,
+            dataProps.Year,
+            dataProps.Description,
+            this.style
+          )}
+          {this.cardBottom(
+            { Path: dataProps.Path },
+            mediaType,
+            dataProps.Album,
+            this.albumNumber,
+            this.noDescription,
+            null,
+            null
+          )}
+        </Card>
+      );
+
+      // Set Album Description
+      if (dataProps.Description.length > 1) {
+        let html = { __html: dataProps.Description };
+        this.descriptionText = (
+          <div>
+            <h4 className="mediaDescriptionTitle">Description</h4>
+            <p dangerouslySetInnerHTML={html}></p>
+          </div>
+        );
+      } else {
+        this.descriptionText = null;
+      }
+
+      // Create Description Card
+      this.mediaCardsDescription.push(
+        <Draggable key={this.key}>
+          <Card
+            // id={data[i].Albums[x].Album}
+            id={this.key}
+            className="mediaCard"
+            key={this.key}
+            title={dataProps.Album}
+            artist={dataProps.Artist}
+            year={dataProps.Year}
+            length={dataProps.TrackCount}
+            value={this.descriptionOn}
+            onMouseEnter={(e) => {
+              e.target.style.zIndex = "4";
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.zIndex = "2";
+            }}
+            style={{
+              position: "absolute",
+              display: "flex",
+              zIndex: "2",
+              width: "30vw",
+              height: "30vw",
+              top: "20%",
+              backgroundColor: this.albumColor1,
+              color: this.albumColor4,
+              border: `2px solid ${this.albumColor4}`,
+            }}
+          >
+            <div
+              className="mediaTopBar"
               style={{
-                zIndex: 1,
-                width: this.style.img.width,
-                backgroundColor: this.albumColor1,
-                color: this.albumColor4,
-                backgroundImage: `url(${url})`,
+                backgroundColor:
+                  this.albumColor2 === "#undefined"
+                    ? "burlywood"
+                    : this.albumColor2,
+                borderColor: this.albumColor4,
               }}
             >
-              {this.cardTop(
-                data[i].Albums[x].Album,
-                mediaType,
-                null,
-                data[i].Albums[x].Attributes.url,
-                null,
-                this.style
-              )}
-              {this.cardMiddle(
-                data[i].Artist,
-                data[i].Albums[x].Genres,
-                mediaType,
-                data[i].Albums[x].TrackCount,
-                data[i].Albums[x].Year,
-                data[i].Albums[x].Description,
-                this.style
-              )}
-              {this.cardBottom(
-                { Path: data[i].Albums[x].Path },
-                mediaType,
-                data[i].Albums[x].Album,
-                this.albumNumber,
-                this.noDescription,
-                null,
-                null
-              )}
-            </Card>
-          );
-
-          // Set Album Description
-          if (data[i].Albums[x].Description.length > 1) {
-            let html = { __html: data[i].Albums[x].Description };
-            this.descriptionText = (
-              <div>
-                <h4 className="mediaDescriptionTitle">Description</h4>
-                <p dangerouslySetInnerHTML={html}></p>
-              </div>
-            );
-          } else {
-            this.descriptionText = null;
-          }
-
-          // Create Description Card
-          this.mediaCardsDescription.push(
-            <Draggable key={this.key}>
-              <Card
-                // id={data[i].Albums[x].Album}
-                id={this.key}
-                className="mediaCard"
-                key={this.key}
-                title={data[i].Albums[x].Album}
-                artist={data[i].Artist}
-                year={data[i].Albums[x].Year}
-                length={data[i].Albums[x].TrackCount}
-                value={this.descriptionOn}
-                onMouseEnter={(e) => {
-                  e.target.style.zIndex = "4";
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.zIndex = "2";
-                }}
-                style={{
-                  position: "absolute",
-                  display: "flex",
-                  zIndex: "2",
-                  width: "30vw",
-                  height: "30vw",
-                  top: "20%",
-                  backgroundColor: this.albumColor1,
-                  color: this.albumColor4,
-                }}
-              >
-                <div
-                  className="mediaTopBar"
+              <div className="mediaTopBarButtons">
+                <button
+                  className="far fa-times-circle"
+                  title="Close"
+                  value={JSON.stringify({ action: "close", key: this.key })}
+                  onClick={this.pinDescriptionCard}
                   style={{
-                    backgroundColor:
-                      this.albumColor2 === "#undefined"
-                        ? "burlywood"
-                        : this.albumColor2,
-                    borderColor: this.albumColor4,
+                    color: this.albumColor4,
+                    background: "none",
+                    border: "none",
+                    marginLeft: "5px",
+                  }}
+                />
+                <button
+                  className="fa-solid fa-thumbtack"
+                  title="Pin"
+                  value={JSON.stringify({ action: "pin", key: this.key })}
+                  onClick={this.pinDescriptionCard}
+                  style={{
+                    color: this.albumColor4,
+                    background: "none",
+                    border: "none",
+                  }}
+                />
+                <button
+                  className="far fa-window-minimize"
+                  title="Minimize"
+                  onClick={this.minimizeDescriptionCard}
+                  value={this.key}
+                  style={{
+                    color: this.albumColor4,
+                    background: "none",
+                    border: "none",
+                    position: "relative",
+                  }}
+                />
+              </div>
+              <div className="mediaDescBarTitle">{dataProps.Album}</div>
+            </div>
+
+            {/* TRACKS */}
+            <div className="mediaDescription">
+              <div
+                className="musicTrackHolder"
+                style={{ borderColor: this.albumColor2 }}
+              >
+                <div className="descriptionPara">
+                  <h4 className="mediaDescriptionTitle">Tracks</h4>
+                </div>
+                {this.songs}
+              </div>
+
+              {/* DESCRIPTION */}
+              <div className="descriptionHolder">
+                <div className="descriptionPara">{this.descriptionText}</div>
+
+                {/* INFO */}
+                <div className="descriptionPara">
+                  <h4 className="mediaDescriptionTitle">Info</h4>
+                </div>
+                <p className="descriptionPara">
+                  <span style={{ fontWeight: "bold" }}>Genre: </span>
+                  {dataProps.Genres}
+                </p>
+                <p className="descriptionPara">
+                  <span style={{ fontWeight: "bold" }}> Released: </span>
+                  {dataProps.Year}
+                </p>
+                <p className="descriptionPara">
+                  <span style={{ fontWeight: "bold" }}>Tracks: </span>
+                  {this.localTrackCount}
+                </p>
+                <p className="descriptionPara">
+                  <span style={{ fontWeight: "bold" }}>
+                    Has All Album Tracks:{" "}
+                  </span>
+                  {dataProps.HasAllTracks.toString()}
+                </p>
+              </div>
+
+              <div className="musicDescriptionButtonDiv">
+                <button
+                  className="musicOpenFolderButton"
+                  title="Open Artist Folder"
+                  value={JSON.stringify({ Path: dataProps.Path })}
+                  onClick={this.openMedia}
+                  style={{
+                    background: "none",
+                    color: this.albumColor4,
                   }}
                 >
-                  <div className="mediaTopBarButtons">
-                    <button
-                      className="far fa-times-circle"
-                      title="Close"
-                      value={JSON.stringify({ action: "close", key: this.key })}
-                      onClick={this.pinDescriptionCard}
-                      style={{
-                        color: this.albumColor4,
-                        background: "none",
-                        border: "none",
-                        marginLeft: "5px",
-                      }}
-                    />
-                    <button
-                      className="fa-solid fa-thumbtack"
-                      title="Pin"
-                      value={JSON.stringify({ action: "pin", key: this.key })}
-                      onClick={this.pinDescriptionCard}
-                      style={{
-                        color: this.albumColor4,
-                        background: "none",
-                        border: "none",
-                      }}
-                    />
-                    <button
-                      className="far fa-window-minimize"
-                      title="Minimize"
-                      onClick={this.minimizeDescriptionCard}
-                      value={this.key}
-                      style={{
-                        color: this.albumColor4,
-                        background: "none",
-                        border: "none",
-                        position: "relative",
-                      }}
-                    />
-                  </div>
-                  <div className="mediaDescBarTitle">
-                    {data[i].Albums[x].Album}
-                  </div>
-                </div>
+                  Artist Folder <i className="fa-solid fa-folder-open" />
+                </button>
 
-                {/* TRACKS */}
-                <div className="mediaDescription">
-                  <div
-                    className="musicTrackHolder"
-                    style={{ borderColor: this.albumColor2 }}
-                  >
-                    <div className="descriptionPara">
-                      <h4 className="mediaDescriptionTitle">Tracks</h4>
-                    </div>
-                    {this.songs}
-                  </div>
-
-                  {/* DESCRIPTION */}
-                  <div className="descriptionHolder">
-                    <div className="descriptionPara">
-                      {this.descriptionText}
-                    </div>
-
-                    {/* INFO */}
-                    <div className="descriptionPara">
-                      <h4 className="mediaDescriptionTitle">Info</h4>
-                    </div>
-                    <p className="descriptionPara">
-                      <span style={{ fontWeight: "bold" }}>Genre: </span>
-                      {data[i].Albums[x].Genres}
-                    </p>
-                    <p className="descriptionPara">
-                      <span style={{ fontWeight: "bold" }}> Released: </span>
-                      {data[i].Albums[x].Year}
-                    </p>
-                    <p className="descriptionPara">
-                      <span style={{ fontWeight: "bold" }}>Tracks: </span>
-                      {this.localTrackCount}
-                    </p>
-                    <p className="descriptionPara">
-                      <span style={{ fontWeight: "bold" }}>
-                        Has All Album Tracks:{" "}
-                      </span>
-                      {data[i].Albums[x].HasAllTracks.toString()}
-                    </p>
-                  </div>
-
-                  <div className="musicDescriptionButtonDiv">
-                    <button
-                      className="musicOpenFolderButton"
-                      title="Open Artist Folder"
-                      value={JSON.stringify({ Path: data[i].Path })}
-                      onClick={this.openMedia}
-                      style={{
-                        background: "none",
-                        color: this.albumColor4,
-                      }}
-                    >
-                      Artist Folder <i className="fa-solid fa-folder-open" />
-                    </button>
-
-                    <button
-                      className="musicOpenFolderButton"
-                      title="Close"
-                      onClick={this.pinDescriptionCard}
-                      value={JSON.stringify({ action: "close", key: this.key })}
-                      style={{
-                        background: "none",
-                        color: this.albumColor4,
-                      }}
-                    >
-                      Close
-                    </button>
-                    <button
-                      className="musicOpenFolderButton"
-                      title="Open Album Folder"
-                      value={JSON.stringify({ Path: data[i].Albums[x].Path })}
-                      onClick={this.openMedia}
-                      style={{
-                        background: "none",
-                        color: this.albumColor4,
-                      }}
-                    >
-                      Album Folder <i className="fa-solid fa-folder-open" />
-                    </button>
-                  </div>
-                </div>
-                {this.cardBottom(
-                  { Path: data[i].Albums[x].Path },
-                  mediaType,
-                  data[i].Albums[x].Album,
-                  this.albumNumber,
-                  this.descriptionOn,
-                  null,
-                  null
-                )}
-              </Card>
-            </Draggable>
-          );
-
-          // Reset Arrays for Next Album Loop
-          this.songs = [];
-          this.songPaths = [];
-          this.albumColors = [];
-          x = x + 1;
-        }
-      } while (x <= data[i].Albums.length - 1);
-      // Reset Next Artist Loop
-      if (i < data.length - 1) {
-        if (data[i].Result !== data[i + 1].Result) {
-          x = 0;
-        }
-      }
+                <button
+                  className="musicOpenFolderButton"
+                  title="Close"
+                  onClick={this.pinDescriptionCard}
+                  value={JSON.stringify({ action: "close", key: this.key })}
+                  style={{
+                    background: "none",
+                    color: this.albumColor4,
+                  }}
+                >
+                  Close
+                </button>
+                <button
+                  className="musicOpenFolderButton"
+                  title="Open Album Folder"
+                  value={JSON.stringify({ Path: dataProps.Path })}
+                  onClick={this.openMedia}
+                  style={{
+                    background: "none",
+                    color: this.albumColor4,
+                  }}
+                >
+                  Album Folder <i className="fa-solid fa-folder-open" />
+                </button>
+              </div>
+            </div>
+            {this.cardBottom(
+              { Path: dataProps.Path },
+              mediaType,
+              dataProps.Album,
+              this.albumNumber,
+              this.descriptionOn,
+              null,
+              null
+            )}
+          </Card>
+        </Draggable>
+      );
+      this.songs = [];
+      this.songPaths = [];
+      this.albumColors = [];
+      y = 0;
     }
 
     this.createRows();
@@ -842,7 +826,7 @@ export default class Template extends Component {
       <div className="mediaCardTop" id={title} value={title}>
         <div
           className="mediaTitle"
-          onClick={this.hideAlbumTitle}
+          onClick={this.state.navtitle === "Music" ? this.hideAlbumTitle : null}
           style={{
             top: 1,
             width: style.img.width,
@@ -1127,6 +1111,7 @@ export default class Template extends Component {
     this.artist = this.albumInfo.artist;
     this.album = this.albumInfo.album;
     this.trackNumber = parseInt(this.albumInfo.tracknumber);
+
     // Next Song Load Place Holder JSX
     this.nextSongPlaceHolder = (
       <div
@@ -1147,7 +1132,7 @@ export default class Template extends Component {
     let res = await axios.get(`${this.props.address}/setmusic`, {
       params: { path: this.songPath, song: this.songName, album: this.album },
     });
-    this.albumSongList = JSON.parse(res.data);
+    this.albumSongList = res.data;
 
     // Set Previous / Next Song Values
     for (let i = 0; i < this.albumSongList.length; i++) {
@@ -1157,14 +1142,14 @@ export default class Template extends Component {
         this.songPath = this.albumSongList[i].Path;
         // Set Prev Song Values (If Defined)
         if (i >= 1) {
-          this.prevSong = this.albumSongList[i - 1].Song;
+          this.prevSong = this.albumSongList[i - 1].Track;
           this.prevSongTrack = this.albumSongList[i - 1].TrackNumber;
           this.prevSongPath = this.albumSongList[i - 1];
         }
         // Set Next Song Values (If Defined)
         try {
           if (i <= this.albumSongList.length) {
-            this.nextSong = this.albumSongList[i + 1].Song;
+            this.nextSong = this.albumSongList[i + 1].Track;
             this.nextSongTrack = this.albumSongList[i + 1].TrackNumber;
             this.nextSongPath = this.albumSongList[i + 1].Path;
           }
@@ -1204,7 +1189,12 @@ export default class Template extends Component {
       >
         <div className="musicTitleDiv" style={{ color: this.colors[0].color4 }}>
           <h1 className="musicPlayerTitle">{this.songName}</h1>
-          <h4>
+          <h4
+            style={{
+              overflow: "hidden",
+              height: "24px",
+            }}
+          >
             {this.album} | {this.artist}
           </h4>
         </div>
@@ -1298,16 +1288,25 @@ export default class Template extends Component {
           </div>
         </div>
         {this.albumSongList.length === this.trackNumber ? (
-          <audio
-            id="musicPlayer"
-            autoPlay
-            onEnded={this.closeMusicPlayer}
-            onError={alert(
-              `Streaming Error: Music path not available. Please confirm the location exists or a network drive is not disconnected.\nPath: ${this.songPath}`
-            )}
-          >
-            <source src="http://localhost:3020/streammusic" type="audio/ogg" />
-            <source src="http://localhost:3020/streammusic" type="audio/mpeg" />
+          <audio id="musicPlayer" autoPlay onEnded={this.closeMusicPlayer}>
+            <source
+              src="http://localhost:3020/streammusic"
+              onError={(e) => {
+                alert(
+                  `Streaming Error: Please confirm path exists or if it is a network drive, the drive is connected. Path: ${this.songPath}`
+                );
+              }}
+              type="audio/ogg"
+            />
+            <source
+              src="http://localhost:3020/streammusic"
+              onError={(e) => {
+                alert(
+                  `Streaming Error: Please confirm path exists or if it is a network drive, the drive is connected. Path: ${this.songPath}`
+                );
+              }}
+              type="audio/mpeg"
+            />
             Your browser does not support the audio element.
           </audio>
         ) : (
@@ -1315,13 +1314,26 @@ export default class Template extends Component {
             id="musicPlayer"
             autoPlay
             onEnded={this.playLocalSong}
-            onError={alert(
-              `Streaming Error: Music path not available. Please confirm the location exists or a network drive is not disconnected.\nPath: ${this.songPath}`
-            )}
             music={JSON.stringify(this.nextTrack)}
           >
-            <source src="http://localhost:3020/streammusic" type="audio/ogg" />
-            <source src="http://localhost:3020/streammusic" type="audio/mpeg" />
+            <source
+              src="http://localhost:3020/streammusic"
+              onError={(e) => {
+                alert(
+                  `Streaming Error: Please confirm path exists or if it is a network drive, the drive is connected. Path: ${this.songPath}`
+                );
+              }}
+              type="audio/ogg"
+            />
+            <source
+              src="http://localhost:3020/streammusic"
+              onError={(e) => {
+                alert(
+                  `Streaming Error: Please confirm path exists or if it is a network drive, the drive is connected. Path: ${this.songPath}`
+                );
+              }}
+              type="audio/mpeg"
+            />
             Your browser does not support the audio element.
           </audio>
         )}
@@ -1433,6 +1445,7 @@ export default class Template extends Component {
     this.setState((prevState) => ({
       showInBrowser: !prevState.showInBrowser,
       showInBrowserObject: this.imagePreview,
+      scrollHidden: true,
     }));
   }
   ////End Media Type Photos
@@ -1477,6 +1490,7 @@ export default class Template extends Component {
         this.setState((prevState) => ({
           showInBrowser: !prevState.showInBrowser,
           showInBrowserObject: this.bookReader,
+          scrollHidden: true,
         }));
         this.scrollToTop();
       }
@@ -1502,6 +1516,7 @@ export default class Template extends Component {
           this.setState((prevState) => ({
             showInBrowser: !prevState.showInBrowser,
             showInBrowserObject: bookReader,
+            scrollHidden: true,
           }));
           this.scrollToTop();
         }
@@ -1526,6 +1541,7 @@ export default class Template extends Component {
         this.setState((prevState) => ({
           showInBrowser: !prevState.showInBrowser,
           showInBrowserObject: bookReader,
+          scrollHidden: true,
         }));
         this.scrollToTop();
       }
@@ -1578,6 +1594,7 @@ export default class Template extends Component {
       this.setState((prevState) => ({
         showInBrowser: !prevState.showInBrowser,
         showInBrowserObject: this.moviePlayer,
+        scrollHidden: true,
       }));
       this.scrollToTop();
     }
@@ -1743,6 +1760,7 @@ export default class Template extends Component {
       this.setState((prevState) => ({
         showInBrowser: !prevState.showInBrowser,
         showInBrowserObject: this.seasonPreview,
+        scrollHidden: true,
       }));
     } catch (err) {
       console.error(`Error Generating Season Data: ${err}`);
@@ -1976,10 +1994,7 @@ export default class Template extends Component {
           // Revert Media Card Attributes
           let newStyle = mediaCard
             .getAttribute("style")
-            .replaceAll(
-              "height: 0; width: 15vw;",
-              "height: 30vw; width: 30vw;"
-            );
+            .replaceAll("height: 0; width: 15vw; border: none;", "");
           mediaCard.removeAttribute("style");
           mediaCard.setAttribute("style", newStyle);
 
@@ -1998,7 +2013,7 @@ export default class Template extends Component {
           // Change Media Card Attributes
           mediaCard.setAttribute(
             "style",
-            `${initialStyle} height: 0; width: 15vw;`
+            `${initialStyle} height: 0; width: 15vw; border: none;`
           );
 
           // Change Media Card Bottom Attributes
@@ -2194,6 +2209,7 @@ export default class Template extends Component {
     this.setState((prevState) => ({
       showInBrowser: !prevState.showInBrowser,
       showInBrowserObject: null,
+      scrollHidden: false,
     }));
   }
 

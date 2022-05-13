@@ -128,7 +128,7 @@ body {
   z-index: 3;
   height: 3vw;
   cursor: grab;
-  border-bottom: 1px solid;
+  border-bottom: 2px solid;
   border-top-left-radius: 19px;
   border-top-right-radius: 19px;
   border-bottom-left-radius: 20px;

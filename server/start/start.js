@@ -5,7 +5,7 @@ const { saveToDatabase } = require("../database/savetoDatabase");
 async function readProps(prop) {
   let cmd = { cmd: "findOne", collection: "Properties", key: prop };
   let propValue = await databaseAction(cmd);
-  console.log("Prop Result: ", propValue[0].data);
+  //console.log(`Read Properties: Property: ${prop}: `, propValue[0].data);
   return propValue[0].data;
 }
 
@@ -32,7 +32,6 @@ async function setProps(serverAddress) {
   let zoomIn = await readProps("zoomIn");
   let zoomOut = await readProps("zoomOut");
 
-  console.log(serverAddress);
   let startObj = {
     keyBooks: apikeybooks,
     keyMovies: apikeymovie,
@@ -72,7 +71,6 @@ function setServerIp() {
     address = address[0];
   }
   handleSave("IP Address", address.toString());
-  console.log(`Saved Server's IP Address: ${address.toString()}`);
   return address.toString();
 }
 
@@ -89,4 +87,4 @@ async function getPort() {
   }
 }
 
-module.exports = { setProps, setServerIp, getPort };
+module.exports = { setProps, setServerIp, getPort, readProps };

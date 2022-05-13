@@ -105,12 +105,11 @@ My main goal for this project was to showcase my abilities writing code and obta
 Date: 4/20/22
 
 <h3>ALPHA Version Changes - WIP</h3>
+<li>Performance - Store 1 Item at a time from Final media array instead of whole array.</li>
 <li>Add MongoDB Setup to README</li>
 <li>Windows Testing / Fixes</li>
 <li>Add Album Goto Button for Music Player NavBar</li>
-<li>Add error message for folder paths not available.</li>
 <li>Feature - Fix media items not found from browser window and retry API call for fixed item.</li>
-<li>Performance - Store 1 Item at a time from Final media array instead of whole array.</li>
 <li>Feature - Better logging</li>
 <li>Code Cleanup - Migrate Media Types into individual components. Certain functions are not reusable for all media types now. </li>
 <li>Bug Fixes - Fix scroll to top error triggered by createRows refresh.</li>
@@ -132,7 +131,7 @@ Date: 4/20/22
 <li>Feature - Different View Options</li>
 <li>Feature - Custom Poster / Edit Media Information</li>
 <li>Feature - Webooks<li>
-<li>Feature - CSS Changes</li>
+<li>Feature - CSS Changes / CSS Transitions</li>
 
 <h3>Features to be added by Media Type</h3>
 
@@ -160,8 +159,9 @@ Date: 4/20/22
 <li>Fix Sort for Photos</li>
 <br/>
 
-## Features Added / Fixed Bugs
+## Change Log | Features Added / Fixed Bugs
 
+<li>Finished 5/12 Add error message for folder paths not available.</li>
 <li>Finished 5/11 - Bug Fixes - Sort: Misc sort issues caused by special characters / other issues.</li>
 <li>Finished 5/11 - Add Pin feature for all media types.</li>
 <li>Finished 5/11 - Fix crash on media path not available due to drive disconnect or change of location.</li>
