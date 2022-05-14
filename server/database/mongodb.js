@@ -54,9 +54,9 @@ async function databaseAction(cmd) {
       .updateOne({ key: key }, { $set: { data: data } })
       .then((result) => {
         if (result.modifiedCount > 0) {
-          // console.log(
-          //   `Updated ${key}. Results Modified: ${result.modifiedCount}`
-          // );
+          console.log(
+            `Updated ${key}. Results Modified: ${result.modifiedCount}`
+          );
         } else if (result.matchedCount >= 1) {
           // Was Same Value Update
         } else {

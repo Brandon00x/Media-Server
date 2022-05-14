@@ -106,6 +106,7 @@ Date: 4/20/22
 
 <h3>ALPHA Version Changes - WIP</h3>
 <li>Performance - Store 1 Item at a time from Final media array instead of whole array.</li>
+
 <li>Add MongoDB Setup to README</li>
 <li>Windows Testing / Fixes</li>
 <li>Add Album Goto Button for Music Player NavBar</li>

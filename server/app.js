@@ -51,9 +51,11 @@ app.post("/update", cors(corsOptions), async function (req, res) {
 
     // Scan | Find Local Media
     let mediaData = await startScan(res, mediaCategory, mediaPath);
+
+    //let mediaData = "testing";
     // API Call | Get Metadata Information for Media
     if (mediaData.length > 0 && mediaCategory !== "updatephotos") {
-      await getMediaInfo(mediaData, res, mediaCategory);
+      await getMediaInfo(res, mediaCategory);
     }
     // API Found 0 Results
     else if (mediaData.length === 0) {
@@ -95,13 +97,14 @@ app.post("/photo", cors(corsOptions), async function (req, res) {
 app.post("/getmedia", cors(corsOptions), async function (req, res) {
   let mediaType = await req.body.data;
   console.info(`Media Data Requested for ${mediaType}`);
-  if (mediaType === "Music") {
-    let cmd = { cmd: "find", collection: mediaType };
-    let dbMediaItems = await databaseAction(cmd);
-    res.send(dbMediaItems);
-  } else {
-    readMedia(mediaType, res);
-  }
+
+  let cmd = { cmd: "find", collection: mediaType };
+  let dbMediaItems = await databaseAction(cmd);
+  res.send(dbMediaItems);
+
+  // else {
+  //   readMedia(mediaType, res);
+  // }
 });
 
 // Send Season / Episode Data for TV Shows

@@ -32,7 +32,6 @@
 .scanFolderOptions {
   display: flex;
   flex-direction: row;
-  max-height: 24vh;
 }
 
 .settingsSaveButton {

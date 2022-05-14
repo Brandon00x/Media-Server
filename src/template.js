@@ -167,41 +167,50 @@ export default class Template extends Component {
       this.mapMusic(data, mediaType);
       return;
     }
-
     // Create Cards for TV, Movies, Books, Photos
     else {
+      // Filter Results with Name instead of Title
+      data = data.filter(function (item) {
+        return item.data.name === undefined; // Return Titles (They are API Updated)
+      });
+
       // Sort Title A-Z
       data.sort(function (a, b) {
-        return a.Title.localeCompare(b.Title);
+        return a.data[0].Title.localeCompare(b.data[0].Title);
       });
+
+      // Map Data
       try {
         let rowCount = `rowCount${this.state.cardsPerRow}`;
         this.style = cardStyleProps[rowCount].cardProps;
-
         for (let i = 0; i < data.length; i++) {
-          this.title = data[i].Title;
+          this.title = data[i].data[0].Title;
           this.creator =
-            mediaType === "TV Shows" ? data[i].Actors : data[i].Creator;
-          this.description = data[i].Description;
-          this.categories = data[i].Categories;
-          this.path = data[i].Path;
-          this.ext = data[i].Ext;
-          this.imgUrl = data[i].ImageURL;
+            mediaType === "TV Shows"
+              ? data[i].data[0].Actors
+              : data[i].data[0].Creator;
+          this.description = data[i].data[0].Description;
+          this.categories = data[i].data[0].Categories;
+          this.path = data[i].data[0].Path;
+          this.ext = data[i].data[0].Ext;
+          this.imgUrl = data[i].data[0].ImageURL;
           mediaType === "Photos"
             ? (this.photo = await this.getLocalPhoto(this.path))
             : (this.photo = null);
           mediaType === "Photos"
-            ? (this.imgType = data[i].Ext.slice(1))
+            ? (this.imgType = data[i].data[0].Ext.slice(1))
             : (this.imgType = null);
 
           this.length =
-            data[i].Length === null || data[i].Length === "N/A"
+            data[i].data[0].Length === null || data[i].data[0].Length === "N/A"
               ? "0"
-              : data[i].Length.toString();
+              : data[i].data[0].Length.toString();
 
           this.key = uuidv4();
           this.year =
-            data[i].Year === undefined ? "0" : data[i].Year.toString();
+            data[i].data[0].Year === undefined
+              ? "0"
+              : data[i].data[0].Year.toString();
           this.downloadValue = {
             Path: this.path,
             Title: this.title,
@@ -210,10 +219,20 @@ export default class Template extends Component {
           };
           this.noDescription = "nodesc";
           this.descriptionOn = "desc";
+          // try {
+          //   console.log(
+          //     `Title ${data[i].data[0].Title} New: ${
+          //       data[i + 4].data[0]
+          //     }, I: ${i}`
+          //   );
+          // } catch (err) {
+          //   console.log(err);
+          // }
 
           this.mediaCards.push(
             <Card
               className="mediaCard"
+              id={this.title}
               key={this.key}
               title={this.title}
               year={this.year}
@@ -278,7 +297,10 @@ export default class Template extends Component {
                     <button
                       className="far fa-times-circle"
                       title="Close"
-                      value={JSON.stringify({ action: "close", key: this.key })}
+                      value={JSON.stringify({
+                        action: "close",
+                        key: this.key,
+                      })}
                       onClick={this.pinDescriptionCard}
                       style={{
                         background: "none",
@@ -350,7 +372,9 @@ export default class Template extends Component {
         // Create this.state.cardsPerRow of Row
         this.createRows();
       } catch (err) {
-        console.error(`Error Creating Media Cards: ${err}`);
+        console.error(
+          `Error Creating Media Cards: ${err}, Title: ${this.title}`
+        );
         this.setState({
           isLoading: false,
           noMediaFound: true,
@@ -1581,11 +1605,14 @@ export default class Template extends Component {
             controls
             autoPlay
             poster={this.poster}
-            onError={alert(
-              `Streaming Error: Video path not available. Please confirm the location exists or a network drive is not disconnected.\nPath: ${path}`
-            )}
           >
-            <source src={`http://localhost:3020/video/`} type="video/mp4" />
+            <source
+              src={`http://localhost:3020/video/`}
+              onError={alert(
+                `Streaming Error: Video path not available. Please confirm the location exists or a network drive is not disconnected.\nPath: ${path}`
+              )}
+              type="video/mp4"
+            />
           </video>
         </div>
       );
@@ -2076,7 +2103,7 @@ export default class Template extends Component {
     if (toggleShowDesc === undefined) {
       toggleShowDesc = e.target.getAttribute("value");
     }
-    // console.log(`Show Description Called ${id}, ${toggleShowDesc}`);
+    //console.log(`Show Description Called ${id}, ${toggleShowDesc}`);
     // console.log(e.target);
     for (let i = 0; i < this.mediaCards.length; i++) {
       if (

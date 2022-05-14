@@ -74,21 +74,14 @@ async function startScan(response, mediaCategory, mediaPath) {
   saveScanTime("start");
   res = response;
 
-  //TODO: Future Versions Drop Entry
-  // Drop Database for New Entries
+  //TODO: Remove Previous Records only if Deleted. Only Insert New Records.
+  // Drop Collection for New Entries.
   let cmd = {
     cmd: "dropCollection",
-    collection: mediaCategory,
+    collection: mediaType,
     key: "key",
   };
   await databaseAction(cmd);
-  // TODO: Remove - Old Code
-  // let cmd2 = {
-  //   cmd: "dropCollection",
-  //   collection: mediaType,
-  //   key: "key",
-  // };
-  // await databaseAction(cmd2);
 
   return new Promise(async (resolve, reject) => {
     // Path | All Media | Make Sure Path ends with forward slash.
@@ -144,12 +137,18 @@ async function startScan(response, mediaCategory, mediaPath) {
       // Sanitize | Books | Makes Book Titles API Searchable
       await makeSearchable();
       saveScanTime("makeSearchable");
+
+      await saveToDB();
+      saveScanTime("saveToDB");
     }
     // Sanitize - Create JSON | Movies | Sanitize Movie Titles
     else if (mediaCategory === "updatemovies") {
       // Sanitize | Movies | Sanitizes Movies for API Call
       await sanitizeMovieTvTitles();
       saveScanTime("sanitizeMovieTitles");
+
+      await saveToDB();
+      saveScanTime("saveToDB");
     }
     // Sanitize - Create JSON | TV Shows
     else if (mediaCategory === "updatetv") {
@@ -168,6 +167,10 @@ async function startScan(response, mediaCategory, mediaPath) {
       // Order TV Shows by Show > Season > Episodes
       await orderBySeason();
       saveScanTime("OrderBySeason");
+
+      // Save Records to DB.
+      await saveToDB();
+      saveScanTime("saveToDB");
     }
     // Sanitize - Create JSON | Music | Sanitize Music Data for API
     else if (mediaCategory === "updatemusic") {
@@ -199,24 +202,14 @@ async function startScan(response, mediaCategory, mediaPath) {
 
       await getFileCreatedDate();
       saveScanTime("getFileCreatedDate");
+
+      await saveToDatabase("Photos", "Photos", mediaArr);
     }
-    // Finish | All Media | Scan Media Completes.
+
+    //// Finish | All Media | Scan Media Completes.
     // Data | All Media | Log Categories Fixed to Browser Window
     await sendCategoryFixes(res);
     saveScanTime("sendCategoryFixes");
-
-    // Save Media Array to DB
-    // if (mediaCategory === "updatephotos") {
-    //   await saveToDatabase("Photos", "Photos", mediaArr);
-    // } else {
-    //   await saveToDatabase(mediaCategory, mediaCategory, mediaArr);
-    //   saveScanTime("saveToDatabase");
-    // }
-
-    // Save Individual Records to DB.
-    // for (let i = 0; i < mediaArr.length; i++) {
-    //   await saveToDatabase(mediaType, mediaArr[i], mediaArr[i]);
-    // }
 
     // Write Final Stats
     res.write(
@@ -234,6 +227,12 @@ async function startScan(response, mediaCategory, mediaPath) {
 }
 //////////// End Main Program Loop
 
+async function saveToDB() {
+  // Save Individual Records to DB.
+  for (let i = 0; i < mediaArr.length; i++) {
+    await saveToDatabase(mediaType, mediaArr[i].name, mediaArr[i]);
+  }
+}
 //////////// Directory / File Scans | All Media | Scans Directories and Files. Pushes to array.
 // Path | All Media | Account for needing forward slash in path even though it is already verified when saved.
 function checkPathEnding(mediaPath) {
@@ -1485,6 +1484,7 @@ function resetGlobalVariables() {
   finalFolderPaths = [];
   mediaArr = [];
   counter = 1;
+  resultNumber = 1;
   scanCompleted = false;
   fixedTitles = 1;
   fixedTitles1 = 1;
