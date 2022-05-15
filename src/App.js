@@ -29,7 +29,6 @@ export default class App extends Component {
 
   // TODO: Fix Change Server Address
   async getServerAddress() {
-    // console.log(`Address: ${this.state.address}`);
     // Change Local Server Addres
     await axios.get(`http://192.168.0.100:3020/props`).then(
       (res) => {

@@ -49,6 +49,8 @@ export default class Template extends Component {
       musicPlaying: false, // Toggle Play/Pause Music
       artistHidden: true, // Toggle Artist Over Album
       albumTitleHidden: false, // Toggle Album Title On/Off
+      albumTitleStyle: null, //Holds Style for Album Title
+      artistTitleStyle: null, // Holds Style for Artist Title
 
       // Hotkey Props
       hotkeyTop: null,
@@ -65,7 +67,6 @@ export default class Template extends Component {
     this.cardTop = this.cardTop.bind(this);
     this.cardMiddle = this.cardMiddle.bind(this);
     this.cardBottom = this.cardBottom.bind(this);
-    this.showDescription = this.showDescription.bind(this);
     this.openMedia = this.openMedia.bind(this);
     this.sort = this.sort.bind(this);
     this.sortYear = this.sortYear.bind(this);
@@ -170,6 +171,7 @@ export default class Template extends Component {
     // Create Cards for TV, Movies, Books, Photos
     else {
       // Filter Results with Name instead of Title
+
       data = data.filter(function (item) {
         return item.data.name === undefined; // Return Titles (They are API Updated)
       });
@@ -219,15 +221,6 @@ export default class Template extends Component {
           };
           this.noDescription = "nodesc";
           this.descriptionOn = "desc";
-          // try {
-          //   console.log(
-          //     `Title ${data[i].data[0].Title} New: ${
-          //       data[i + 4].data[0]
-          //     }, I: ${i}`
-          //   );
-          // } catch (err) {
-          //   console.log(err);
-          // }
 
           this.mediaCards.push(
             <Card
@@ -263,11 +256,12 @@ export default class Template extends Component {
                 i,
                 this.noDescription,
                 this.imgType,
-                this.photo
+                this.photo,
+                this.key
               )}
             </Card>
           );
-          // All Media - Music
+          // All Media No Music
           this.mediaCardsDescription.push(
             <Draggable key={this.key}>
               <Card
@@ -493,8 +487,8 @@ export default class Template extends Component {
           artist={dataProps.Artist}
           year={dataProps.Year}
           length={this.localTrackCount.toString()}
-          onClick={this.showDescription}
-          value={this.noDescription}
+          onClick={this.pinDescriptionCard}
+          value={JSON.stringify({ action: "open", key: this.key })}
           style={{
             zIndex: 1,
             width: this.style.img.width,
@@ -545,7 +539,7 @@ export default class Template extends Component {
         this.descriptionText = null;
       }
 
-      // Create Description Card
+      // Create Description Card Music
       this.mediaCardsDescription.push(
         <Draggable key={this.key}>
           <Card
@@ -1096,8 +1090,11 @@ export default class Template extends Component {
             name={i}
             title="Description"
             id={title}
-            value={descriptionOn}
-            onClick={this.showDescription}
+            value={JSON.stringify({
+              action: "open",
+              key: this.key,
+            })}
+            onClick={this.pinDescriptionCard}
             style={{
               width: "6vw",
             }}
@@ -1373,34 +1370,44 @@ export default class Template extends Component {
 
   // Toggle Show / Hide Artist Name on Album Cover
   hideArtist() {
-    this.getMedia();
-    this.createRows();
+    let list = document.getElementsByClassName("mediaCreator");
+    let artistTitleStyle = [];
+    if (this.state.artistHidden === true) {
+      for (let i = 0; i < list.length; ++i) {
+        this.state.artistTitleStyle[i].replace("display: none;", "");
+        list[i].setAttribute("style", this.state.artistTitleStyle[i]);
+      }
+    } else if (this.state.artistHidden === false) {
+      for (let i = 0; i < list.length; ++i) {
+        artistTitleStyle.push(list[i].getAttribute("style"));
+        list[i].setAttribute("style", "display: none;");
+      }
+    }
     this.setState((prevState) => ({
       artistHidden: !prevState.artistHidden,
+      artistTitleStyle: artistTitleStyle,
     }));
   }
 
   // Toggle Show / Hide Album Title
   hideAlbumTitle() {
-    // let list = document.getElementsByClassName("mediaTitle");
-    // if (this.state.albumTitleHidden === true) {
-    //   this.createRows();
-    // } else {
-    //   for (let i = 0; i < list.length; ++i) {
-    //     console.log(list[i].style);
-    //     list[i].setAttribute("style", "display: none");
-    //     console.log(list[i].style);
-    //   }
-    // }
-    // this.setState((prevState) => ({
-    //   albumTitleHidden: !prevState.albumTitleHidden,
-    // }));
-
+    let list = document.getElementsByClassName("mediaTitle");
+    let albumTitleStyle = [];
+    if (this.state.albumTitleHidden === true) {
+      for (let i = 0; i < list.length; ++i) {
+        this.state.albumTitleStyle[i].replace("display: none;", "");
+        list[i].setAttribute("style", this.state.albumTitleStyle[i]);
+      }
+    } else {
+      for (let i = 0; i < list.length; ++i) {
+        albumTitleStyle.push(list[i].getAttribute("style"));
+        list[i].setAttribute("style", "display: none;");
+      }
+    }
     this.setState((prevState) => ({
       albumTitleHidden: !prevState.albumTitleHidden,
+      albumTitleStyle: albumTitleStyle,
     }));
-    this.getMedia();
-    this.createRows();
   }
 
   // Music Volume Control
@@ -1606,13 +1613,7 @@ export default class Template extends Component {
             autoPlay
             poster={this.poster}
           >
-            <source
-              src={`http://localhost:3020/video/`}
-              onError={alert(
-                `Streaming Error: Video path not available. Please confirm the location exists or a network drive is not disconnected.\nPath: ${path}`
-              )}
-              type="video/mp4"
-            />
+            <source src={`http://localhost:3020/video/`} type="video/mp4" />
           </video>
         </div>
       );
@@ -1999,7 +2000,7 @@ export default class Template extends Component {
       }
       return false;
     } catch (err) {
-      console.log("Deleting Album Error: ", err);
+      console.log("Closing Pinned Card Error: ", err);
     }
   }
 
@@ -2062,22 +2063,38 @@ export default class Template extends Component {
   async pinDescriptionCard(e) {
     let key;
     let action;
-
-    key = JSON.parse(e.target.value).key;
-    action = JSON.parse(e.target.value);
+    try {
+      key = JSON.parse(e.target.value).key;
+      action = JSON.parse(e.target.value).action;
+    } catch (err) {
+      // Bootstrap Causes issues with Attributes use Get Attribute
+      if (typeof key === "undefined") {
+        let values = JSON.parse(e.target.getAttribute("value"));
+        key = values.key;
+        action = values.action;
+      }
+    } finally {
+      // If Key is still Undefined - Return.
+      if (typeof key === "undefined") {
+        return;
+      }
+    }
 
     // Check if Item is already Pinned and close
     let close = await this.closeDescriptionCard(key);
     if (close) {
       return;
+    } else if (!close) {
+      this.openCard = [];
     }
-    if (action.action === "pin") {
+    // Pin Cards
+    if (action === "pin") {
+      this.openCard = [];
       try {
         for (let i = 0; i < this.mediaCardsDescription.length; i++) {
           if (key === this.mediaCardsDescription[i].key) {
             // Pin Album
             this.pinnedCardKeys.push({ key: key, isPinned: true });
-            // this.pinnedStyleLeft++;
             this.pinnedCards.push(
               <div className="pinnedItem" key={key}>
                 {this.mediaCardsDescription[i]}
@@ -2093,36 +2110,19 @@ export default class Template extends Component {
         console.log("Creating Album Pin Error: ", err);
       }
     }
-    this.createRows();
-  }
-
-  // Toggle Show Media Description for Media Card
-  async showDescription(e) {
-    let toggleShowDesc = e.target.value; // Will be nodesc or desc
-    let id = e.target.id; // Will Be Media Title
-    if (toggleShowDesc === undefined) {
-      toggleShowDesc = e.target.getAttribute("value");
-    }
-    //console.log(`Show Description Called ${id}, ${toggleShowDesc}`);
-    // console.log(e.target);
-    for (let i = 0; i < this.mediaCards.length; i++) {
-      if (
-        this.mediaCards[i].props.title === id &&
-        toggleShowDesc === "nodesc"
-      ) {
-        this.previousCard = this.mediaCards[i];
-        this.mediaCards[i] = this.mediaCardsDescription[i];
-        await this.createRows();
-        this.mediaCards[i] = this.previousCard;
-        return;
-      } else if (toggleShowDesc === "desc") {
-        this.previousCard = this.mediaCardsDescription[i];
-        this.mediaCardsDescription[i] = this.mediaCards[i];
-        await this.createRows();
-        this.mediaCardsDescription[i] = this.previousCard;
-        return;
+    // Open 1 Card
+    else if (action === "open") {
+      this.openCard = [];
+      for (let i = 0; i < this.mediaCardsDescription.length; i++) {
+        if (key === this.mediaCardsDescription[i].key) {
+          this.openCard.push(
+            <div key={key}>{this.mediaCardsDescription[i]}</div>
+          );
+          break;
+        }
       }
     }
+    this.createRows();
   }
 
   // Scrolls to Page Top
@@ -2323,7 +2323,7 @@ export default class Template extends Component {
           hideScroll={this.hideScroll.bind(this)}
         />
         <div className="pinnedItems">{this.state.pinnedCards}</div>
-
+        <div className="openDescriptionCard">{this.openCard}</div>
         {this.state.showInSameWindow ? this.state.showInSameWindowObject : null}
         {this.state.isLoading ? (
           <div className="mediaLoading">

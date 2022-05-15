@@ -10,8 +10,8 @@ My main goal for this project was to showcase my abilities writing code and obta
 ## Installation / Setup
 
 <h3>Prerequisites:</h3>
-<li>NodeJS - 16.14.0</li>
-<li>MongoDB</li>
+<li>NodeJS - 16.14.0 <a>https://nodejs.org/en/download/</a></li>
+<li>MongoDB <a>https://www.mongodb.com/try/download/community</a></li>
 <br/>
 <h3>Start the Program:</h3>
 <p>Inside the App Directory Run:</p>
@@ -105,17 +105,14 @@ My main goal for this project was to showcase my abilities writing code and obta
 Date: 4/20/22
 
 <h3>ALPHA Version Changes - WIP</h3>
-<li>Performance - Store 1 Item at a time from Final media array instead of whole array.</li>
-
-<li>Add MongoDB Setup to README</li>
 <li>Windows Testing / Fixes</li>
 <li>Add Album Goto Button for Music Player NavBar</li>
 <li>Feature - Fix media items not found from browser window and retry API call for fixed item.</li>
 <li>Feature - Better logging</li>
 <li>Code Cleanup - Migrate Media Types into individual components. Certain functions are not reusable for all media types now. </li>
-<li>Bug Fixes - Fix scroll to top error triggered by createRows refresh.</li>
 
 <h3>BETA Version Changes - Timeline TBD</h3>
+<li>Feature - Include Extra Metadata for Books/Movies/TV/Photos</li>
 <li>Create installer for prereqs / setup</li>
 <li>Performance - API Calls Performance Improvements.</li>
 <li>Performance - Scan Performance Improvements Based on Data Captured</li>
@@ -124,7 +121,7 @@ Date: 4/20/22
 <li>Feature - Fix Incorrect Media Data Match</li>
 <li>Feature - Add Queue for TV/Movies</li>
 <li> Feature - Add Played Status / Play Count </li>
-<li>Feature - Continue Playback</li>
+<li>Feature - Resume Playback</li>
 <li>Feature - Recently Added</li>
 <li>Feature - Redesign Home Screen</li>
 <li>Feature - Add stream options from web locations.</li>
@@ -161,7 +158,10 @@ Date: 4/20/22
 <br/>
 
 ## Change Log | Features Added / Fixed Bugs
-
+<li>Finished 5/14 - Bug Fixes - Fix scroll to top error triggered by createRows refresh.</li>
+<li>Finished 5/14 - Bug Fixes - Prevent scroll to top / need for create rows on toggle album or artist title.</li>
+<li>Finished 5/13 - Performance - Store 1 Item at a time from Final media array instead of whole array.</li>
+<li>Finish 5/13 - Included more metadata from API calls to use later.</li>
 <li>Finished 5/12 Add error message for folder paths not available.</li>
 <li>Finished 5/11 - Bug Fixes - Sort: Misc sort issues caused by special characters / other issues.</li>
 <li>Finished 5/11 - Add Pin feature for all media types.</li>

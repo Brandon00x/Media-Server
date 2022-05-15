@@ -490,3 +490,9 @@ body {
   left: 5px;
   z-index: 3;
 }
+
+.openDescriptionCard {
+  position: absolute;
+  top: 25%;
+  left: 35vw;
+}
