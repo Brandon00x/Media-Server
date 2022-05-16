@@ -134,10 +134,6 @@ async function startScan(response, mediaCategory, mediaPath) {
       await removeAuthorFromTitle();
       saveScanTime("removeAuthorFromTitle");
 
-      // Sanitize | Books | Makes Book Titles API Searchable
-      await makeSearchable();
-      saveScanTime("makeSearchable");
-
       await saveToDB();
       saveScanTime("saveToDB");
     }
@@ -948,22 +944,6 @@ async function removeAuthorFromTitle() {
     }
   } catch (err) {
     console.error("Error Adjusting Titles: ", err);
-  }
-}
-
-// Sanitize | Books | Make Book Titles Usable for API Call
-async function makeSearchable() {
-  for (let i = 0; i < mediaArr.length; i++) {
-    mediaArr[i].name = mediaArr[i].name
-      .replaceAll(" ", "+")
-      .replaceAll("(", "")
-      .replaceAll(")", "")
-      .replaceAll(",", "")
-      .replaceAll("_", " ")
-      .replaceAll(".", "")
-      .replaceAll("'", "")
-      .replaceAll(",", "+");
-    mediaArr[i].author = mediaArr[i].author;
   }
 }
 

@@ -5,15 +5,22 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import Loading from "./Loading";
 
+// TODO: Change API Calls from Localhost to Server IP
 export default class MediaNotFound extends Component {
   constructor(props) {
     super(props);
     this.state = {
       navtitle: "Missing Media",
       isLoading: true,
+      isEditing: false,
+      editTitle: null,
+      editCreator: null,
     };
     this.getMissingMedia = this.getMissingMedia.bind(this);
     this.openFolder = this.openFolder.bind(this);
+    this.updateItem = this.updateItem.bind(this);
+    this.onChangeEvt = this.onChangeEvt.bind(this);
+    this.searchApi = this.searchApi.bind(this);
   }
 
   componentDidMount() {
@@ -23,24 +30,26 @@ export default class MediaNotFound extends Component {
   async getMissingMedia() {
     let res = await axios.get(`http://localhost:3020/missingmedia`);
     this.missingMedia = res.data;
-
     this.missingBooks = this.missingMedia[0].books;
     this.missingMovies = this.missingMedia[0].movies;
     this.missingTv = this.missingMedia[0].tv;
+    this.missingBooksTotal = "undefined" ? 0 : this.missingBooks.length;
+    this.missingMoviesTotal = "undefined" ? 0 : this.missingMovies.length;
+    this.missingTvTotal = "undefined" ? 0 : this.missingTv.length;
+
     this.missingBooksJsx = [];
     this.missingMoviesJsx = [];
     this.missingTvJsx = [];
-
     // Set Missing Books
     try {
       for (let i = 0; i < this.missingBooks.length; i++) {
-        this.missingBook = this.missingBooks[i].Name.replaceAll("+", " ");
-        this.missingBook = this.missingBook.replace(
+        this.missingBook = this.missingBooks[i].data[0].Name.replace(
           /(^\w{1})|(\s+\w{1})/g,
           (letter) => letter.toUpperCase()
         );
-        this.missingBookPathIndex = this.missingBooks[i].Path.lastIndexOf("/");
-        this.missingBookPath = this.missingBooks[i].Path.slice(
+        this.missingBookPathIndex =
+          this.missingBooks[i].data[0].Path.lastIndexOf("/");
+        this.missingBookPath = this.missingBooks[i].data[0].Path.slice(
           0,
           this.missingBookPathIndex
         );
@@ -54,7 +63,7 @@ export default class MediaNotFound extends Component {
             <div className="missingMediaItemText">Item {[i + 1]}: </div>
             <div className="missingMediaItemText">Name: {this.missingBook}</div>
             <div className="missingMediaItemText">
-              Path: {this.missingBooks[i].Path}
+              Path: {this.missingBooks[i].data[0].Path}
             </div>
             <button
               className="notFoundButton"
@@ -62,6 +71,14 @@ export default class MediaNotFound extends Component {
               value={this.missingBookPath}
             >
               Open Folder
+            </button>
+            <button
+              className="notFoundButton"
+              onClick={this.updateItem}
+              name={"updatebooks"}
+              value={JSON.stringify(this.missingBooks[i].data[0])}
+            >
+              Update Item
             </button>
             <br />
           </div>
@@ -103,6 +120,14 @@ export default class MediaNotFound extends Component {
             >
               Open Folder
             </button>
+            <button
+              className="notFoundButton"
+              onClick={this.updateItem}
+              value={this.missingMoviePath}
+              name={"updatemovies"}
+            >
+              Update Item
+            </button>
             <br />
           </div>
         );
@@ -142,6 +167,14 @@ export default class MediaNotFound extends Component {
             >
               Open Folder
             </button>
+            <button
+              className="notFoundButton"
+              onClick={this.updateItem}
+              value={this.missingTv}
+              name={"updatetv"}
+            >
+              Update Item
+            </button>
             <br />
           </div>
         );
@@ -155,6 +188,134 @@ export default class MediaNotFound extends Component {
     this.setState({
       isLoading: false,
     });
+  }
+
+  updateItem(e) {
+    this.jsxEdit = [];
+    this.mediaItemData = [];
+    try {
+      this.item = JSON.parse(e.target.value);
+      this.mediaType = e.target.name;
+      this.mediaItemData.push({ data: this.item, mediaType: this.mediaType });
+    } catch (err) {
+      // Close JSX Item
+      this.setState({
+        isEditing: false,
+      });
+      return;
+    }
+
+    this.jsxEdit.push(
+      <div className="missingItemEdit" key={uuidv4()}>
+        <div className="missingItemTitleBar">
+          <h2
+            style={{
+              marginLeft: "10px",
+            }}
+          >
+            Edit Item
+          </h2>
+          <i
+            className="far fa-times-circle fa-2x"
+            onClick={this.updateItem}
+            style={{
+              marginRight: "5px",
+              marginTop: "-25px",
+            }}
+          ></i>
+        </div>
+        <div className="missingItemContent">
+          <h3 style={{ textAlign: "center" }}>{this.item.Name}</h3>
+          <div className="missingItemEditContent">
+            <h4 style={{ width: "60px" }}>Title: </h4>{" "}
+            <input
+              className="editMediaItemInput"
+              name={"title"}
+              onChange={this.onChangeEvt}
+              placeholder={this.item.Name}
+            ></input>
+          </div>
+          <div className="missingItemEditContent">
+            <h4 style={{ width: "60px" }}>Author: </h4>{" "}
+            <input
+              className="editMediaItemInput"
+              name={"creator"}
+              onChange={this.onChangeEvt}
+              placeholder={this.item.Data.data.author}
+            ></input>
+          </div>
+          <button
+            value={JSON.stringify(this.mediaItemData)}
+            onClick={this.searchApi}
+            style={{
+              marginBottom: "10px",
+            }}
+          >
+            Update
+          </button>
+        </div>
+      </div>
+    );
+    this.setState({
+      isEditing: true,
+    });
+  }
+
+  onChangeEvt(e) {
+    this.item = e.target.name;
+    this.value = e.target.value;
+    if (this.item === "title") {
+      this.setState({
+        editTitle: e.target.value,
+      });
+    } else if (this.item === "creator") {
+      this.setState({
+        editCreator: e.target.value,
+      });
+    }
+  }
+
+  async searchApi(e) {
+    let apiData = [];
+    this.mediaType = JSON.parse(e.target.value)[0].mediaType;
+    this.dbKey = JSON.parse(e.target.value)[0].data.Data.key;
+    this.title = this.state.editTitle;
+    this.creator = this.state.editCreator;
+    this.path = JSON.parse(e.target.value)[0].data.Path;
+    this.ext = JSON.parse(e.target.value)[0].data.Data.data.ext;
+
+    apiData.push({
+      mediaType: this.mediaType,
+      key: this.dbKey,
+      name: this.title,
+      param2: this.creator,
+      path: this.path,
+      ext: this.ext,
+    });
+    console.log(this.mediaType, this.title, this.creator, this.dbKey);
+
+    // Retry Item
+    try {
+      if (this.title.length > 0 && this.creator.length > 0) {
+        console.log("Searching");
+        let res = await axios.get(`http://localhost:3020/retrymissingitem`, {
+          params: { data: apiData },
+        });
+        let data = res.data;
+
+        if (data) {
+          console.log(`Found Result For ${this.title}`);
+          this.setState({
+            isEditing: false,
+          });
+          this.getMissingMedia();
+        } else if (!data) {
+          console.log(`No Result Found For ${this.title}`);
+        }
+      }
+    } catch (err) {
+      console.warn("No Search Input. ", err);
+    }
   }
 
   async openFolder(e) {
@@ -172,12 +333,13 @@ export default class MediaNotFound extends Component {
           <Loading />
         ) : (
           <div className="mediaNotFoundContainer">
+            {this.state.isEditing === true ? this.jsxEdit : null}
             <h1 className="mediaNotFoundCategory">Missing Books:</h1>
             <div
               className="mediaNotFoundCategory"
               style={{ marginTop: "-20px", marginBottom: "10px" }}
             >
-              Total Missing Books: {this.missingBooks.length}
+              Total Missing Books: {this.missingBooksTotal}
             </div>
             <div className="mediaNotFoundList">{this.missingBooksJsx}</div>
             <h1 className="mediaNotFoundCategory">Missing Movies:</h1>
@@ -185,7 +347,7 @@ export default class MediaNotFound extends Component {
               className="mediaNotFoundCategory"
               style={{ marginTop: "-20px", marginBottom: "10px" }}
             >
-              Total Missing Movies: {this.missingMovies.length}
+              Total Missing Movies: {this.missingMoviesTotal}
             </div>
             <div className="mediaNotFoundList">{this.missingMoviesJsx}</div>
             <h1 className="mediaNotFoundCategory">Missing TV Shows:</h1>
@@ -193,7 +355,7 @@ export default class MediaNotFound extends Component {
               className="mediaNotFoundCategory"
               style={{ marginTop: "-20px", marginBottom: "10px" }}
             >
-              Total Missing TV Shows: {this.missingTv.length}
+              Total Missing TV Shows: {this.missingTvTotal}
             </div>
             <div className="mediaNotFoundList">{this.missingTvJsx}</div>
             <h1 className="mediaNotFoundCategory">Missing Music:</h1>

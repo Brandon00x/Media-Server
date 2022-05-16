@@ -35,3 +35,36 @@
 .notFoundButton {
   margin: 3px 3px 3px 10px;
 }
+
+.missingItemEdit {
+  position: absolute;
+  left: 40%;
+  top: 30%;
+  border: 2px solid white;
+  background-color: black;
+  width: 300px;
+  height: auto;
+}
+
+.missingItemContent {
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.missingItemEditContent {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.missingItemTitleBar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid white;
+}
+
+.editMediaItemInput {
+  margin-left: 5px;
+}

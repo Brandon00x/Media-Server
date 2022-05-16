@@ -53,7 +53,8 @@ app.post("/update", cors(corsOptions), async function (req, res) {
 
     // API Call | Get Metadata Information for Media
     if (mediaData.length > 0 && mediaCategory !== "updatephotos") {
-      await getMediaInfo(res, mediaCategory);
+      let isSingle = false;
+      await getMediaInfo(res, mediaCategory, isSingle);
     }
     // API Found 0 Results
     else if (mediaData.length === 0) {
@@ -71,7 +72,19 @@ app.post("/update", cors(corsOptions), async function (req, res) {
 // Send Missing Media Information
 app.get("/missingmedia", async function (req, res) {
   let missingItems = await missingMedia();
+  console.log(`Getting Missing Media Items ${missingItems.length}`);
   res.json(missingItems);
+});
+
+// Retry Missing Media Item
+app.get("/retrymissingitem", async function (req, res) {
+  let data = JSON.parse(req.query.data);
+  let mediaItem = data;
+  let mediaType = data.mediaType;
+  console.log(`Retrying Missing Item: ${mediaItem}. Media Type: ${mediaType}`);
+  let result = await getMediaInfo(res, mediaType, mediaItem);
+  res.write(result.toString());
+  res.end();
 });
 
 // Send Base64 Encoded Photo for Photos Page.

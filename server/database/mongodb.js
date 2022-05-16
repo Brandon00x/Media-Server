@@ -23,6 +23,7 @@ async function databaseAction(cmd) {
   let collection = db.collection(cmd.collection);
   let resultCmd = "done.";
 
+  // Create Index On New Item
   if (action === "createIndex") {
     try {
       collection.createIndex({ [key]: 1 }, { unique: true });
@@ -32,6 +33,18 @@ async function databaseAction(cmd) {
     }
   }
 
+  if (action === "deleteOne") {
+    collection
+      .deleteOne({ key: key })
+      .then(() => {
+        console.log(`Successfully Deleted Item. Key: ${key}`);
+      })
+      .catch((e) => {
+        console.error(`Unable to delete item. Key: ${key}. Error: ${e}`);
+      });
+  }
+
+  // Drop Collection
   if (action === "dropCollection") {
     collection
       .drop()
@@ -49,6 +62,7 @@ async function databaseAction(cmd) {
       });
   }
 
+  // Update One Item
   if (action === "updateOne") {
     await collection
       .updateOne({ key: key }, { $set: { data: data } })

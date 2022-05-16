@@ -1,25 +1,103 @@
 const axios = require("axios");
 const { readProps } = require("../start/start");
 const { databaseAction } = require("../database/mongodb");
+
 let mediaResults = [];
 let mediaNotFound = [];
-let counter = 1;
-let successCounter = 0;
-let failCount = 0;
-let mediaName;
-let apikey;
-let res;
+let counter = 1; // Server Response Message #
+let successCounter = 0; // Found Items +1
+let failCount = 0; // Failed Items +1
+let mediaName; // Media Name. Ex: Movies, TV Shows, Books, Music
+let apikey; // API Keys
+let res; // Send Response Message for Server Messages
+let isSingle; // Get API Result for Single Item
+let resultFound; // Boolean - Single Item API Result
 
-async function getMediaInfo(response, mediaType) {
+// Call API for Single Item Fix
+async function getSingleResult(mediaType, singleItem) {
+  isSingle = true;
+  let deleteFoundItem = {
+    cmd: "deleteOne",
+    collection: `Missing ${mediaName}`,
+    key: singleItem.key,
+  };
+
+  // Update Music Single Item
+  if (mediaType === "updatemusic") {
+    await apiCallMusic(artist, album, apikey);
+  }
+  // Update Books Single Item
+  else if (mediaType === "updatebooks") {
+    let mediaInfo = await apiCallBooks(singleItem, apikey);
+    if (mediaInfo.totalItems > 0) {
+      // Insert Found Item to Media Collection
+      let boolSuccess = await mapBookData(mediaInfo, singleItem);
+      console.log(boolSuccess, typeof boolSuccess);
+      if (boolSuccess === true) {
+        // Delete Found Item from Missing Collection.
+        await databaseAction(deleteFoundItem);
+      }
+      resultFound = true;
+    } else {
+      console.log(`No Items Found for ${singleItem.name}`);
+      resultFound = false;
+    }
+  }
+  // Update TV Single Item
+  else if (mediaType === "updatetv") {
+    let mediaInfo = await apiCallTv(apikey, dbMediaItems[x]);
+    if (mediaInfo.Response !== "False") {
+      // Insert Found Item to Media Collection
+      let boolSuccess = await mapTvData(mediaInfo, singleItem);
+      if (boolSuccess === true) {
+        // Delete Found Item from Missing Collection.
+        await databaseAction(deleteFoundItem);
+      }
+      resultFound = true;
+    } else {
+      resultFound = false;
+    }
+  }
+  // Update Movies Single Item
+  else if (mediaType === "updatemovies") {
+    let mediaInfo = await apiCallMovies(apikey, dbMediaItems[x]);
+    if (mediaInfo.Response !== "False") {
+      // Insert Found Item to Media Collection
+      let boolSuccess = await mapMovieData(mediaInfo, singleItem);
+      if (boolSuccess === true) {
+        // Delete Found Item from Missing Collection.
+        await databaseAction(deleteFoundItem);
+      }
+      resultFound = true;
+    } else {
+      resultFound = false;
+    }
+  }
+}
+
+async function getMediaInfo(response, mediaType, singleItem) {
   res = response;
   await useMediaType(mediaType);
   mediaNotFound = [];
   mediaResults = [];
+  if (singleItem) {
+    await getSingleResult(mediaType, singleItem);
+    return resultFound;
+  }
+  let dbMediaItems;
   let cmd = { cmd: "find", collection: mediaName };
-  let dbMediaItems = await databaseAction(cmd);
+  // Get Media Items from DB
+  dbMediaItems = await databaseAction(cmd);
+  // Create Index on Missing Media
+  let createIndex = {
+    cmd: "createIndex",
+    collection: `Missing ${mediaName}`,
+    key: "key",
+  };
+  await databaseAction(createIndex);
+
   console.info(`Calling API for ${dbMediaItems.length} ${mediaName} files.`);
 
-  //dbMediaItems.length
   for (let x = 0; x < dbMediaItems.length; x++) {
     // Update Music
     if (mediaType === "updatemusic") {
@@ -59,7 +137,7 @@ async function getMediaInfo(response, mediaType) {
     }
   }
 
-  // Write missed items in API.
+  // Write missed items for API.
   for (let i = 0; i < mediaNotFound.length; i++) {
     res.write(
       `Name: ${Object.values(mediaNotFound)[i].Name}  Path: ${
@@ -77,6 +155,11 @@ async function getMediaInfo(response, mediaType) {
 // Call OMDBI API for Movies
 async function apiCallMovies(apikey, dbItem) {
   const apiUrl = `http://www.omdbapi.com/`;
+  if (isSingle) {
+    title = dbItem.name;
+  } else {
+    title = dbItem.data.name;
+  }
   let res = await axios.get(apiUrl, {
     params: {
       apikey: apikey,
@@ -90,11 +173,20 @@ async function apiCallMovies(apikey, dbItem) {
 // Call OMDBI API for TV
 async function apiCallTv(apikey, dbItem) {
   const apiUrl = `http://www.omdbapi.com/`;
+  let title;
+  let year;
+  if (isSingle) {
+    title = dbItem.name;
+    year = dbItem.param2;
+  } else {
+    title = dbItem.data.name;
+    year = dbItem.data.year;
+  }
   if (dbItem.data.year === null) {
     let res = await axios.get(apiUrl, {
       params: {
         apikey: apikey,
-        t: dbItem.data.name,
+        t: title,
       },
     });
     let mediaInfo = res.data;
@@ -103,13 +195,31 @@ async function apiCallTv(apikey, dbItem) {
     let res = await axios.get(apiUrl, {
       params: {
         apikey: apikey,
-        t: dbItem.data.name,
-        y: dbItem.data.year,
+        t: title,
+        y: year,
       },
     });
     let mediaInfo = res.data;
     return mediaInfo;
   }
+}
+
+// Call Google Books API
+async function apiCallBooks(mediaValues, apikey) {
+  let title;
+  let author;
+  if (isSingle) {
+    title = mediaValues.name;
+    author = mediaValues.param2;
+  } else {
+    title = mediaValues.data.name;
+    author = mediaValues.data.author;
+  }
+  console.log(`Calling API Books ${title} ${author}`);
+  let apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${title}+inauthor:${author}&langRestrict=en&maxResults=1&key=${apikey}`;
+  let res = await axios.get(apiUrl);
+  let mediaInfo = res.data;
+  return mediaInfo;
 }
 
 // Call Apple Music API
@@ -162,16 +272,6 @@ async function apiCallMusic(artist, album, apikey) {
         });
       }
     });
-}
-
-// Call Google Books API
-async function apiCallBooks(mediaValues, apikey) {
-  let title = mediaValues.data.name;
-  let author = mediaValues.data.author;
-  let apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${title}+inauthor:${author}&langRestrict=en&maxResults=1&key=${apikey}`;
-  let res = await axios.get(apiUrl);
-  let mediaInfo = res.data;
-  return mediaInfo;
 }
 
 // Map Movies / TV Data
@@ -283,19 +383,35 @@ async function mapBookData(mediaInfo, dbItem) {
   try {
     let key = dbItem.key;
     successCounter++;
+    let imgUrl;
+    let path;
+    let ext;
+    let year;
+    try {
+      imgUrl = mediaInfo.items[0].volumeInfo.imageLinks.thumbnail;
+      path = dbItem.data.path;
+      ext = dbItem.data.ext;
+      year = mediaInfo.items[0].volumeInfo.publishedDate.slice(0, 4);
+    } catch (err) {
+      imgUrl = "N/A";
+      path = dbItem.path;
+      ext = dbItem.ext;
+      year = 0;
+    }
+
     mediaResults.push({
       Title: mediaInfo.items[0].volumeInfo.title,
       Description: mediaInfo.items[0].volumeInfo.description,
       Creator: mediaInfo.items[0].volumeInfo.authors, //Author
       Categories: mediaInfo.items[0].volumeInfo.categories,
       Ratings: mediaInfo.items[0].volumeInfo.averageRating,
-      ImageURL: mediaInfo.items[0].volumeInfo.imageLinks.thumbnail,
+      ImageURL: imgUrl,
       Length: mediaInfo.items[0].volumeInfo.pageCount,
-      Path: dbItem.data.path,
-      Ext: dbItem.data.ext,
+      Path: path,
+      Ext: ext,
       ImageURLSmall: mediaInfo.items[0].volumeInfo.imageLinks,
       NumberOfRatings: mediaInfo.items[0].volumeInfo.ratingsCount,
-      Year: mediaInfo.items[0].volumeInfo.publishedDate.slice(0, 4),
+      Year: year,
     });
 
     let cmd = {
@@ -311,8 +427,14 @@ async function mapBookData(mediaInfo, dbItem) {
         mediaInfo.items[0].volumeInfo.title
       }\n`
     );
+    return true;
   } catch (err) {
-    await mediaNotFoundError(dbItem);
+    if (isSingle === true) {
+      console.error(err);
+      return false;
+    } else {
+      await mediaNotFoundError(dbItem);
+    }
   }
 }
 
@@ -378,10 +500,21 @@ async function mediaNotFoundError(mediaValues) {
   mediaNotFound.push({
     Name: mediaValues.data.name,
     Path: mediaValues.data.path,
+    Data: mediaValues,
   });
+  let insertItem = {
+    cmd: "insertOne",
+    collection: `Missing ${mediaName}`,
+    key: mediaValues.data.name,
+    data: mediaNotFound,
+  };
+  // Insert Item
+  await databaseAction(insertItem);
+  mediaNotFound = [];
+  // Create Database Index on Key
   res.write(
     `${counter++}. WARN: ${mediaName} API error with: ${
-      mediaValues.name
+      mediaValues.data.name
     }. Total ${mediaName} Not Found: ${failCount++}\n`
   );
 }

@@ -1,4 +1,4 @@
-const fs = require("fs");
+const { databaseAction } = require("../database/mongodb");
 
 async function missingMedia() {
   let missingMedia = [];
@@ -15,42 +15,30 @@ async function missingMedia() {
 }
 
 async function missingBooks() {
-  return new Promise((resolve, reject) => {
-    fs.readFile("./json/booksnotfound.json", async function (err, data) {
-      if (err) {
-        console.error(`Unable to Read Missing Media`);
-      } else {
-        books = JSON.parse(data);
-        resolve(books);
-      }
-    });
-  });
+  let cmd = { cmd: "find", collection: "Missing Books" };
+  let books = await databaseAction(cmd);
+  if (books.includes("No Search Results Found")) {
+    return;
+  }
+  return books;
 }
 
 async function missingMovies() {
-  return new Promise((resolve, reject) => {
-    fs.readFile("./json/moviesNotFound.json", function (err, data) {
-      if (err) {
-        console.error(`Unable to Read Missing Media`);
-      } else {
-        movies = JSON.parse(data);
-        resolve(movies);
-      }
-    });
-  });
+  let cmd = { cmd: "find", collection: "Missing Movies" };
+  let movies = await databaseAction(cmd);
+  if (movies.includes("No Search Results Found")) {
+    return;
+  }
+  return movies;
 }
 
 async function missingTv() {
-  return new Promise((resolve, reject) => {
-    fs.readFile("./json/tvshowsnotfound.json", function (err, data) {
-      if (err) {
-        console.error(`Unable to Read Missing Media`);
-      } else {
-        tv = JSON.parse(data);
-        resolve(tv);
-      }
-    });
-  });
+  let cmd = { cmd: "find", collection: "Missing TV Shows" };
+  let tv = await databaseAction(cmd);
+  if (tv.includes("No Search Results Found")) {
+    return;
+  }
+  return tv;
 }
 
 module.exports = { missingMedia };

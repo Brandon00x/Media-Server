@@ -105,9 +105,10 @@ My main goal for this project was to showcase my abilities writing code and obta
 Date: 4/20/22
 
 <h3>ALPHA Version Changes - WIP</h3>
+<li>Add Media Not Found Individual DB Records.</li>
+<li>Feature - Fix media items not found from browser window and retry API call for fixed item.</li>
 <li>Windows Testing / Fixes</li>
 <li>Add Album Goto Button for Music Player NavBar</li>
-<li>Feature - Fix media items not found from browser window and retry API call for fixed item.</li>
 <li>Feature - Better logging</li>
 <li>Code Cleanup - Migrate Media Types into individual components. Certain functions are not reusable for all media types now. </li>
 
@@ -158,6 +159,7 @@ Date: 4/20/22
 <br/>
 
 ## Change Log | Features Added / Fixed Bugs
+<li>Finished 5/15 - Performance - Remove make searchable for books since AXIOS does this.</li>
 <li>Finished 5/14 - Bug Fixes - Fix scroll to top error triggered by createRows refresh.</li>
 <li>Finished 5/14 - Bug Fixes - Prevent scroll to top / need for create rows on toggle album or artist title.</li>
 <li>Finished 5/13 - Performance - Store 1 Item at a time from Final media array instead of whole array.</li>

@@ -758,3 +758,123 @@ New Movies Scan. 5/13/2022 4:35:09 PM
 5/13/2022 4:35:21 PM - Media Type Movies. Function: saveToDB. Time eplasted: 8 seconds. v3
 5/13/2022 4:35:21 PM - Media Type Movies. Function: sendCategoryFixes. Time eplasted: 8 seconds. v3
  
+New Books Scan. 5/15/2022 2:12:54 PM
+5/15/2022 2:12:54 PM - Media Type Books. Function: checkPathEnding. Time eplasted: 116 seconds. v3
+5/15/2022 2:12:54 PM - Media Type Books. Function: findMediaDirectories. Time eplasted: 116 seconds. v3
+5/15/2022 2:12:54 PM - Media Type Books. Function: findMediaDirectories 2nd Time. Time eplasted: 116 seconds. v3
+New Books Scan. 5/15/2022 2:13:20 PM
+5/15/2022 2:13:20 PM - Media Type Books. Function: checkPathEnding. Time eplasted: 142 seconds. v3
+5/15/2022 2:13:20 PM - Media Type Books. Function: findMediaDirectories. Time eplasted: 142 seconds. v3
+5/15/2022 2:13:20 PM - Media Type Books. Function: verifyFinalDirectory. Time eplasted: 142 seconds. v3
+5/15/2022 2:13:21 PM - Media Type Books. Function: readDirectoryContents. Time eplasted: 143 seconds. v3
+5/15/2022 2:13:21 PM - Media Type Books. Function: removeAuthorFromTitle. Time eplasted: 143 seconds. v3
+5/15/2022 2:13:21 PM - Media Type Books. Function: makeSearchable. Time eplasted: 143 seconds. v3
+5/15/2022 2:13:21 PM - Media Type Books. Function: saveToDB. Time eplasted: 144 seconds. v3
+5/15/2022 2:13:21 PM - Media Type Books. Function: sendCategoryFixes. Time eplasted: 144 seconds. v3
+ 
+New Books Scan. 5/15/2022 2:14:22 PM
+5/15/2022 2:14:22 PM - Media Type Books. Function: checkPathEnding. Time eplasted: 8 seconds. v3
+5/15/2022 2:14:22 PM - Media Type Books. Function: findMediaDirectories. Time eplasted: 8 seconds. v3
+5/15/2022 2:14:22 PM - Media Type Books. Function: verifyFinalDirectory. Time eplasted: 8 seconds. v3
+5/15/2022 2:14:23 PM - Media Type Books. Function: readDirectoryContents. Time eplasted: 9 seconds. v3
+5/15/2022 2:14:23 PM - Media Type Books. Function: removeAuthorFromTitle. Time eplasted: 9 seconds. v3
+5/15/2022 2:14:23 PM - Media Type Books. Function: makeSearchable. Time eplasted: 9 seconds. v3
+5/15/2022 2:14:23 PM - Media Type Books. Function: saveToDB. Time eplasted: 10 seconds. v3
+ 
+5/15/2022 2:14:23 PM - Media Type Books. Function: sendCategoryFixes. Time eplasted: 10 seconds. v3
+New Books Scan. 5/15/2022 2:46:05 PM
+5/15/2022 2:46:05 PM - Media Type Books. Function: checkPathEnding. Time eplasted: 12 seconds. v3
+5/15/2022 2:46:05 PM - Media Type Books. Function: findMediaDirectories. Time eplasted: 12 seconds. v3
+5/15/2022 2:46:05 PM - Media Type Books. Function: verifyFinalDirectory. Time eplasted: 12 seconds. v3
+5/15/2022 2:46:06 PM - Media Type Books. Function: readDirectoryContents. Time eplasted: 12 seconds. v3
+5/15/2022 2:46:06 PM - Media Type Books. Function: removeAuthorFromTitle. Time eplasted: 12 seconds. v3
+5/15/2022 2:46:07 PM - Media Type Books. Function: saveToDB. Time eplasted: 13 seconds. v3
+5/15/2022 2:46:07 PM - Media Type Books. Function: sendCategoryFixes. Time eplasted: 13 seconds. v3
+ 
+New Books Scan. 5/15/2022 2:47:47 PM
+5/15/2022 2:47:47 PM - Media Type Books. Function: checkPathEnding. Time eplasted: 18 seconds. v3
+5/15/2022 2:47:47 PM - Media Type Books. Function: findMediaDirectories. Time eplasted: 18 seconds. v3
+5/15/2022 2:47:47 PM - Media Type Books. Function: verifyFinalDirectory. Time eplasted: 18 seconds. v3
+5/15/2022 2:47:48 PM - Media Type Books. Function: readDirectoryContents. Time eplasted: 18 seconds. v3
+5/15/2022 2:47:48 PM - Media Type Books. Function: removeAuthorFromTitle. Time eplasted: 18 seconds. v3
+5/15/2022 2:47:49 PM - Media Type Books. Function: saveToDB. Time eplasted: 19 seconds. v3
+5/15/2022 2:47:49 PM - Media Type Books. Function: sendCategoryFixes. Time eplasted: 19 seconds. v3
+ 
+New Books Scan. 5/15/2022 2:54:08 PM
+5/15/2022 2:54:08 PM - Media Type Books. Function: checkPathEnding. Time eplasted: 43 seconds. v3
+5/15/2022 2:54:08 PM - Media Type Books. Function: findMediaDirectories. Time eplasted: 43 seconds. v3
+5/15/2022 2:54:08 PM - Media Type Books. Function: verifyFinalDirectory. Time eplasted: 43 seconds. v3
+5/15/2022 2:54:09 PM - Media Type Books. Function: readDirectoryContents. Time eplasted: 43 seconds. v3
+5/15/2022 2:54:09 PM - Media Type Books. Function: removeAuthorFromTitle. Time eplasted: 43 seconds. v3
+5/15/2022 2:54:10 PM - Media Type Books. Function: saveToDB. Time eplasted: 44 seconds. v3
+5/15/2022 2:54:10 PM - Media Type Books. Function: sendCategoryFixes. Time eplasted: 44 seconds. v3
+ 
+New Books Scan. 5/15/2022 6:47:39 PM
+5/15/2022 6:47:39 PM - Media Type Books. Function: verifyFinalDirectory. Time eplasted: 1838 seconds. v3
+5/15/2022 6:47:39 PM - Media Type Books. Function: checkPathEnding. Time eplasted: 1838 seconds. v3
+5/15/2022 6:47:39 PM - Media Type Books. Function: findMediaDirectories. Time eplasted: 1838 seconds. v3
+5/15/2022 6:47:40 PM - Media Type Books. Function: readDirectoryContents. Time eplasted: 1839 seconds. v3
+5/15/2022 6:47:40 PM - Media Type Books. Function: removeAuthorFromTitle. Time eplasted: 1839 seconds. v3
+5/15/2022 6:47:40 PM - Media Type Books. Function: saveToDB. Time eplasted: 1839 seconds. v3
+5/15/2022 6:47:40 PM - Media Type Books. Function: sendCategoryFixes. Time eplasted: 1839 seconds. v3
+ 
+New Books Scan. 5/15/2022 6:50:04 PM
+5/15/2022 6:50:04 PM - Media Type Books. Function: checkPathEnding. Time eplasted: 3 seconds. v3
+5/15/2022 6:50:04 PM - Media Type Books. Function: findMediaDirectories. Time eplasted: 3 seconds. v3
+5/15/2022 6:50:04 PM - Media Type Books. Function: verifyFinalDirectory. Time eplasted: 3 seconds. v3
+5/15/2022 6:50:05 PM - Media Type Books. Function: readDirectoryContents. Time eplasted: 3 seconds. v3
+5/15/2022 6:50:05 PM - Media Type Books. Function: removeAuthorFromTitle. Time eplasted: 3 seconds. v3
+5/15/2022 6:50:06 PM - Media Type Books. Function: saveToDB. Time eplasted: 4 seconds. v3
+5/15/2022 6:50:06 PM - Media Type Books. Function: sendCategoryFixes. Time eplasted: 4 seconds. v3
+ 
+New Books Scan. 5/15/2022 6:50:30 PM
+5/15/2022 6:50:30 PM - Media Type Books. Function: checkPathEnding. Time eplasted: 3 seconds. v3
+5/15/2022 6:50:30 PM - Media Type Books. Function: findMediaDirectories. Time eplasted: 3 seconds. v3
+5/15/2022 6:50:30 PM - Media Type Books. Function: verifyFinalDirectory. Time eplasted: 3 seconds. v3
+5/15/2022 6:50:31 PM - Media Type Books. Function: readDirectoryContents. Time eplasted: 3 seconds. v3
+5/15/2022 6:50:31 PM - Media Type Books. Function: removeAuthorFromTitle. Time eplasted: 3 seconds. v3
+5/15/2022 6:50:31 PM - Media Type Books. Function: saveToDB. Time eplasted: 4 seconds. v3
+5/15/2022 6:50:31 PM - Media Type Books. Function: sendCategoryFixes. Time eplasted: 4 seconds. v3
+ 
+New Books Scan. 5/15/2022 7:06:49 PM
+5/15/2022 7:06:49 PM - Media Type Books. Function: checkPathEnding. Time eplasted: 4 seconds. v3
+5/15/2022 7:06:49 PM - Media Type Books. Function: findMediaDirectories. Time eplasted: 4 seconds. v3
+5/15/2022 7:06:49 PM - Media Type Books. Function: verifyFinalDirectory. Time eplasted: 4 seconds. v3
+5/15/2022 7:06:49 PM - Media Type Books. Function: readDirectoryContents. Time eplasted: 5 seconds. v3
+5/15/2022 7:06:49 PM - Media Type Books. Function: removeAuthorFromTitle. Time eplasted: 5 seconds. v3
+5/15/2022 7:06:50 PM - Media Type Books. Function: saveToDB. Time eplasted: 5 seconds. v3
+5/15/2022 7:06:50 PM - Media Type Books. Function: sendCategoryFixes. Time eplasted: 5 seconds. v3
+ 
+New TV Shows Scan. 5/15/2022 7:33:47 PM
+5/15/2022 7:33:48 PM - Media Type TV Shows. Function: verifyFinalDirectory. Time eplasted: 869 seconds. v3
+5/15/2022 7:33:47 PM - Media Type TV Shows. Function: checkPathEnding. Time eplasted: 869 seconds. v3
+5/15/2022 7:33:47 PM - Media Type TV Shows. Function: findMediaDirectories. Time eplasted: 869 seconds. v3
+5/15/2022 7:33:49 PM - Media Type TV Shows. Function: readDirectoryContents. Time eplasted: 870 seconds. v3
+5/15/2022 7:33:49 PM - Media Type TV Shows. Function: OrderBySeason. Time eplasted: 870 seconds. v3
+5/15/2022 7:33:49 PM - Media Type TV Shows. Function: sanitizeMovieTitles. Time eplasted: 870 seconds. v3
+5/15/2022 7:33:49 PM - Media Type TV Shows. Function: preventEpisodeAsTitle. Time eplasted: 870 seconds. v3
+5/15/2022 7:33:49 PM - Media Type TV Shows. Function: deDupeTitles. Time eplasted: 870 seconds. v3
+5/15/2022 7:33:49 PM - Media Type TV Shows. Function: saveToDB. Time eplasted: 871 seconds. v3
+5/15/2022 7:33:49 PM - Media Type TV Shows. Function: sendCategoryFixes. Time eplasted: 871 seconds. v3
+ 
+New TV Shows Scan. 5/15/2022 7:35:07 PM
+5/15/2022 7:35:07 PM - Media Type TV Shows. Function: checkPathEnding. Time eplasted: 871 seconds. v3
+5/15/2022 7:35:07 PM - Media Type TV Shows. Function: findMediaDirectories. Time eplasted: 871 seconds. v3
+5/15/2022 7:35:20 PM - Media Type TV Shows. Function: verifyFinalDirectory. Time eplasted: 871 seconds. v3
+5/15/2022 7:35:29 PM - Media Type TV Shows. Function: readDirectoryContents. Time eplasted: 871 seconds. v3
+5/15/2022 7:35:29 PM - Media Type TV Shows. Function: OrderBySeason. Time eplasted: 871 seconds. v3
+5/15/2022 7:35:29 PM - Media Type TV Shows. Function: sanitizeMovieTitles. Time eplasted: 871 seconds. v3
+5/15/2022 7:35:29 PM - Media Type TV Shows. Function: deDupeTitles. Time eplasted: 871 seconds. v3
+5/15/2022 7:35:29 PM - Media Type TV Shows. Function: preventEpisodeAsTitle. Time eplasted: 871 seconds. v3
+5/15/2022 7:35:30 PM - Media Type TV Shows. Function: saveToDB. Time eplasted: 871 seconds. v3
+5/15/2022 7:35:30 PM - Media Type TV Shows. Function: sendCategoryFixes. Time eplasted: 871 seconds. v3
+ 
+New Movies Scan. 5/15/2022 7:45:16 PM
+5/15/2022 7:45:16 PM - Media Type Movies. Function: verifyFinalDirectory. Time eplasted: 315 seconds. v3
+5/15/2022 7:45:16 PM - Media Type Movies. Function: checkPathEnding. Time eplasted: 315 seconds. v3
+5/15/2022 7:45:16 PM - Media Type Movies. Function: findMediaDirectories. Time eplasted: 315 seconds. v3
+5/15/2022 7:45:28 PM - Media Type Movies. Function: readDirectoryContents. Time eplasted: 327 seconds. v3
+5/15/2022 7:45:28 PM - Media Type Movies. Function: sanitizeMovieTitles. Time eplasted: 327 seconds. v3
+5/15/2022 7:45:29 PM - Media Type Movies. Function: saveToDB. Time eplasted: 328 seconds. v3
+5/15/2022 7:45:29 PM - Media Type Movies. Function: sendCategoryFixes. Time eplasted: 328 seconds. v3
+ 
