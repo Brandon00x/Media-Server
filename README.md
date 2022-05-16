@@ -10,21 +10,12 @@ My main goal for this project was to showcase my abilities writing code and obta
 ## Installation / Setup
 
 <h3>Prerequisites:</h3>
-<li>NodeJS - 16.14.0 <a>https://nodejs.org/en/download/</a></li>
-<li>MongoDB <a>https://www.mongodb.com/try/download/community</a></li>
+<li>NodeJS - 16.14.0 <a href="https://nodejs.org/en/download/">Download NodeJS</a></li>
+<li>MongoDB <a href="https://www.mongodb.com/try/download/community">Download MongoDB</a></li>
 <br/>
 <h3>Start the Program:</h3>
-<p>Inside the App Directory Run:</p>
-
-`npm i`
-
-`npm start`
-
-<p>Inside the App/Server Directory Run:</p>
-
-`npm i`
-
-`node app.js`
+<p>Run startwindows.bat or startlinux.sh to start the program.</p>
+<p>Note: You will need to run as admin on windows for the batch file to start MongoDB or start MongoDB manually.</p>
 
 <br/>
 
@@ -100,9 +91,9 @@ My main goal for this project was to showcase my abilities writing code and obta
 <h2>Settings</h2>
 <img src="./images/settings.png" />
 
-## Changelog / New Feature List
+## Change Log / New Feature List
 
-<a href="https://github.com/Brandon00x/Media-Server/blob/main/changelog.md">Changelog</a>
+<a href="https://github.com/Brandon00x/Media-Server/blob/main/changelog.md">Change Log</a>
 
 ## About Me
 

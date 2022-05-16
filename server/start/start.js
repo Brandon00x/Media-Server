@@ -87,4 +87,53 @@ async function getPort() {
   }
 }
 
-module.exports = { setProps, setServerIp, getPort, readProps };
+// Confirm Default Properties have Values - If not set them.
+async function checkPropertiesFirstRun(serverAddress) {
+  console.log("Confirming Default Properties have Values.");
+  let props = await setProps(serverAddress);
+
+  let defaultProps = {
+    zoomLevelMusic: 4,
+    zoomLevelOther: 5,
+    toggleArtist: false,
+    toggleAlbum: true,
+    toggleScroll: false,
+    scrollTop: 6,
+    scrollBot: 7,
+    hideScroll: 3,
+    hideAlbum: 4,
+    hideArtist: 5,
+    zoomIn: 2,
+    zoomOut: 1,
+  };
+
+  // Loop Through Props and Compare.
+  for (const [key, value] of Object.entries(props)) {
+    if (value === undefined) {
+      let undefinedValue = key;
+      for (const [key, value] of Object.entries(defaultProps)) {
+        if (undefinedValue === key) {
+          console.log(
+            `Property ${key} was undefined. Setting property default value: ${value}`
+          );
+          let cmd = {
+            cmd: "insertOne",
+            collection: "Properties",
+            key: key,
+            data: value,
+          };
+          // Update Undefined Property to Default Value
+          databaseAction(cmd);
+        }
+      }
+    }
+  }
+}
+
+module.exports = {
+  setProps,
+  setServerIp,
+  getPort,
+  readProps,
+  checkPropertiesFirstRun,
+};

@@ -486,7 +486,7 @@ export default class Settings extends Component {
                     <span className="settingsProgramTitle">Hide Scroll: </span>
                     <select
                       id="selectBool"
-                      name={"toggleSroll"}
+                      name={"toggleScroll"}
                       onChange={this.handleSubmit}
                     >
                       <option value={false}>False</option>

@@ -5,7 +5,12 @@ const fs = require("fs");
 const exec = require("child_process").exec;
 const { startScan } = require("./scanmedia/scanmedia");
 const { handleSave } = require("./save/handleSave");
-const { setProps, setServerIp, getPort } = require("./start/start");
+const {
+  setProps,
+  setServerIp,
+  getPort,
+  checkPropertiesFirstRun,
+} = require("./start/start");
 const { getMediaInfo } = require("./apicalls/apicall");
 const { readBook } = require("./readmedia/readbook");
 const { readTvSeason } = require("./readmedia/readtvseason");
@@ -229,6 +234,7 @@ const startServer = async () => {
   serverAddress = `http://${ip}:${port}`;
   app.listen(port, () => {
     console.info(`Media Metadata Server Listening On: ${port}.\n`);
+    checkPropertiesFirstRun(serverAddress);
   });
 };
 
