@@ -233,8 +233,8 @@ const startServer = async () => {
   let port = await getPort();
   serverAddress = `http://${ip}:${port}`;
   app.listen(port, () => {
-    console.info(`Media Metadata Server Listening On: ${port}.\n`);
     checkPropertiesFirstRun(serverAddress);
+    console.info(`Media Metadata Server Listening On: ${port}.\n`);
   });
 };
 

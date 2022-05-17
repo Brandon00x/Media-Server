@@ -199,7 +199,9 @@ async function startScan(response, mediaCategory, mediaPath) {
       await getFileCreatedDate();
       saveScanTime("getFileCreatedDate");
 
-      await saveToDatabase("Photos", "Photos", mediaArr);
+      // Save Photos Data to DB
+      await saveToDB();
+      saveScanTime("savePhotosToDb");
     }
 
     //// Finish | All Media | Scan Media Completes.

@@ -96,7 +96,7 @@ async function checkPropertiesFirstRun(serverAddress) {
     zoomLevelMusic: 4,
     zoomLevelOther: 5,
     toggleArtist: false,
-    toggleAlbum: true,
+    toggleAlbum: false,
     toggleScroll: false,
     scrollTop: 6,
     scrollBot: 7,

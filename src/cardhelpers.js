@@ -114,7 +114,11 @@ function cardTop(title, mediaType, imgType, imgUrl, photo, style) {
       display = "none";
     }
   } else if (mediaType === "Photos") {
-    img = `data:image/${imgType};base64,${photo}`;
+    if (photo === undefined) {
+      console.log("undefined img");
+    } else {
+      img = `data:image/${imgType};base64,${photo}`;
+    }
     height = "3vw";
     fontSize = "1.3vw";
     marginTop = "5px";

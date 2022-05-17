@@ -75,7 +75,7 @@ export default class Template extends Component {
       mediaRows: null, // Media Rows with Cards
       pinnedCards: null, // Pinned Albums
       musicPlaying: false, // Toggle Play/Pause Music
-      artistHidden: true, // Toggle Artist Over Album
+      artistHidden: false, // Toggle Artist Over Album
       albumTitleHidden: false, // Toggle Album Title On/Off
       albumTitleStyle: null, //Holds Style for Album Title
       artistTitleStyle: null, // Holds Style for Artist Title
@@ -126,6 +126,7 @@ export default class Template extends Component {
     this.minimizeDescriptionCard = minimizeDescriptionCard.bind(this);
     this.hotKeys = hotKeys.bind(this);
     this.getProperties = this.getProperties.bind(this);
+    this.mapPhotos = this.mapPhotos.bind(this);
   }
 
   // Component Mounted
@@ -196,6 +197,11 @@ export default class Template extends Component {
       });
       this.mapMusic(data, mediaType);
       return;
+    } else if (mediaType === "Photos") {
+      data.sort(function (a, b) {
+        return a.data.name.localeCompare(b.data.name);
+      });
+      this.mapPhotos(data, mediaType);
     }
     // Create Cards for TV, Movies, Books, Photos
     else {
@@ -225,9 +231,6 @@ export default class Template extends Component {
           this.path = data[i].data[0].Path;
           this.ext = data[i].data[0].Ext;
           this.imgUrl = data[i].data[0].ImageURL;
-          mediaType === "Photos"
-            ? (this.photo = await this.getLocalPhoto(this.path))
-            : (this.photo = null);
           mediaType === "Photos"
             ? (this.imgType = data[i].data[0].Ext.slice(1))
             : (this.imgType = null);
@@ -748,6 +751,174 @@ export default class Template extends Component {
     }
 
     this.createRows();
+  }
+
+  async mapPhotos(data, mediaType) {
+    console.log("Mapping Photos");
+    try {
+      let rowCount = `rowCount${this.state.cardsPerRow}`;
+      this.style = cardStyleProps[rowCount].cardProps;
+      for (let i = 0; i < data.length; i++) {
+        this.resultItemNum = data[i].data.result;
+        this.title = data[i].data.name;
+        this.path = data[i].data.Path;
+        this.ext = data[i].data.Ext;
+        this.description = data[i].data.Description;
+        this.creator = data[i].data.Creator;
+        this.imageUrl = data[i].data.ImageURL;
+        this.length = data[i].data.Length;
+        this.year = data[i].data.Year;
+        this.photo = await this.getLocalPhoto(this.path);
+        this.key = uuidv4();
+        this.downloadValue = {
+          Path: this.path,
+          Title: this.title,
+          Ext: this.ext,
+          Img: this.imgUrl,
+        };
+
+        this.mediaCards.push(
+          <Card
+            className="mediaCard"
+            id={this.title}
+            key={this.key}
+            title={this.title}
+            year={this.year}
+            length={this.length}
+            style={{ height: "auto" }}
+          >
+            {this.cardTop(
+              this.title,
+              mediaType,
+              this.imgType,
+              this.imgUrl,
+              this.photo,
+              this.style
+            )}
+            {this.cardMiddle(
+              this.creator,
+              this.categories,
+              mediaType,
+              this.length,
+              this.year,
+              this.description,
+              this.style
+            )}
+            {this.cardBottom(
+              this.downloadValue,
+              mediaType,
+              this.title,
+              i,
+              this.noDescription,
+              this.imgType,
+              this.photo,
+              this.key
+            )}
+          </Card>
+        );
+        // All Media No Music
+        this.mediaCardsDescription.push(
+          <Draggable key={this.key}>
+            <Card
+              id={this.key}
+              className="mediaCard"
+              key={this.key}
+              title={this.title}
+              year={this.year}
+              length={this.length}
+              style={{
+                position: "absolute",
+                display: "flex",
+                zIndex: "2",
+                width: "30vw",
+                height: "30vw",
+                top: "20%",
+                border: "1px solid black",
+              }}
+            >
+              <div
+                className="mediaTopBar"
+                style={{
+                  backgroundColor: "goldenrod",
+                }}
+              >
+                <div className="mediaTopBarButtons">
+                  <button
+                    className="far fa-times-circle"
+                    title="Close"
+                    value={JSON.stringify({
+                      action: "close",
+                      key: this.key,
+                    })}
+                    onClick={this.pinDescriptionCard}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      marginLeft: "5px",
+                    }}
+                  />
+                  <button
+                    className="fa-solid fa-thumbtack"
+                    title="Pin"
+                    value={JSON.stringify({ action: "pin", key: this.key })}
+                    onClick={this.pinDescriptionCard}
+                    style={{
+                      background: "none",
+                      border: "none",
+                    }}
+                  />
+                  <button
+                    className="far fa-window-minimize"
+                    title="Minimize"
+                    onClick={this.minimizeDescriptionCard}
+                    value={this.key}
+                    style={{
+                      background: "none",
+                      border: "none",
+                      position: "relative",
+                    }}
+                  />
+                </div>
+                <div className="mediaDescBarTitle" style={{ fontSize: "1vw" }}>
+                  {this.title}
+                </div>
+              </div>
+              <p className="mediaDescription">{this.description}</p>
+              {this.state.cardsPerRow >= 6 ? (
+                <div id="mediaCardMidButtons">
+                  <Button
+                    className="mediaButton"
+                    title={`Open ${this.title} Locally`}
+                    value={JSON.stringify(this.downloadValue)}
+                    onClick={this.openMedia}
+                    style={{
+                      border: "none",
+                      fontWeight: "bold",
+                    }}
+                  >
+                    Open <i className="fa-solid fa-folder-open" />
+                  </Button>
+                  {this.streamButton}{" "}
+                </div>
+              ) : null}
+              {this.cardBottom(
+                this.downloadValue,
+                mediaType,
+                this.title,
+                i,
+                this.descriptionOn,
+                this.imgType,
+                this.photo
+              )}
+            </Card>
+          </Draggable>
+        );
+      }
+      // Create Photo Rows
+      this.createRows();
+    } catch (err) {
+      console.error(`Error Mapping Photos ${err}`);
+    }
   }
   //// End Get Media Create Cards
 

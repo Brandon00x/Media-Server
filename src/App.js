@@ -29,6 +29,14 @@ export default class App extends Component {
 
   // TODO: Fix Change Server Address
   async getServerAddress() {
+    if (this.state.address !== null) {
+      console.log("Server Address is defined: ", this.state.address);
+      this.setState({
+        serverUnreachable: false,
+        isLoading: false,
+      });
+      return;
+    }
     // Change Local Server Addres
     await axios.get(`http://192.168.0.100:3020/props`).then(
       (res) => {
@@ -38,6 +46,7 @@ export default class App extends Component {
           serverUnreachable: false,
           isLoading: false,
         });
+        console.log("Set Server Address: ", this.address);
       },
       (err) => {
         console.warn("Unable to connect to server.");

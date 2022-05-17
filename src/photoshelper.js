@@ -29,6 +29,7 @@ async function showPhoto(e) {
         className="showInBrowserImage"
         src={this.fullSizeImage}
         alt=""
+        title="Click To Close"
       ></img>
     </div>
   );

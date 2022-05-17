@@ -5,16 +5,15 @@ Project Start Date: 4/20/22
 ## Additional Features To Be Added Soon / Known Bugs
 
 <h3>ALPHA Version Changes - WIP</h3>
-<li>Add Album Goto Button for Music Player NavBar</li>
 <li>Feature - Better logging</li>
 <li>Fix Photos Loading Issues</li>
 
 <h3>BETA Version Changes - Timeline TBD</h3>
 <li>Feature - Include Extra Metadata for Books/Movies/TV/Photos</li>
 <li>Create installer for prereqs / setup</li>
+<li>Add Album Goto Button for Music Player NavBar</li>
 <li>Performance - API Calls Performance Improvements.</li>
 <li>Performance - Scan Performance Improvements Based on Data Captured</li>
-<li>Can change to BETA version after above is done.</li>
 <li>Feature - More Sort Options for Album Title / Other properties.</li>
 <li>Feature - Fix Incorrect Media Data Match</li>
 <li>Feature - Add Queue for TV/Movies</li>
@@ -57,6 +56,7 @@ Project Start Date: 4/20/22
 
 ## Change Log | Features Added / Fixed Bugs
 
+<li>Finished 5/16 - Bug Fixes - Fixed Phtotos Create Cards Error</li>
 <li>Finished 5/16 - Bug Fixes - Set Default Property Values for Hotkeys if undefined on first start.</li>
 <li>Finished 5/16 - Windows Testing / Fixes</li>
 <li>Finished 5/16 - Bug Fixes - Prevent Media Item Duplication when using zoom too quickly. </li>

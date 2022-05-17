@@ -521,8 +521,8 @@ export default class Settings extends Component {
                       name={"toggleArtist"}
                       onChange={this.handleSubmit}
                     >
-                      <option value={true}>True</option>
                       <option value={false}>False</option>
+                      <option value={true}>True</option>
                     </select>
                   </span>
                 </div>
