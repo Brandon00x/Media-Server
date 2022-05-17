@@ -6,7 +6,6 @@ Project Start Date: 4/20/22
 
 <h3>ALPHA Version Changes - WIP</h3>
 <li>Feature - Better logging</li>
-<li>Fix Photos Loading Issues</li>
 
 <h3>BETA Version Changes - Timeline TBD</h3>
 <li>Feature - Include Extra Metadata for Books/Movies/TV/Photos</li>
