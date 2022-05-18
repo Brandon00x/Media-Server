@@ -5,7 +5,6 @@ import axios from "axios";
 import { v4 as uuidv4 } from "uuid";
 import Loading from "./Loading";
 
-// TODO: Change API Calls from Localhost to Server IP
 export default class MediaNotFound extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +27,7 @@ export default class MediaNotFound extends Component {
   }
 
   async getMissingMedia() {
-    let res = await axios.get(`/missingmedia`);
+    let res = await axios.get(`/api/missingmedia`);
     this.missingMedia = res.data;
     this.missingBooks = this.missingMedia[0].books;
     this.missingMovies = this.missingMedia[0].movies;
@@ -298,7 +297,7 @@ export default class MediaNotFound extends Component {
     try {
       if (this.title.length > 0 && this.creator.length > 0) {
         console.log("Searching");
-        let res = await axios.get(`/retrymissingitem`, {
+        let res = await axios.get(`/api/retrymissingitem`, {
           params: { data: apiData },
         });
         let data = res.data;
@@ -320,7 +319,7 @@ export default class MediaNotFound extends Component {
 
   async openFolder(e) {
     this.folder = e.target.value;
-    await axios.get(`/open`, {
+    await axios.get(`/api/open`, {
       params: { data: this.folder },
     });
   }

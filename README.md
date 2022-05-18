@@ -13,9 +13,10 @@ My main goal for this project was to showcase my abilities writing code and obta
 <li>NodeJS - 16.14.0 <a href="https://nodejs.org/en/download/">Download NodeJS</a></li>
 <li>MongoDB <a href="https://www.mongodb.com/try/download/community">Download MongoDB</a></li>
 <br/>
-<h3>Start the Program:</h3>
-<p>Run startwindows.bat or startlinux.sh to start the program.</p>
-<p>Note: You will need to run as admin on windows for the batch file to start MongoDB or start MongoDB manually.</p>
+<h3>Install NPM Packages for server/client:</h3>
+<p>npm run configure</p>
+<h3>Start</h3>
+<p>npm start</p>
 
 <br/>
 

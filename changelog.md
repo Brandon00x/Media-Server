@@ -5,10 +5,10 @@ Project Start Date: 4/20/22
 ## Additional Features To Be Added Soon / Known Bugs
 
 <h3>ALPHA Version Changes - WIP</h3>
+<li>Finish TV Show Section / Streaming</li>
 
 <h3>BETA Version Changes - Timeline TBD</h3>
 <li>Feature - Include Extra Metadata for Books/Movies/TV/Photos</li>
-<li>Create installer for prereqs / setup</li>
 <li>Add Album Goto Button for Music Player NavBar</li>
 <li>Performance - API Calls Performance Improvements.</li>
 <li>Performance - Scan Performance Improvements Based on Data Captured</li>
@@ -53,6 +53,9 @@ Project Start Date: 4/20/22
 <br/>
 
 ## Change Log | Features Added / Fixed Bugs
+
+<li>Finished 5/17 - Startup - Use package.json and npm scripts to start / install</li>
+<li>Finished 5/17 - Bug Fixes - Fix proxy causing music to not stream. Redo as manual proxy to prevent IMG src errors.</li>
 <li>Finished 5/17 - Feature - Add Proxy Config</li>
 <li>Finished 5/17 - Feature - Better logging</li>
 <li>Finished 5/16 - Bug Fixes - Fixed Phtotos Create Cards Error</li>

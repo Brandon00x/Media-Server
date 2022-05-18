@@ -155,7 +155,9 @@ function cardTop(title, mediaType, imgType, imgUrl, photo, style) {
           id={title}
           value={this.noDescription}
           alt=""
-          onError={(e) => (e.target.src = "altimage.png")}
+          onError={(e) => {
+            e.target.src = "altimage.png";
+          }}
           style={{
             width: style.img.width,
             height: style.img.height,

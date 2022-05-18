@@ -55,7 +55,7 @@ export default class Settings extends Component {
   };
 
   async getSavedData() {
-    let res = await axios.get(`/props`); // Change Local Server Address
+    let res = await axios.get(`/api/props`); // Change Local Server Address
     let data = res.data;
     this.setState({
       apikeymovie: data.keyMovies,
@@ -102,7 +102,7 @@ export default class Settings extends Component {
         mediaType = "Music";
       }
       serverMessages.innerText += `Starting Local ${mediaType} Scan...\n This could take some time if your root folder contains a lot of items\n`;
-      let res = await fetch(`/update`, {
+      let res = await fetch(`/api/update`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ type: mediaCategory, path: mediaPath }),
@@ -150,7 +150,7 @@ export default class Settings extends Component {
   async saveChangesToServer(property, value) {
     const serverMessages = document.getElementById("serverMessages");
     serverMessages.innerText += `INFO: Updating Property: ${property}. Value: ${value}\n`;
-    let res = await fetch(`/save`, {
+    let res = await fetch(`/api/save`, {
       method: "POST",
       headers: {
         Accept: "application/json",

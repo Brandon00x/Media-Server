@@ -30,7 +30,7 @@ let musicStreamPath;
 let serverAddress;
 
 // Sends Properties, Keys, and Folder Locations
-app.get("/props", cors(corsOptions), async function (req, res) {
+app.get("/api/props", cors(corsOptions), async function (req, res) {
   try {
     logger.silent(`Route Get Request for /props`);
     let startObj = await setProps(serverAddress);
@@ -41,7 +41,7 @@ app.get("/props", cors(corsOptions), async function (req, res) {
 });
 
 // Save Properties, Folders, API Keys, or PORT Change.
-app.post("/save", cors(corsOptions), async function (req, res) {
+app.post("/api/save", cors(corsOptions), async function (req, res) {
   let property = req.body.property;
   let data = req.body.data;
   handleSave(property, data, res);
@@ -52,7 +52,7 @@ app.post("/save", cors(corsOptions), async function (req, res) {
 });
 
 // Scan local media (books, movies, music) then call API for each one to update.
-app.post("/update", cors(corsOptions), async function (req, res) {
+app.post("/api/update", cors(corsOptions), async function (req, res) {
   try {
     logger.silent("Route Post Request /update.");
     let mediaCategory = await req.body.type;
@@ -83,14 +83,14 @@ app.post("/update", cors(corsOptions), async function (req, res) {
 });
 
 // Send Missing Media Information
-app.get("/missingmedia", async function (req, res) {
+app.get("/api/missingmedia", async function (req, res) {
   let missingItems = await missingMedia();
   logger.info(`Getting Missing Media Items ${missingItems.length}`);
   res.json(missingItems);
 });
 
 // Retry Missing Media Item
-app.get("/retrymissingitem", async function (req, res) {
+app.get("/api/retrymissingitem", async function (req, res) {
   let data = JSON.parse(req.query.data);
   let mediaItem = data;
   let mediaType = data.mediaType;
@@ -101,7 +101,7 @@ app.get("/retrymissingitem", async function (req, res) {
 });
 
 // Send Base64 Encoded Photo for Photos Page.
-app.post("/photo", cors(corsOptions), async function (req, res) {
+app.post("/api/photo", cors(corsOptions), async function (req, res) {
   let photoPath = await req.body.data;
   fs.readFile(photoPath, function (err, data) {
     if (err) {
@@ -118,7 +118,7 @@ app.post("/photo", cors(corsOptions), async function (req, res) {
 });
 
 // Send Media API Data from Database
-app.post("/getmedia", cors(corsOptions), async function (req, res) {
+app.post("/api/getmedia", cors(corsOptions), async function (req, res) {
   let mediaType = await req.body.data;
   logger.info(`Media Data Requested for ${mediaType}`);
   let cmd = { cmd: "find", collection: mediaType };
@@ -127,7 +127,7 @@ app.post("/getmedia", cors(corsOptions), async function (req, res) {
 });
 
 // Send Season / Episode Data for TV Shows
-app.post("/getseason", cors(corsOptions), async function (req, res) {
+app.post("/api/getseason", cors(corsOptions), async function (req, res) {
   let replaceSpecialCharacters = await req.body.data;
   let show = replaceSpecialCharacters
     .replaceAll(":", "")
@@ -139,7 +139,7 @@ app.post("/getseason", cors(corsOptions), async function (req, res) {
 });
 
 // Open File Requested Locally. (Not In Browser)
-app.get("/open", cors(corsOptions), async function (req, res) {
+app.get("/api/open", cors(corsOptions), async function (req, res) {
   try {
     let path = req.query.data;
     let finalPath = '"' + path + '"';
@@ -159,7 +159,7 @@ app.get("/open", cors(corsOptions), async function (req, res) {
 });
 
 // Set Movie Stream Path
-app.get("/setvideo", async function (req, res) {
+app.get("/api/setvideo", async function (req, res) {
   videoSreamPath = req.query.data;
   logger.info(`Set Video Stream Path:\n${videoSreamPath}`);
   res.send(true);
@@ -167,7 +167,7 @@ app.get("/setvideo", async function (req, res) {
 
 // Stream Movie
 // TODO: Decode h265 and other video codec support.
-app.get("/video", async function (req, res) {
+app.get("/api/video", async function (req, res) {
   try {
     let path = await videoSreamPath;
     // TODO: TV Show Stream Not Done
@@ -206,7 +206,7 @@ app.get("/video", async function (req, res) {
 });
 
 // Set Music Stream Path
-app.get("/setmusic", async function (req, res) {
+app.get("/api/setmusic", async function (req, res) {
   musicStreamPath = req.query.path;
   let song = req.query.song;
   let album = req.query.album;
@@ -218,17 +218,19 @@ app.get("/setmusic", async function (req, res) {
 });
 
 // Stream Music
-app.get("/streammusic", function (req, res) {
+app.get("/api/streammusic", function (req, res) {
   let musicStream = fs.createReadStream(musicStreamPath);
   musicStream.on("error", (err) => {
     logger.error(`Streaming Error: ${err}`);
+    res.status(400);
+    return;
   });
   res.writeHead(200, { "Content-Type": "audio/mp3" });
   musicStream.pipe(res);
 });
 
 // Parse Epub Book File. Append Parsed Content into Readable HTML and Send.
-app.get("/book", async function (req, res) {
+app.get("/api/book", async function (req, res) {
   let path = req.query.path;
   let ext = req.query.ext;
   logger.info(`Get Book Request: Extension Type: ${ext}`);

@@ -3,6 +3,9 @@ import axios from "axios";
 // Display Book in Browser
 async function readInBrowser(e) {
   try {
+    this.setState({
+      isLoading: true,
+    });
     this.bookObject = JSON.parse(e.target.value);
     this.path = this.bookObject.Path;
     this.ext = this.bookObject.Ext;
@@ -10,15 +13,18 @@ async function readInBrowser(e) {
     console.info(
       `Read In Browser Called. Title: ${this.name}. Extension Type ${this.ext}`
     );
-    let res = await axios.get(`/book/`, {
+    let res = await axios.get(`/api/book/`, {
       params: { path: this.path, ext: this.ext },
     });
 
     // If Server Returned Error Alert Error.
     if (res.data.Error) {
       alert(
-        `Unable to open book. A mapped drive may be disconnect. Please confirm the path exists: ${this.path}`
+        `Unable to open book. A mapped drive may be disconnected or the file type is not supported yet. Please confirm the path exists: ${this.path}`
       );
+      this.setState({
+        isLoading: false,
+      });
       return;
     }
 
@@ -36,18 +42,12 @@ async function readInBrowser(e) {
           <div className="showInBrowserBook" dangerouslySetInnerHTML={html} />
         </div>
       );
-      this.setState((prevState) => ({
-        showInBrowser: !prevState.showInBrowser,
-        showInBrowserObject: this.bookReader,
-        scrollHidden: true,
-      }));
-      this.scrollToTop();
     }
     // Render Extension PDF
     else if (this.ext === ".pdf") {
       if (res.data.Success) {
         let pdf = await require("./PDFs/ViewPDF.pdf");
-        let bookReader = (
+        this.bookReader = (
           <div>
             <h1 className="showInBrowserTitle">{this.name}</h1>
             <i
@@ -58,18 +58,12 @@ async function readInBrowser(e) {
             <iframe title={this.name} className="showInBrowserPDF" src={pdf} />
           </div>
         );
-        this.setState((prevState) => ({
-          showInBrowser: !prevState.showInBrowser,
-          showInBrowserObject: bookReader,
-          scrollHidden: true,
-        }));
-        this.scrollToTop();
       }
     }
     // Render Extension DOC
     // TODO: DOC Files are not supported as of now. Will Alert Error Msg before code executes.
     else if (this.ext === ".doc") {
-      let bookReader = (
+      this.bookReader = (
         <div>
           <h1 className="showInBrowserTitle">Doc Files Are Not Supported</h1>
           <p>
@@ -83,13 +77,13 @@ async function readInBrowser(e) {
           ></i>
         </div>
       );
-      this.setState((prevState) => ({
-        showInBrowser: !prevState.showInBrowser,
-        showInBrowserObject: bookReader,
-        scrollHidden: true,
-      }));
-      this.scrollToTop();
     }
+    this.setState((prevState) => ({
+      showInBrowser: !prevState.showInBrowser,
+      showInBrowserObject: this.bookReader,
+      scrollHidden: true,
+      isLoading: false,
+    }));
   } catch (err) {
     console.error(err);
   }

@@ -7,7 +7,7 @@ async function getSeason(e) {
     this.showProps = JSON.parse(e.target.value);
     this.showPropsJson = JSON.stringify(this.showProps);
     console.info(`Get Season Called for ${this.showProps.Title}`);
-    let res = await axios.post(`/getseason`, {
+    let res = await axios.post(`/api/getseason`, {
       data: this.showProps.Title,
     });
     this.seasonObject = res.data;

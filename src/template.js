@@ -139,7 +139,7 @@ export default class Template extends Component {
 
   // Gets/Sets Saved Properties for Zoom, Scroll, Titles, etc.
   async getProperties() {
-    let res = await axios.get(`/props`);
+    let res = await axios.get(`/api/props`);
     let props = res.data;
     // Set Properties
     this.setState({
@@ -169,7 +169,7 @@ export default class Template extends Component {
     let data;
 
     try {
-      let res = await axios.post(`/getmedia`, {
+      let res = await axios.post(`/api/getmedia`, {
         data: mediaType,
       });
       data = res.data;

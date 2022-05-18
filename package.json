@@ -7,6 +7,7 @@
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.26.1",
+    "http-proxy-middleware": "^2.0.6",
     "react": "^18.0.0",
     "react-bootstrap": "^2.2.2",
     "react-dom": "^18.0.0",
@@ -18,12 +19,13 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "configure": "npm i & cd server & npm i",
+    "start": "mongod & node server/app.js & react-scripts start"
   },
-  "proxy": "http://localhost:3020",
   "eslintConfig": {
     "extends": [
       "react-app",

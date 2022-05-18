@@ -11,7 +11,7 @@ async function playInBrowser(e) {
     `Play In Browser Called. Title: ${this.name}. Extension: ${this.ext}`
   );
   // Set Movie / TV Video Path.
-  let res = await axios.get(`/setvideo/`, {
+  let res = await axios.get(`/api/setvideo/`, {
     params: { data: path },
   });
   if (res.data) {
@@ -31,7 +31,7 @@ async function playInBrowser(e) {
           autoPlay
           poster={this.poster}
         >
-          <source src={`/video/`} type="video/mp4" />
+          <source src={`/api/video/`} type="video/mp4" />
         </video>
       </div>
     );
