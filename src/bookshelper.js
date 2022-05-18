@@ -10,7 +10,7 @@ async function readInBrowser(e) {
     console.info(
       `Read In Browser Called. Title: ${this.name}. Extension Type ${this.ext}`
     );
-    let res = await axios.get(`${this.props.address}/book/`, {
+    let res = await axios.get(`/book/`, {
       params: { path: this.path, ext: this.ext },
     });
 

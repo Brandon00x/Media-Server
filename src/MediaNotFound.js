@@ -28,7 +28,7 @@ export default class MediaNotFound extends Component {
   }
 
   async getMissingMedia() {
-    let res = await axios.get(`http://localhost:3020/missingmedia`);
+    let res = await axios.get(`/missingmedia`);
     this.missingMedia = res.data;
     this.missingBooks = this.missingMedia[0].books;
     this.missingMovies = this.missingMedia[0].movies;
@@ -298,7 +298,7 @@ export default class MediaNotFound extends Component {
     try {
       if (this.title.length > 0 && this.creator.length > 0) {
         console.log("Searching");
-        let res = await axios.get(`http://localhost:3020/retrymissingitem`, {
+        let res = await axios.get(`/retrymissingitem`, {
           params: { data: apiData },
         });
         let data = res.data;
@@ -320,7 +320,7 @@ export default class MediaNotFound extends Component {
 
   async openFolder(e) {
     this.folder = e.target.value;
-    await axios.get(`http://localhost:3020/open`, {
+    await axios.get(`/open`, {
       params: { data: this.folder },
     });
   }

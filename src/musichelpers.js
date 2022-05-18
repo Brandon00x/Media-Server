@@ -28,7 +28,7 @@ async function playLocalSong(e) {
   });
 
   // Set Song Path / Get Album Tracks from DB.
-  let res = await axios.get(`${this.props.address}/setmusic`, {
+  let res = await axios.get(`/setmusic`, {
     params: { path: this.songPath, song: this.songName, album: this.album },
   });
   this.albumSongList = res.data;
@@ -186,7 +186,7 @@ async function playLocalSong(e) {
       {this.albumSongList.length === this.trackNumber ? (
         <audio id="musicPlayer" autoPlay onEnded={this.closeMusicPlayer}>
           <source
-            src="http://localhost:3020/streammusic"
+            src="/streammusic"
             onError={(e) => {
               alert(
                 `Streaming Error: Please confirm path exists or if it is a network drive, the drive is connected. Path: ${this.songPath}`
@@ -195,7 +195,7 @@ async function playLocalSong(e) {
             type="audio/ogg"
           />
           <source
-            src="http://localhost:3020/streammusic"
+            src="/streammusic"
             onError={(e) => {
               alert(
                 `Streaming Error: Please confirm path exists or if it is a network drive, the drive is connected. Path: ${this.songPath}`
@@ -213,7 +213,7 @@ async function playLocalSong(e) {
           music={JSON.stringify(this.nextTrack)}
         >
           <source
-            src="http://localhost:3020/streammusic"
+            src="/streammusic"
             onError={(e) => {
               alert(
                 `Streaming Error: Please confirm path exists or if it is a network drive, the drive is connected. Path: ${this.songPath}`
@@ -222,7 +222,7 @@ async function playLocalSong(e) {
             type="audio/ogg"
           />
           <source
-            src="http://localhost:3020/streammusic"
+            src="/streammusic"
             onError={(e) => {
               alert(
                 `Streaming Error: Please confirm path exists or if it is a network drive, the drive is connected. Path: ${this.songPath}`

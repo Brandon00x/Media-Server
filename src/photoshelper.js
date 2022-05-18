@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Get Base64 Image
 async function getLocalPhoto(photoPath) {
-  let res = await axios.post(`${this.props.address}/photo`, {
+  let res = await axios.post(`/photo`, {
     data: photoPath,
   });
   let photo = res.data;

@@ -5,7 +5,6 @@ Project Start Date: 4/20/22
 ## Additional Features To Be Added Soon / Known Bugs
 
 <h3>ALPHA Version Changes - WIP</h3>
-<li>Feature - Better logging</li>
 
 <h3>BETA Version Changes - Timeline TBD</h3>
 <li>Feature - Include Extra Metadata for Books/Movies/TV/Photos</li>
@@ -54,7 +53,8 @@ Project Start Date: 4/20/22
 <br/>
 
 ## Change Log | Features Added / Fixed Bugs
-
+<li>Finished 5/17 - Feature - Add Proxy Config</li>
+<li>Finished 5/17 - Feature - Better logging</li>
 <li>Finished 5/16 - Bug Fixes - Fixed Phtotos Create Cards Error</li>
 <li>Finished 5/16 - Bug Fixes - Set Default Property Values for Hotkeys if undefined on first start.</li>
 <li>Finished 5/16 - Windows Testing / Fixes</li>

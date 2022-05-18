@@ -183,7 +183,7 @@ async function changeRowCount(e, value) {
 function openMedia(e) {
   let values = JSON.parse(e.target.value);
   let path = values.Path;
-  axios.get(`${this.props.address}/open`, { params: { data: path } });
+  axios.get(`/open`, { params: { data: path } });
 }
 
 // Close Pinned Card

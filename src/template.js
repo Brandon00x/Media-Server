@@ -139,7 +139,7 @@ export default class Template extends Component {
 
   // Gets/Sets Saved Properties for Zoom, Scroll, Titles, etc.
   async getProperties() {
-    let res = await axios.get(`${this.props.address}/props`);
+    let res = await axios.get(`/props`);
     let props = res.data;
     // Set Properties
     this.setState({
@@ -169,7 +169,7 @@ export default class Template extends Component {
     let data;
 
     try {
-      let res = await axios.post(`${this.props.address}/getmedia`, {
+      let res = await axios.post(`/getmedia`, {
         data: mediaType,
       });
       data = res.data;
@@ -206,7 +206,6 @@ export default class Template extends Component {
     // Create Cards for TV, Movies, Books, Photos
     else {
       // Filter Results with Name instead of Title
-
       data = data.filter(function (item) {
         return item.data.name === undefined; // Return Titles (They are API Updated)
       });

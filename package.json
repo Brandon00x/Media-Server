@@ -1,5 +1,5 @@
 {
-  "name": "books",
+  "name": "media-server",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -23,6 +23,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+  "proxy": "http://localhost:3020",
   "eslintConfig": {
     "extends": [
       "react-app",
