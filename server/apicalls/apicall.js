@@ -1,6 +1,7 @@
 const axios = require("axios");
 const { readProps } = require("../start/start");
 const { databaseAction } = require("../database/mongodb");
+const { logger } = require("../logger/logger");
 
 let mediaResults = [];
 let mediaNotFound = [];
@@ -32,14 +33,13 @@ async function getSingleResult(mediaType, singleItem) {
     if (mediaInfo.totalItems > 0) {
       // Insert Found Item to Media Collection
       let boolSuccess = await mapBookData(mediaInfo, singleItem);
-      console.log(boolSuccess, typeof boolSuccess);
       if (boolSuccess === true) {
         // Delete Found Item from Missing Collection.
         await databaseAction(deleteFoundItem);
       }
       resultFound = true;
     } else {
-      console.log(`No Items Found for ${singleItem.name}`);
+      logger.info(`No Items Found for ${singleItem.name}`);
       resultFound = false;
     }
   }
@@ -96,7 +96,7 @@ async function getMediaInfo(response, mediaType, singleItem) {
   };
   await databaseAction(createIndex);
 
-  console.info(`Calling API for ${dbMediaItems.length} ${mediaName} files.`);
+  logger.info(`Calling API for ${dbMediaItems.length} ${mediaName} files.`);
 
   for (let x = 0; x < dbMediaItems.length; x++) {
     // Update Music
@@ -107,7 +107,7 @@ async function getMediaInfo(response, mediaType, singleItem) {
         await apiCallMusic(artist, album, apikey);
       } catch (err) {
         failCount++;
-        console.error(`Error Calling Music API: ${err}`);
+        logger.error(`Error Calling Music API: ${err}`);
         mediaNotFound.push({
           Name: album,
           Path: artist,
@@ -149,7 +149,7 @@ async function getMediaInfo(response, mediaType, singleItem) {
   res.write(
     `${counter++}. ${mediaName} API Found ${successCounter} results. ${mediaName} API Failed for ${failCount}\n`
   );
-  console.log(`Finished API Calls.`);
+  logger.info(`Finished API Calls.`);
 }
 
 // Call OMDBI API for Movies
@@ -215,7 +215,7 @@ async function apiCallBooks(mediaValues, apikey) {
     title = mediaValues.data.name;
     author = mediaValues.data.author;
   }
-  console.log(`Calling API Books ${title} ${author}`);
+  logger.info(`Calling API Books ${title} ${author}`);
   let apiUrl = `https://www.googleapis.com/books/v1/volumes?q=${title}+inauthor:${author}&langRestrict=en&maxResults=1&key=${apikey}`;
   let res = await axios.get(apiUrl);
   let mediaInfo = res.data;
@@ -265,7 +265,7 @@ async function apiCallMusic(artist, album, apikey) {
         }
       } catch (err) {
         failCount++;
-        console.error(`Error Handling Music API Response: ${err}`);
+        logger.error(`Error Handling Music API Response: ${err}`);
         mediaNotFound.push({
           Name: album,
           Path: err,
@@ -430,7 +430,7 @@ async function mapBookData(mediaInfo, dbItem) {
     return true;
   } catch (err) {
     if (isSingle === true) {
-      console.error(err);
+      logger.error(err);
       return false;
     } else {
       await mediaNotFoundError(dbItem);
@@ -478,7 +478,7 @@ async function mapMusicData(mediaInfo, album) {
     );
     successCounter++;
   } catch (err) {
-    console.error(err);
+    logger.error(err);
   }
   try {
     if (

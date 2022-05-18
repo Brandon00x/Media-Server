@@ -7,6 +7,7 @@ const { readdir } = require("fs/promises");
 const sizeOf = require("image-size");
 const { databaseAction } = require("../database/mongodb");
 const { saveToDatabase } = require("../database/saveToDatabase");
+const { logger } = require("../logger/logger");
 
 // Arrays Used for Media.
 let initialFolderPaths = []; //Initial First Level Folders
@@ -67,8 +68,8 @@ let scan = setInterval(() => {
 // Program | All Media | Starts Scan
 async function startScan(response, mediaCategory, mediaPath) {
   setCategory(mediaCategory);
-  console.info(
-    `Starting Local Media Scan:\nMedia Type ${mediaType}. Media Category ${mediaCategory}.`
+  logger.info(
+    `Starting Local Media Scan: Media Type ${mediaType}. Media Category ${mediaCategory}.`
   );
   resetGlobalVariables();
   saveScanTime("start");
@@ -88,7 +89,7 @@ async function startScan(response, mediaCategory, mediaPath) {
     mediaPath = await checkPathEnding(mediaPath);
     saveScanTime("checkPathEnding");
     let initDir = mediaPath;
-    console.info(`Directory Path to Scan: ${mediaPath}`);
+    logger.info(`Directory Path to Scan: ${mediaPath}`);
 
     // Directories | All Media | Read Root Directories. If they contain directories matching media name use those directories.
     let superDirectoriesCheck = false;
@@ -115,11 +116,11 @@ async function startScan(response, mediaCategory, mediaPath) {
     }
 
     for (let i = 0; i < initialFolderPaths.length; i++) {
-      console.info(
+      logger.info(
         `Initial Folder Path ${i + 1}. ${initialFolderPaths[i].directory}`
       );
     }
-    console.info(`Verifying Final Folder Paths from Initial Folder Paths`);
+    logger.info(`Verifying Final Folder Paths from Initial Folder Paths`);
     // Directories | All Media | Scan All Sub Directories Recursively and verify there are no more sub directories
     let paths = await verifyFinalDirectory(initialFolderPaths);
     saveScanTime("verifyFinalDirectory");
@@ -213,7 +214,7 @@ async function startScan(response, mediaCategory, mediaPath) {
     res.write(
       `Finished: Found ${mediaArr.length} media items. Media Path Searched: ${mediaPath}.\nChecked Root Directories: true Checked Super Directories: ${superDirectoriesCheck}`
     );
-    console.info(
+    logger.info(
       `Finished: Found ${mediaArr.length} media items. Media Path Searched: ${mediaPath}.\nChecked Root Directories: true Checked Super Directories: ${superDirectoriesCheck}`
     );
 
@@ -361,7 +362,7 @@ async function removeObjProps(o) {
       }
     }
   } catch (err) {
-    console.error(err);
+    logger.error(err);
   }
 }
 
@@ -396,14 +397,14 @@ async function verifyFinalDirectory(path) {
     }
     return finalFolderPaths;
   } catch (err) {
-    console.error(`Error Verifying Directories ${err}`);
+    logger.error(`Error Verifying Directories ${err}`);
   }
 }
 
 // Directories | All Media Types | Read Files in Verified Directories
 async function readDirectoryContents(paths, mediaCategory, reject) {
   if (loop) {
-    console.info("Reading Directory Files");
+    logger.info("Reading Directory Files");
   }
   let path = await paths;
   try {
@@ -424,7 +425,7 @@ async function readDirectoryContents(paths, mediaCategory, reject) {
       await readDirectoryContents(initialFolderPaths, mediaCategory, reject);
     }
   } catch (err) {
-    console.error(`Error Reading File Contents of Directory ${err}`);
+    logger.error(`Error Reading File Contents of Directory ${err}`);
     reject(err);
   }
 }
@@ -632,7 +633,7 @@ async function verifyFileExtension(files, paths, mediaCategory, reject) {
       }
     }
   } catch (err) {
-    console.error(`Error Verifying File Extensions ${err}`);
+    logger.error(`Error Verifying File Extensions ${err}`);
     reject(err);
   }
 }
@@ -641,7 +642,7 @@ async function verifyFileExtension(files, paths, mediaCategory, reject) {
 /////////// SANITIZE DATA | ALL MEDIA | Sanitize Titles for API
 // Sanitize | Music | Sanitize Music Titles for API
 async function sanitizeMusic() {
-  console.log(`Sanitizing Music Titles`);
+  logger.info(`Sanitizing Music Titles`);
   return new Promise(async (resolve, reject) => {
     let done = false;
     let musicSanitize = setInterval(() => {
@@ -675,7 +676,7 @@ async function sanitizeMusic() {
 
 // Sanitize | Music | Set Music Artist Based on Folder Name
 async function setMusicArtist() {
-  console.info(`Setting Music Artist`);
+  logger.info(`Setting Music Artist`);
   for (let i = 0; i < mediaArr.length; i++) {
     let lastIndexPath = mediaArr[i].path.lastIndexOf(
       "/",
@@ -690,7 +691,7 @@ async function setMusicArtist() {
 
 // Sanitize | Music | Set Music Album Based on Folder Name
 async function setMusicAlbum() {
-  console.log(`Setting Music Album`);
+  logger.info(`Setting Music Album`);
   for (let i = 0; i < mediaArr.length; i++) {
     // Get Album
     let lastIndexPath = mediaArr[i].path.lastIndexOf("/");
@@ -709,7 +710,7 @@ async function setMusicAlbum() {
 
 // Sanitize | Music | Sort Music By Artist > Album > Songs
 async function sortMusic() {
-  console.log(`Sorting Music`);
+  logger.info(`Sorting Music`);
   let songArray = [];
   let albumArray = [];
   let artistArray = [];
@@ -782,7 +783,7 @@ async function sortMusic() {
 }
 
 async function saveMusicToDb() {
-  console.log(`Saving Music To Database`);
+  logger.info(`Saving Music To Database`);
   let x = 0;
   let albumSongs = [];
   let songs = [];
@@ -844,7 +845,7 @@ async function saveMusicToDb() {
 
 // Sanitize | Books | Sanitize book titles and removes junk.
 async function removeAuthorFromTitle() {
-  console.log(`Removing Author From Title`);
+  logger.info(`Removing Author From Title`);
   try {
     for (let i = 0; i < mediaArr.length; i++) {
       let authorReversedLowerCase =
@@ -945,7 +946,7 @@ async function removeAuthorFromTitle() {
       }
     }
   } catch (err) {
-    console.error("Error Adjusting Titles: ", err);
+    logger.error("Error Adjusting Titles: ", err);
   }
 }
 
@@ -969,7 +970,7 @@ async function getFileCreatedDate() {
     for (let i = 0; i < mediaArr.length; i++) {
       fs.stat(mediaArr[i].Path, async (err, stats) => {
         if (err) {
-          console.error("Error Getting File Stats: ", err);
+          logger.error("Error Getting File Stats: ", err);
           reject(err);
         } else {
           mediaArr[i].Year = `Created: ${stats.birthtime
@@ -1092,7 +1093,7 @@ async function sanitizeMovieTvTitles() {
         }
         // No Episode Found -- Ignore for now.
         else {
-          console.info(`Nothing Found ${notfound++} Title ${titleWasBlank}`);
+          logger.info(`Nothing Found ${notfound++} Title ${titleWasBlank}`);
         }
       }
 
@@ -1211,7 +1212,7 @@ async function sanitizeMovieTvTitles() {
 
 // Sanitize | TV Shows | Dedupe TV Shows.
 async function deDupeTitles() {
-  console.info(`Deduping Titles`);
+  logger.info(`Deduping Titles`);
   let round = 0;
   for (let i = 0; i < mediaArr.length; i++) {
     let title = mediaArr[i].name.toLowerCase();
@@ -1235,7 +1236,7 @@ async function deDupeTitles() {
 
 // Sanitize | TV Shows | Check Folder Path against Title. If no match use folder title to prevent episode as Title
 async function preventEpisodeAsTitle() {
-  console.info(
+  logger.info(
     `Prevent Episode as Title: Checking Folder Name Against Show Name.`
   );
   for (let i = 0; i < mediaArr.length; i++) {
@@ -1277,7 +1278,7 @@ async function preventEpisodeAsTitle() {
 
 // Sanitize | TV Shows | Order TV Shows by Name > Season > Episode.
 async function orderBySeason() {
-  console.info(`Ordering TV Show by Season.`);
+  logger.info(`Ordering TV Show by Season.`);
   let numberOfShows = 0;
   // Split TV Shows by Name and Episodes
   for (let i = 0; i < mediaArr.length; i++) {
@@ -1312,7 +1313,7 @@ async function orderBySeason() {
         });
       }
     } catch (err) {
-      console.error(`Error Pushing TV Show Name ${err}`);
+      logger.error(`Error Pushing TV Show Name ${err}`);
     }
 
     let season;
@@ -1400,7 +1401,7 @@ async function orderBySeason() {
             });
           }
         } catch (err) {
-          console.error(err);
+          logger.error(err);
         }
 
         // Map TV Show Result #, Title, > Season Obj > Episodes
@@ -1425,7 +1426,7 @@ async function orderBySeason() {
             try {
               tvShow[x].content = showObj;
             } catch (err) {
-              console.error(`Error Mapping TV Show: ${err}`);
+              logger.error(`Error Mapping TV Show: ${err}`);
             }
             // Reset Variables for Next Show
             seasonObj = [];
@@ -1435,7 +1436,7 @@ async function orderBySeason() {
             seasonsKey = 1;
           }
         } catch (err) {
-          console.error(err);
+          logger.error(err);
         }
       }
     }
@@ -1479,6 +1480,7 @@ function resetGlobalVariables() {
   loop = true;
   tvShow = [];
   tvSeason = [];
+  logger.silent(`Scan Media Global Variables Reset.`);
 }
 
 // Performance Metric | All Media | Saves time to complete each scan and time each function took to complete
@@ -1500,7 +1502,7 @@ function saveScanTime(fn) {
 function writeScanTime(scanTimeData) {
   fs.appendFile("./scanmedia/scantime.txt", scanTimeData, (err) => {
     if (err) {
-      console.error("Error saving scan time Error: ", err);
+      logger.error("Error saving scan time Error: ", err);
     } else {
       // We saved scan time.
     }

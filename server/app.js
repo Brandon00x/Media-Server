@@ -16,6 +16,7 @@ const { readBook } = require("./readmedia/readbook");
 const { readTvSeason } = require("./readmedia/readtvseason");
 const { databaseAction } = require("./database/mongodb");
 const { missingMedia } = require("./missingmedia/missingmedia");
+const { logger } = require("./logger/logger");
 
 const corsOptions = {
   origin: "*",
@@ -31,10 +32,11 @@ let serverAddress;
 // Sends Properties, Keys, and Folder Locations
 app.get("/props", cors(corsOptions), async function (req, res) {
   try {
+    logger.silent(`Route Get Request for /props`);
     let startObj = await setProps(serverAddress);
     res.send(startObj);
   } catch (err) {
-    console.error(`Error Sending Properties Data: ${err}`);
+    logger.error(`Error Sending Properties Data: ${err}`);
   }
 });
 
@@ -43,13 +45,16 @@ app.post("/save", cors(corsOptions), async function (req, res) {
   let property = req.body.property;
   let data = req.body.data;
   handleSave(property, data, res);
-  console.info(`Success: Saved Propterty: ${property}. Data: ${data}`);
+  logger.info(
+    `Route Post Request for /save.  Success: Saved Propterty: ${property}. Data: ${data}`
+  );
   res.send(`Success: Saved Propterty: ${property}. Data: ${data}`);
 });
 
 // Scan local media (books, movies, music) then call API for each one to update.
 app.post("/update", cors(corsOptions), async function (req, res) {
   try {
+    logger.silent("Route Post Request /update.");
     let mediaCategory = await req.body.type;
     let mediaPath = await req.body.path;
 
@@ -58,6 +63,9 @@ app.post("/update", cors(corsOptions), async function (req, res) {
 
     // API Call | Get Metadata Information for Media
     if (mediaData.length > 0 && mediaCategory !== "updatephotos") {
+      logger.info(
+        `Local Media Scan Complete. Found ${mediaData.length} items. Starting API calls for ${mediaCategory}.`
+      );
       let isSingle = false;
       await getMediaInfo(res, mediaCategory, isSingle);
     }
@@ -69,7 +77,7 @@ app.post("/update", cors(corsOptions), async function (req, res) {
     }
     res.end();
   } catch (err) {
-    console.error(`Error: Unable to finish scan request: ${err}`);
+    logger.error(`Error: Unable to finish scan request: ${err}`);
     res.end();
   }
 });
@@ -77,7 +85,7 @@ app.post("/update", cors(corsOptions), async function (req, res) {
 // Send Missing Media Information
 app.get("/missingmedia", async function (req, res) {
   let missingItems = await missingMedia();
-  console.log(`Getting Missing Media Items ${missingItems.length}`);
+  logger.info(`Getting Missing Media Items ${missingItems.length}`);
   res.json(missingItems);
 });
 
@@ -86,7 +94,7 @@ app.get("/retrymissingitem", async function (req, res) {
   let data = JSON.parse(req.query.data);
   let mediaItem = data;
   let mediaType = data.mediaType;
-  console.log(`Retrying Missing Item: ${mediaItem}. Media Type: ${mediaType}`);
+  logger.info(`Retrying Missing Item: ${mediaItem}. Media Type: ${mediaType}`);
   let result = await getMediaInfo(res, mediaType, mediaItem);
   res.write(result.toString());
   res.end();
@@ -97,7 +105,7 @@ app.post("/photo", cors(corsOptions), async function (req, res) {
   let photoPath = await req.body.data;
   fs.readFile(photoPath, function (err, data) {
     if (err) {
-      console.error("Error Getting Local Photo: ", err);
+      logger.error("Error Getting Local Photo: ", err);
       res.send("Error");
       res.end();
     } else {
@@ -112,7 +120,7 @@ app.post("/photo", cors(corsOptions), async function (req, res) {
 // Send Media API Data from Database
 app.post("/getmedia", cors(corsOptions), async function (req, res) {
   let mediaType = await req.body.data;
-  console.info(`Media Data Requested for ${mediaType}`);
+  logger.info(`Media Data Requested for ${mediaType}`);
   let cmd = { cmd: "find", collection: mediaType };
   let dbMediaItems = await databaseAction(cmd);
   res.send(dbMediaItems);
@@ -125,7 +133,8 @@ app.post("/getseason", cors(corsOptions), async function (req, res) {
     .replaceAll(":", "")
     .replaceAll("!", "")
     .replaceAll(",", "");
-  console.info(`Season Data Requested for show: ${show}`);
+  logger.info(`Season Data Requested for show: ${show}`);
+  // TODO: Local TV Season Use DB Instead of JSON
   await readTvSeason(show, res);
 });
 
@@ -137,22 +146,22 @@ app.get("/open", cors(corsOptions), async function (req, res) {
 
     // Check OS
     let isWin = /^win/.test(process.platform); // possible outcomes -> 'darwin', 'freebsd', 'linux', 'sunos' or 'win32'
-    console.info(`Platform was Windows? ${isWin}\nPath: ${finalPath}\n`);
+    logger.info(`Platform was Windows? ${isWin}\nPath: ${finalPath}\n`);
     exec((isWin ? "start " : "open ") + finalPath, function (err) {
       if (err !== null) {
-        console.error(`Error Opening File: ${err}.\nError Path: ${path}\n`);
+        logger.error(`Error Opening File: ${err}.\nError Path: ${path}\n`);
       }
     });
     res.end();
   } catch (err) {
-    console.error("Error Opening File: ", err);
+    logger.error("Error Opening File: ", err);
   }
 });
 
 // Set Movie Stream Path
 app.get("/setvideo", async function (req, res) {
   videoSreamPath = req.query.data;
-  console.info(`Set Video Stream Path:\n${videoSreamPath}`);
+  logger.info(`Set Video Stream Path:\n${videoSreamPath}`);
   res.send(true);
 });
 
@@ -163,7 +172,7 @@ app.get("/video", async function (req, res) {
     let path = await videoSreamPath;
     // TODO: TV Show Stream Not Done
     if (path.includes("TV Show")) {
-      console.error("INFO: Streaming TV Shows Not Finished");
+      logger.error("INFO: Streaming TV Shows Not Finished");
       return;
     }
     let stat = fs.statSync(path);
@@ -192,7 +201,7 @@ app.get("/video", async function (req, res) {
       fs.createReadStream(path).pipe(res);
     }
   } catch (err) {
-    console.error(`Error Streaming Video:\n${err}\n`);
+    logger.error(`Error Streaming Video:\n${err}\n`);
   }
 });
 
@@ -201,7 +210,7 @@ app.get("/setmusic", async function (req, res) {
   musicStreamPath = req.query.path;
   let song = req.query.song;
   let album = req.query.album;
-  console.info(`Music Play Request for Song: ${song} Album ${album}.`);
+  logger.info(`Music Play Request for Song: ${song} Album ${album}.`);
   // Get Database Album Songs/Paths
   let cmd = { cmd: "find", collection: "Music", key: "key", data: album };
   let dbSongs = await databaseAction(cmd);
@@ -212,7 +221,7 @@ app.get("/setmusic", async function (req, res) {
 app.get("/streammusic", function (req, res) {
   let musicStream = fs.createReadStream(musicStreamPath);
   musicStream.on("error", (err) => {
-    console.log(`Streaming Error: ${err}`);
+    logger.error(`Streaming Error: ${err}`);
   });
   res.writeHead(200, { "Content-Type": "audio/mp3" });
   musicStream.pipe(res);
@@ -222,19 +231,19 @@ app.get("/streammusic", function (req, res) {
 app.get("/book", async function (req, res) {
   let path = req.query.path;
   let ext = req.query.ext;
-  console.info(`Get Book Request: Extension Type: ${ext}`);
+  logger.info(`Get Book Request: Extension Type: ${ext}`);
   readBook(path, ext, res);
 });
 
 // Start Server and Read PORT File
 const startServer = async () => {
-  console.info("Starting Server:");
+  logger.info("Starting Server:");
   let ip = setServerIp();
   let port = await getPort();
   serverAddress = `http://${ip}:${port}`;
   app.listen(port, () => {
     checkPropertiesFirstRun(serverAddress);
-    console.info(`Media Metadata Server Listening On: ${port}.\n`);
+    logger.info(`Media Server Listening on Port: ${port}.`);
   });
 };
 

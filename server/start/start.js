@@ -1,14 +1,19 @@
 const { handleSave } = require("../save/handleSave");
 const { databaseAction } = require("../database/mongodb");
 const { saveToDatabase } = require("../database/savetoDatabase");
+const { logger } = require("../logger/logger");
 
+// Get Property from DB
 async function readProps(prop) {
   let cmd = { cmd: "findOne", collection: "Properties", key: prop };
   let propValue = await databaseAction(cmd);
-  //console.log(`Read Properties: Property: ${prop}: `, propValue[0].data);
+  logger.silent(
+    `Read Properties: Property: ${prop}. Value: ${propValue[0].data}`
+  );
   return propValue[0].data;
 }
 
+// Set Property from DB
 async function setProps(serverAddress) {
   let apikeybooks = await readProps("apikeybooks");
   let apikeymovie = await readProps("apikeymovie");
@@ -89,7 +94,7 @@ async function getPort() {
 
 // Confirm Default Properties have Values - If not set them.
 async function checkPropertiesFirstRun(serverAddress) {
-  console.log("Confirming Default Properties have Values.");
+  logger.silent("Confirming Default Properties have Values.");
   let props = await setProps(serverAddress);
 
   let defaultProps = {
@@ -113,8 +118,8 @@ async function checkPropertiesFirstRun(serverAddress) {
       let undefinedValue = key;
       for (const [key, value] of Object.entries(defaultProps)) {
         if (undefinedValue === key) {
-          console.log(
-            `Property ${key} was undefined. Setting property default value: ${value}`
+          logger.warn(
+            `Undefined Default Property: ${key} found. Updated Property: ${key}. New Value: ${value}`
           );
           let cmd = {
             cmd: "insertOne",
