@@ -271,15 +271,7 @@ export default class Template extends Component {
                 this.photo,
                 this.style
               )}
-              {this.cardMiddle(
-                this.creator,
-                this.categories,
-                mediaType,
-                this.length,
-                this.year,
-                this.description,
-                this.style
-              )}
+
               {this.cardBottom(
                 this.downloadValue,
                 mediaType,
@@ -310,6 +302,7 @@ export default class Template extends Component {
                   height: "30vw",
                   top: "20%",
                   border: "1px solid black",
+                  background: "burlywood",
                 }}
               >
                 <div
@@ -362,24 +355,16 @@ export default class Template extends Component {
                     {this.title}
                   </div>
                 </div>
-                <p className="mediaDescription">{this.description}</p>
-                {this.state.cardsPerRow >= 6 ? (
-                  <div id="mediaCardMidButtons">
-                    <Button
-                      className="mediaButton"
-                      title={`Open ${this.title} Locally`}
-                      value={JSON.stringify(this.downloadValue)}
-                      onClick={this.openMedia}
-                      style={{
-                        border: "none",
-                        fontWeight: "bold",
-                      }}
-                    >
-                      Open <i className="fa-solid fa-folder-open" />
-                    </Button>
-                    {this.streamButton}{" "}
-                  </div>
-                ) : null}
+                {this.cardMiddle(
+                  this.creator,
+                  this.categories,
+                  mediaType,
+                  this.length,
+                  this.year,
+                  this.description,
+                  this.style
+                )}
+                <p className="mediaDescriptionText">{this.description}</p>
                 {this.cardBottom(
                   this.downloadValue,
                   mediaType,
@@ -498,7 +483,6 @@ export default class Template extends Component {
         y++;
       } while (y < dataProps.Tracks.length);
       // Reset Arrays for Next Album Loop
-
       let url;
       try {
         if (dataProps.Attributes.url !== undefined) {
@@ -794,15 +778,6 @@ export default class Template extends Component {
               this.photo,
               this.style
             )}
-            {this.cardMiddle(
-              this.creator,
-              this.categories,
-              mediaType,
-              this.length,
-              this.year,
-              this.description,
-              this.style
-            )}
             {this.cardBottom(
               this.downloadValue,
               mediaType,
@@ -881,6 +856,15 @@ export default class Template extends Component {
                 <div className="mediaDescBarTitle" style={{ fontSize: "1vw" }}>
                   {this.title}
                 </div>
+                {this.cardMiddle(
+                  this.creator,
+                  this.categories,
+                  mediaType,
+                  this.length,
+                  this.year,
+                  this.description,
+                  this.style
+                )}
               </div>
               <p className="mediaDescription">{this.description}</p>
               {this.state.cardsPerRow >= 6 ? (

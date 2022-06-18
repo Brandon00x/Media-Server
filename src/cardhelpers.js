@@ -80,74 +80,31 @@ function createRows() {
 // Create Card Top
 function cardTop(title, mediaType, imgType, imgUrl, photo, style) {
   let img;
-  let height;
-  let fontSize;
-  let rightRadius;
-  let leftRadius;
-  let display;
-  let marginTop;
-  let marginBottom;
-  let alignItems;
-  let minHeight;
+  let titleClassName;
+
   if (
     mediaType === "Movies" ||
     mediaType === "Books" ||
     mediaType === "TV Shows"
   ) {
+    titleClassName = "mediaTitle";
     img = imgUrl;
-    height = "3vw";
-    fontSize = "1.3vw";
-    marginTop = "5px";
-    marginBottom = "0px";
-    alignItems = "center";
   } else if (mediaType === "Music") {
-    height = "auto";
-    fontSize = "1vw";
-    rightRadius = "10px";
-    leftRadius = "10px";
-    alignItems = "center";
-    minHeight = "2vw";
+    titleClassName = "mediaTitleMusic";
     this.transparentColor = hex2rgba(this.albumColor4).includes("NaN")
       ? (this.transparentColor = "rgb(147 191 207 / 58%)")
       : (this.transparentColor = hex2rgba(this.albumColor4));
-    if (this.state.albumTitleHidden === true) {
-      display = "none";
-    }
   } else if (mediaType === "Photos") {
+    titleClassName = "mediaTitle";
     if (photo === undefined) {
       console.log("undefined img");
     } else {
       img = `data:image/${imgType};base64,${photo}`;
     }
-    height = "3vw";
-    fontSize = "1.3vw";
-    marginTop = "5px";
-    marginBottom = "0px";
-    alignItems = "center";
   }
 
   const cardTop = (
     <div className="mediaCardTop" id={title} value={title}>
-      <div
-        className="mediaTitle"
-        onClick={this.state.navtitle === "Music" ? this.hideAlbumTitle : null}
-        style={{
-          top: 1,
-          width: style.img.width,
-          height: height,
-          fontSize: fontSize,
-          borderTopLeftRadius: leftRadius,
-          borderTopRightRadius: rightRadius,
-          display: display,
-          backgroundColor: this.transparentColor,
-          marginTop: marginTop,
-          marginBottom: marginBottom,
-          alignItems: alignItems,
-          minHeight: minHeight,
-        }}
-      >
-        {title}
-      </div>
       {mediaType === "Music" ? null : (
         <img
           className="mediaImg"
@@ -157,6 +114,7 @@ function cardTop(title, mediaType, imgType, imgUrl, photo, style) {
           alt=""
           onError={(e) => {
             e.target.src = "altimage.png";
+            e.target.style = `border: 1px solid white; width: ${style.img.width}; height: ${style.img.height}; margin-top: 10px`;
           }}
           style={{
             width: style.img.width,
@@ -165,6 +123,16 @@ function cardTop(title, mediaType, imgType, imgUrl, photo, style) {
           }}
         />
       )}
+      <div
+        className={titleClassName}
+        onClick={this.state.navtitle === "Music" ? this.hideAlbumTitle : null}
+        style={{
+          width: style.img.width,
+          backgroundColor: this.transparentColor,
+        }}
+      >
+        {title}
+      </div>
     </div>
   );
   return cardTop;
@@ -183,7 +151,6 @@ function cardMiddle(
   let lengthName;
   let categoriesName;
   let released;
-
   if (mediaType === "Movies") {
     lengthName = (
       <span style={{ fontWeight: "bold" }}>
@@ -248,21 +215,12 @@ function cardMiddle(
       {mediaType === "Music" ? (
         <span
           id="mediaCreator"
-          className="mediaCreator"
+          className="mediaCreatorMusic"
           onClick={this.hideArtist}
           title={creator}
           style={{
             width: parseFloat(style.img.width) + "vw",
-            marginLeft: "-3px",
             backgroundColor: this.transparentColor,
-            color: this.albumColor1,
-            position: "absolute",
-            bottom: 0,
-            height: "2vw",
-            left: "3px",
-            fontSize: "1vw",
-            borderBottomLeftRadius: "10px",
-            borderBottomRightRadius: "10px",
             display: this.state.artistHidden === true ? "none" : "relative",
           }}
         >
@@ -278,10 +236,7 @@ function cardMiddle(
         </span>
       )}
       {mediaType === "Music" ? null : (
-        <div
-          className="cardMiddleContent"
-          style={{ width: parseFloat(style.img.width) + "vw" }}
-        >
+        <div className="mediaCategories">
           <span className="mediaCategoriesGenre">
             {mediaType === "Photos" ? (
               description
@@ -289,13 +244,13 @@ function cardMiddle(
               <span style={{ fontWeight: "bold" }}>
                 {categoriesName}:{" "}
                 <span style={{ fontWeight: "normal" }}>{categories}</span>
+                <br />
+                {released}
+                <br /> {lengthName}
               </span>
             )}
           </span>
-          <div className="mediaCategories">{released}</div>
-          <span className="mediaTimeInfo">
-            <span className="mediaLength">{lengthName}</span>
-          </span>
+          <div className="mediaCategories"></div>
         </div>
       )}
     </div>
@@ -313,55 +268,71 @@ function cardBottom(
   imgType,
   photo
 ) {
+  // Set Button Classes for Description Cards
+  let buttonSpanClass;
+  let buttonClass;
+  let buttonColor;
+  if (descriptionOn === "nodesc" || typeof descriptionOn === "undefined") {
+    if (mediaType === "Photos") {
+      buttonSpanClass = "mediaButtonSpanPhotos";
+    } else {
+      buttonSpanClass = "mediaButtonSpan";
+    }
+    buttonClass = "mediaButton";
+    buttonColor = "white";
+  } else {
+    buttonSpanClass = "mediaButtonSpanDescription";
+    buttonClass = "mediaButtonDescription";
+    buttonColor = "black";
+  }
+
   // Action Button - TV Shows
   this.showTvSeason = (
     <Button
-      className="mediaButton"
+      className={buttonClass}
       onClick={this.getSeason}
       value={JSON.stringify(downloadValue)}
       name={title}
       title={`View ${title} Seasons`}
-      style={{
-        width: "6vw",
-      }}
     >
-      Seasons <i className="fas fa-tv" style={{ color: "black" }}></i>
+      Seasons <i className="fas fa-tv" style={{ color: buttonColor }}></i>
     </Button>
   );
   // Action Button - Movies
   this.streamMovieButton = (
     <Button
-      className="mediaButton"
+      className={buttonClass}
       onClick={this.playInBrowser}
       value={JSON.stringify(downloadValue)}
       name={title}
       title={`Watch ${title}`}
     >
-      Watch <i className="fas fa-tv" style={{ color: "black" }}></i>
+      Watch <i className="fas fa-tv" style={{ color: buttonColor }}></i>
     </Button>
   );
   // Action Button - Photos
   this.viewFullSizeButton = (
     <Button
-      className="mediaButton"
+      className={buttonClass}
       onClick={this.showPhoto}
       value={`data:image/${imgType};base64,${photo}`}
       name={title}
       title={`View Full Size Image`}
     >
-      Full Size <i className="fas fa-expand-alt"></i>
+      Full Size{" "}
+      <i className="fas fa-expand-alt" style={{ color: buttonColor }}></i>
     </Button>
   );
   // Action Button - Books
   this.readButton = (
     <Button
-      className="mediaButton"
+      className={buttonClass}
       onClick={this.readInBrowser}
       value={JSON.stringify(downloadValue)}
       name={title}
       title={`Read ${title}`}
     >
-      Read <i className="fas fa-book" style={{ color: "black" }}></i>
+      Read <i className="fas fa-book" style={{ color: buttonColor }}></i>
     </Button>
   );
 
@@ -380,9 +351,9 @@ function cardBottom(
   if (mediaType !== "Music") {
     this.spanKey = uuidv4();
     const cardBottom = (
-      <span id={this.spanKey} key={this.spanKey} className="mediaButtonSpan">
+      <span id={this.spanKey} key={this.spanKey} className={buttonSpanClass}>
         <Button
-          className="mediaButton"
+          className={buttonClass}
           name={i}
           title="Description"
           id={title}
@@ -391,25 +362,21 @@ function cardBottom(
             key: this.key,
           })}
           onClick={this.pinDescriptionCard}
-          style={{
-            width: "6vw",
-          }}
         >
           Description <i className="fas fa-file-alt"></i>
         </Button>
-        {this.state.cardsPerRow >= 6 ? null : (
-          <>
-            <Button
-              className="mediaButton"
-              title={`Open ${title} Locally`}
-              value={JSON.stringify(downloadValue)}
-              onClick={this.openMedia}
-            >
-              Open <i className="fa-solid fa-folder-open"></i>
-            </Button>
-            {this.streamButton}
-          </>
-        )}
+
+        <>
+          <Button
+            className={buttonClass}
+            title={`Open ${title} Locally`}
+            value={JSON.stringify(downloadValue)}
+            onClick={this.openMedia}
+          >
+            Open <i className="fa-solid fa-folder-open"></i>
+          </Button>
+          {this.streamButton}
+        </>
       </span>
     );
     return cardBottom;

@@ -33,6 +33,7 @@ async function databaseAction(cmd) {
     }
   }
 
+  // Delete One
   if (action === "deleteOne") {
     collection
       .deleteOne({ key: key })

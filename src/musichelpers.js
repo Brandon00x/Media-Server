@@ -246,7 +246,7 @@ async function playLocalSong(e) {
 
 // Toggle Show / Hide Artist Name on Album Cover
 function hideArtist() {
-  let list = document.getElementsByClassName("mediaCreator");
+  let list = document.getElementsByClassName("mediaCreatorMusic");
   let artistTitleStyle = [];
   if (this.state.artistHidden === true) {
     for (let i = 0; i < list.length; ++i) {
@@ -267,7 +267,7 @@ function hideArtist() {
 
 // Toggle Show / Hide Album Title
 function hideAlbumTitle() {
-  let list = document.getElementsByClassName("mediaTitle");
+  let list = document.getElementsByClassName("mediaTitleMusic");
   let albumTitleStyle = [];
   if (this.state.albumTitleHidden === true) {
     for (let i = 0; i < list.length; ++i) {

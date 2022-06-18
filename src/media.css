@@ -109,7 +109,6 @@ body {
   flex-direction: column;
   flex-wrap: nowrap;
   margin: 5px 5px 0px 5px;
-  background-color: burlywood;
   border-radius: 5%;
   height: -webkit-fill-available;
   position: relative;
@@ -156,67 +155,69 @@ body {
 
 .mediaTitle {
   width: 100vw;
-  font-size: 1.75vw;
   font-weight: 800;
   display: flex;
   position: inherit;
-  justify-content: center;
-  text-align: center;
-  /* align-items: center; */
   overflow: hidden;
-  margin-bottom: 5px;
+  justify-content: flex-start;
+  color: white;
+  font-size: 1.1vw;
+  margin-top: 5px;
+  margin-bottom: 0px;
+  height: 3vw;
+}
+
+.mediaTitleMusic {
+  top: 1px;
+  height: auto;
+  min-height: 2vw;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-size: 1vw;
+  font-weight: 800;
+  color: white;
+  position: inherit;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  overflow: hidden;
 }
 
 /* MEDIA CARD MIDDLE */
+
 .mediaCardMiddle {
-  display: flex;
-  flex-direction: column;
-  position: initial;
-  height: 8vw;
-  width: fit-content;
+  margin: 0.5vw;
 }
 
 .mediaCreator {
   bottom: 99%;
   left: 2.2%;
-  font-size: 1.3vw;
+  font-size: 1vw;
   font-weight: 600;
   text-align: left;
   overflow: hidden;
-  margin-left: 5px;
+}
+
+.mediaCreatorMusic {
+  margin-left: -3px;
+  position: absolute;
+  bottom: 0px;
+  height: 2vw;
+  left: 3px;
+  font-size: 1vw;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  font-weight: 800;
+  text-align: center;
+  color: white;
   display: flex;
   justify-content: center;
-  text-align: center;
   align-items: center;
 }
 
 .mediaCategories {
-  margin: 3px 6px 3px 6px;
   font-size: 1vw;
-}
-
-.mediaCategoriesGenre {
-  font-size: 1vw;
-  overflow: hidden;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  padding-left: 5px;
-}
-
-.mediaTimeInfo {
-  font-size: 1vw;
-  height: 2vh;
-  margin: 3px 6px 3px 6px;
-  display: flex;
-  justify-content: space-between;
-}
-
-.mediaLength {
-  font-size: 1vw;
-  height: 4vh;
-  text-align: left;
-  overflow: hidden;
 }
 
 .mediaItemNumber {
@@ -231,32 +232,56 @@ body {
 
 .mediaDescription {
   width: auto;
-  /* height: auto; */
-  margin-left: 5px;
-  margin-right: 5px;
+  margin: 0.5vw;
+  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.mediaDescriptionText {
+  margin: 0.5vw;
+  font-size: 1vw;
+  height: 24.5vh;
   overflow: scroll;
   overflow-y: scroll;
   overflow-x: hidden;
 }
 
 /* MEDIA CARD BOTTOM */
-.mediaButtonSpan {
+.mediaButtonSpanPhotos {
   display: flex;
-  align-self: center;
   justify-content: center;
+  align-items: center;
   bottom: 0;
+  width: inherit;
+  position: relative;
+}
+
+.mediaButtonSpanDescription {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: inherit;
 }
 
 .mediaButton {
-  border: 1px solid black;
-  width: 5vw;
-  height: 30px;
-  font-size: 0.7vw;
+  font-size: 0.8vw;
   font-weight: bold;
-  margin-left: 5px;
-  margin-right: 5px;
   border: none;
   background: none;
+  color: white;
+  padding: 0px;
+  margin-right: 11px;
+}
+
+.mediaButtonDescription {
+  font-size: 1vw;
+  font-weight: bold;
+  border: none;
+  background: none;
+  margin: 0vw 1vw 1vw 1vw;
 }
 
 /* TV Seasons Popup */
