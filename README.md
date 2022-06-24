@@ -14,9 +14,12 @@ My main goal for this project was to showcase my abilities writing code and obta
 <li>MongoDB <a href="https://www.mongodb.com/try/download/community">Download MongoDB</a></li>
 <br/>
 <h3>Install NPM Packages for server/client:</h3>
-<p>npm run configure</p>
+
+`npm install`
+
 <h3>Start</h3>
-<p>npm start</p>
+
+`npm start`
 
 <br/>
 

@@ -1502,7 +1502,16 @@ function saveScanTime(fn) {
 function writeScanTime(scanTimeData) {
   fs.appendFile("./scanmedia/scantime.txt", scanTimeData, (err) => {
     if (err) {
-      logger.error("Error saving scan time Error: ", err);
+      if (err.errno === -2) {
+        logger.info(`No Scan Time File To Write To. Creating File.`);
+        fs.writeFile(`./scanmedia/scantime.txt `, scanTimeData, (err) => {
+          if (err) {
+            logger.error(`ERROR: Scan Time File Could Not Be Created.`);
+          }
+        });
+      } else {
+        logger.error("Error saving scan time Error: ", err);
+      }
     } else {
       // We saved scan time.
     }

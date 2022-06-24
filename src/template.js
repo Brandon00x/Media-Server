@@ -364,7 +364,6 @@ export default class Template extends Component {
                   this.description,
                   this.style
                 )}
-                <p className="mediaDescriptionText">{this.description}</p>
                 {this.cardBottom(
                   this.downloadValue,
                   mediaType,
@@ -636,7 +635,7 @@ export default class Template extends Component {
             </div>
 
             {/* TRACKS */}
-            <div className="mediaDescription">
+            <div className="mediaDescriptionMusic">
               <div
                 className="musicTrackHolder"
                 style={{ borderColor: this.albumColor2 }}
@@ -736,6 +735,7 @@ export default class Template extends Component {
     this.createRows();
   }
 
+  // Photos Card
   async mapPhotos(data, mediaType) {
     console.log("Mapping Photos");
     try {
@@ -760,6 +760,7 @@ export default class Template extends Component {
           Img: this.imgUrl,
         };
 
+        // Photos Card
         this.mediaCards.push(
           <Card
             className="mediaCard"
@@ -790,7 +791,7 @@ export default class Template extends Component {
             )}
           </Card>
         );
-        // All Media No Music
+        // Photos Description Card
         this.mediaCardsDescription.push(
           <Draggable key={this.key}>
             <Card
@@ -808,6 +809,7 @@ export default class Template extends Component {
                 height: "30vw",
                 top: "20%",
                 border: "1px solid black",
+                background: "burlywood",
               }}
             >
               <div
@@ -856,6 +858,8 @@ export default class Template extends Component {
                 <div className="mediaDescBarTitle" style={{ fontSize: "1vw" }}>
                   {this.title}
                 </div>
+              </div>
+              <div className="photosDescriptionContainer">
                 {this.cardMiddle(
                   this.creator,
                   this.categories,
@@ -866,24 +870,6 @@ export default class Template extends Component {
                   this.style
                 )}
               </div>
-              <p className="mediaDescription">{this.description}</p>
-              {this.state.cardsPerRow >= 6 ? (
-                <div id="mediaCardMidButtons">
-                  <Button
-                    className="mediaButton"
-                    title={`Open ${this.title} Locally`}
-                    value={JSON.stringify(this.downloadValue)}
-                    onClick={this.openMedia}
-                    style={{
-                      border: "none",
-                      fontWeight: "bold",
-                    }}
-                  >
-                    Open <i className="fa-solid fa-folder-open" />
-                  </Button>
-                  {this.streamButton}{" "}
-                </div>
-              ) : null}
               {this.cardBottom(
                 this.downloadValue,
                 mediaType,

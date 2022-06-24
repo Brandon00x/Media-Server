@@ -107,7 +107,9 @@ async function getMediaInfo(response, mediaType, singleItem) {
         await apiCallMusic(artist, album, apikey);
       } catch (err) {
         failCount++;
-        logger.error(`Error Calling Music API: ${err}`);
+        logger.error(
+          `Error Calling Music API: ${err} --- CONFIRM YOUR JWT TOKEN IS REFRESHED AND SAVE IN SETTINGS AGAIN`
+        );
         mediaNotFound.push({
           Name: album,
           Path: artist,
@@ -235,7 +237,6 @@ async function apiCallMusic(artist, album, apikey) {
     });
   }, 3000);
   timeOut;
-
   // Begin API Call
   await axios
     .get(
@@ -439,10 +440,11 @@ async function mapBookData(mediaInfo, dbItem) {
 }
 
 // Map Music Data
-async function mapMusicData(mediaInfo, album) {
+async function mapMusicData(mediaInfo, res, album) {
   try {
     let cmd = { cmd: "find", collection: "Music", key: "key", data: album };
     let dbAlbum = await databaseAction(cmd);
+
     if (mediaInfo !== undefined) {
       dbAlbum[0].data.Genres =
         mediaInfo.results.albums.data[0].attributes.genreNames;
@@ -463,6 +465,21 @@ async function mapMusicData(mediaInfo, album) {
       } else {
         dbAlbum[0].data.HasAllTracks = false;
       }
+
+      try {
+        if (
+          typeof mediaInfo.results.albums.data[0].attributes.editorialNotes
+            .standard !== undefined
+        ) {
+          dbAlbum[0].data.Description =
+            mediaInfo.results.albums.data[0].attributes.editorialNotes.standard
+              .replace("This album is Mastered for iTunes. ", "")
+              .trim();
+        }
+      } catch (err) {
+        // No Album Description Was Available
+      }
+
       let cmd2 = {
         cmd: "updateOne",
         collection: "Music",
@@ -479,19 +496,6 @@ async function mapMusicData(mediaInfo, album) {
     successCounter++;
   } catch (err) {
     logger.error(err);
-  }
-  try {
-    if (
-      typeof mediaInfo.results.albums.data[0].attributes.editorialNotes
-        .standard !== undefined
-    ) {
-      dbAlbum[0].Description =
-        mediaInfo.results.albums.data[0].attributes.editorialNotes.standard
-          .replace("This album is Mastered for iTunes. ", "")
-          .trim();
-    }
-  } catch (err) {
-    //No Description Found
   }
 }
 

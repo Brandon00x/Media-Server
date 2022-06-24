@@ -60,7 +60,7 @@ app.post("/api/update", cors(corsOptions), async function (req, res) {
 
     // Scan | Find Local Media
     let mediaData = await startScan(res, mediaCategory, mediaPath);
-
+    
     // API Call | Get Metadata Information for Media
     if (mediaData.length > 0 && mediaCategory !== "updatephotos") {
       logger.info(

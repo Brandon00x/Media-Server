@@ -235,22 +235,26 @@ function cardMiddle(
           {creator === undefined ? "N/A" : creator}
         </span>
       )}
+
       {mediaType === "Music" ? null : (
         <div className="mediaCategories">
           <span className="mediaCategoriesGenre">
-            {mediaType === "Photos" ? (
-              description
-            ) : (
-              <span style={{ fontWeight: "bold" }}>
-                {categoriesName}:{" "}
-                <span style={{ fontWeight: "normal" }}>{categories}</span>
+            <span style={{ fontWeight: "bold" }}>
+              {categoriesName}:{" "}
+              <span style={{ fontWeight: "normal" }}>
+                {categories /* Genres/Categories of Media */}
                 <br />
-                {released}
-                <br /> {lengthName}
+                {released /* Media Release Date */}
+                <br /> {lengthName /* Length of Media */}
+                <br />{" "}
+                {mediaType === "Photos" ? (
+                  <div>{description}</div> // Image Type Of Photo
+                ) : (
+                  <div className="mediaDescription">{description}</div> // Synopsis of Plot
+                )}
               </span>
-            )}
+            </span>
           </span>
-          <div className="mediaCategories"></div>
         </div>
       )}
     </div>

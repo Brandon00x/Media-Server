@@ -5,6 +5,7 @@ Project Start Date: 4/20/22
 ## Additional Features To Be Added Soon / Known Bugs
 
 <h3>ALPHA Version Changes - WIP</h3>
+<li>CSS Changes to look more professional.</li>
 <li>Finish TV Show Section / Streaming</li>
 
 <h3>BETA Version Changes - Timeline TBD</h3>
@@ -54,6 +55,7 @@ Project Start Date: 4/20/22
 
 ## Change Log | Features Added / Fixed Bugs
 
+<li>Finished 6/24 - Move all npm packages to one package.json. Simplify npm start to run server/client</li>
 <li>Finished 5/17 - Startup - Use package.json and npm scripts to start / install</li>
 <li>Finished 5/17 - Bug Fixes - Fix proxy causing music to not stream. Redo as manual proxy to prevent IMG src errors.</li>
 <li>Finished 5/17 - Feature - Add Proxy Config</li>
