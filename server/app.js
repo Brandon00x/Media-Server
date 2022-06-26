@@ -60,7 +60,7 @@ app.post("/api/update", cors(corsOptions), async function (req, res) {
 
     // Scan | Find Local Media
     let mediaData = await startScan(res, mediaCategory, mediaPath);
-    
+
     // API Call | Get Metadata Information for Media
     if (mediaData.length > 0 && mediaCategory !== "updatephotos") {
       logger.info(
@@ -133,9 +133,11 @@ app.post("/api/getseason", cors(corsOptions), async function (req, res) {
     .replaceAll(":", "")
     .replaceAll("!", "")
     .replaceAll(",", "");
+
   logger.info(`Season Data Requested for show: ${show}`);
-  // TODO: Local TV Season Use DB Instead of JSON
-  await readTvSeason(show, res);
+
+  let resultShow = await readTvSeason(show, res);
+  res.json(resultShow);
 });
 
 // Open File Requested Locally. (Not In Browser)

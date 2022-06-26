@@ -299,7 +299,11 @@ function cardBottom(
       name={title}
       title={`View ${title} Seasons`}
     >
-      Seasons <i className="fas fa-tv" style={{ color: buttonColor }}></i>
+      Seasons{" "}
+      <i
+        className="fas fa-tv"
+        style={{ color: buttonColor, marginLeft: "5px" }}
+      ></i>
     </Button>
   );
   // Action Button - Movies
@@ -356,29 +360,33 @@ function cardBottom(
     this.spanKey = uuidv4();
     const cardBottom = (
       <span id={this.spanKey} key={this.spanKey} className={buttonSpanClass}>
-        <Button
-          className={buttonClass}
-          name={i}
-          title="Description"
-          id={title}
-          value={JSON.stringify({
-            action: "open",
-            key: this.key,
-          })}
-          onClick={this.pinDescriptionCard}
-        >
-          Description <i className="fas fa-file-alt"></i>
-        </Button>
-
-        <>
+        {mediaType === "TV Shows" ? null : (
           <Button
             className={buttonClass}
-            title={`Open ${title} Locally`}
-            value={JSON.stringify(downloadValue)}
-            onClick={this.openMedia}
+            name={i}
+            title="Description"
+            id={title}
+            value={JSON.stringify({
+              action: "open",
+              key: this.key,
+            })}
+            onClick={this.pinDescriptionCard}
           >
-            Open <i className="fa-solid fa-folder-open"></i>
+            Description <i className="fas fa-file-alt"></i>
           </Button>
+        )}
+
+        <>
+          {mediaType === "TV Shows" ? null : (
+            <Button
+              className={buttonClass}
+              title={`Open ${title} Locally`}
+              value={JSON.stringify(downloadValue)}
+              onClick={this.openMedia}
+            >
+              Open <i className="fa-solid fa-folder-open"></i>
+            </Button>
+          )}
           {this.streamButton}
         </>
       </span>

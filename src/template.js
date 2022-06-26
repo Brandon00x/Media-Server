@@ -491,7 +491,7 @@ export default class Template extends Component {
         }
       } catch (err) {}
 
-      // Create Main Card
+      // Create Main Card Music
       this.mediaCards.push(
         <Card
           id={dataProps.Album}
@@ -933,7 +933,9 @@ export default class Template extends Component {
                 </div>
               </div>
             ) : (
-              <div id="top">
+              <div>
+                <div id="top"></div>
+
                 {this.state.showInBrowser ? (
                   <ShowInBrowser
                     {...this.state}

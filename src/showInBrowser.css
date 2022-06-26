@@ -33,6 +33,7 @@
 }
 
 .closeCircle {
-  position: relative;
-  left: 100%;
+  left: 80%;
+  top: 13%;
+  position: absolute;
 }

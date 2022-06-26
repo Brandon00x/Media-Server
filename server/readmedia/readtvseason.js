@@ -6,11 +6,10 @@ async function readTvSeason(show, res) {
       cmd: "find",
       collection: "TV Shows",
       key: "key",
-      data: show,
+      data: new RegExp(show, `i`),
     };
     let media = await databaseAction(cmd);
-    res.json(media);
-    return;
+    return media;
   } catch (err) {
     console.error(`Error Sending Season Data for show: ${show}. Error: ${err}`);
   }
