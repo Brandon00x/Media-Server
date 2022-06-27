@@ -421,6 +421,11 @@ body {
   margin-right: 10px;
 }
 
+.tvPlayer {
+  width: 100vw;
+  height: 90vh;
+}
+
 .episodeJsxButton {
   width: auto;
   height: 30px;

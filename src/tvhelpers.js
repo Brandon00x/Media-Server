@@ -4,15 +4,19 @@ import { scrollToTop } from "./utilhelpers";
 
 // Get Season Data for TV Show
 async function getSeason(e) {
+  this.seasonsJsx = [];
+  this.episodeJsx = [];
+  this.episodeList = [];
+  this.seasonList = [];
+  this.episodeListValue = [];
   try {
-    this.seasonsJsx = [];
-    this.episodeJsx = [];
-    this.episodeList = [];
-    this.seasonList = [];
-    this.episodeListValue = [];
     this.showProps = JSON.parse(e.target.value);
-    this.showPropsJson = JSON.stringify(this.showProps);
+  } catch (err) {
+    this.showProps.Title = e;
+  }
+  this.showPropsJson = JSON.stringify(this.showProps);
 
+  try {
     let res = await axios.post(`/api/getseason`, {
       data: this.showProps.Title,
     });
@@ -68,9 +72,15 @@ async function getSeason(e) {
         this.episode = this.singleSeasonEpisodes[i].Episode;
         this.season = this.singleSeasonEpisodes[i].Season;
         this.path = this.singleSeasonEpisodes[i].Path;
+        this.episodeDataObj = [
+          this.episode,
+          this.season,
+          this.path,
+          this.showProps.Title,
+        ];
 
         this.episodeList.push(
-          <option value={this.path} key={uuidv4()}>
+          <option value={JSON.stringify(this.episodeDataObj)} key={uuidv4()}>
             Season: {this.season}, Episode: {this.episode}
           </option>
         );
@@ -110,9 +120,15 @@ async function getSeason(e) {
         do {
           this.episode = this.allSeasonData[i].Episodes[x].Episode;
           this.path = this.allSeasonData[i].Episodes[x].Path;
+          this.episodeDataObj = [
+            this.episode,
+            this.season,
+            this.path,
+            this.showProps.Title,
+          ];
 
           this.episodeList.push(
-            <option value={this.path} key={uuidv4()}>
+            <option value={JSON.stringify(this.episodeDataObj)} key={uuidv4()}>
               Season: {this.season}, Episode: {this.episode}
             </option>
           );
@@ -213,13 +229,11 @@ async function getSeason(e) {
         <div className="seasonsPlayEpisode">
           <div className="seasonsShowSubTitle">
             Play Episode:
-            <div
-              className="seasonsShowSubTitleInfo"
-              onChange={(e) => {
-                console.log(e.target.value);
-              }}
-            >
-              <select className="episodeSelector">{this.episodeList}</select>
+            <div className="seasonsShowSubTitleInfo">
+              <select className="episodeSelector" onChange={this.openInBrowser}>
+                <option>Select Episode</option>
+                {this.episodeList}
+              </select>
             </div>
           </div>
           <div className="seasonsShowSubTitle">
@@ -230,7 +244,10 @@ async function getSeason(e) {
                 console.log(e.target.value);
               }}
             >
-              <select className="episodeSelector">{this.episodeList}</select>
+              <select className="episodeSelector">
+                <option>Select Episode</option>
+                {this.episodeList}
+              </select>
             </div>
           </div>
           <div className="seasonsShowSubTitle">
@@ -302,11 +319,11 @@ async function getSeason(e) {
     </div>
   );
   // Render Season(s) In Component: Show In Browser
-  this.setState((prevState) => ({
-    showInBrowser: !prevState.showInBrowser,
+  this.setState({
+    showInBrowser: true,
     showInBrowserObject: this.seasonPreview,
     scrollHidden: true,
-  }));
+  });
   scrollToTop();
 }
 

@@ -428,13 +428,13 @@ function hideScroll() {
 async function openInBrowser(e) {
   let mediaType = this.props.navtitle;
   if (mediaType === "Movies") {
-    this.playInBrowser(e);
+    this.playInBrowser(e, true);
   } else if (mediaType === "Books") {
     this.readInBrowser(e);
   } else if (mediaType === "Music") {
     this.playInBrowser(e);
   } else if (mediaType === "TV Shows") {
-    this.playInBrowser(e);
+    this.playInBrowser(e, false);
   } else if (mediaType === "Photos") {
     this.showPhoto(e);
   }

@@ -36,4 +36,5 @@
   left: 145.2%;
   top: -0.5%;
   position: absolute;
+  z-index: 1;
 }

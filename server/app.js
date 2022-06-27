@@ -172,11 +172,6 @@ app.get("/api/setvideo", async function (req, res) {
 app.get("/api/video", async function (req, res) {
   try {
     let path = await videoSreamPath;
-    // TODO: TV Show Stream Not Done
-    if (path.includes("TV Show")) {
-      logger.error("INFO: Streaming TV Shows Not Finished");
-      return;
-    }
     let stat = fs.statSync(path);
     let fileSize = stat.size;
     let range = req.headers.range;

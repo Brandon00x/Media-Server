@@ -2,14 +2,15 @@
   position: fixed;
   display: flex;
   justify-content: space-between;
-  height: 55px;
-  width: 100vw;
-  top: 0%;
+  height: 6vh;
+  width: 78vw;
   color: black;
-  background-color: goldenrod;
   font-size: 40px;
-  border-bottom: 2px solid white;
+  background: white;
   z-index: 1;
+  align-items: center;
+  left: 11.1%;
+  border-radius: 20px;
 }
 
 .navbarTitle {
@@ -55,16 +56,28 @@
   font-size: 1.5vw;
   border: 2px solid black;
   color: black;
-  background-color: goldenrod;
+  background-color: white;
+  border-radius: 15px;
+  padding-left: 10px;
 }
 
 .navMediaOptions {
   display: flex;
   width: 225px;
   font-size: 1.2vw;
-  background-color: goldenrod;
+  background-color: white;
   border: 2px solid black;
+  border-radius: 15px;
 }
+
+.menuTitleGroup {
+  font-weight: 600;
+  height: 4vh;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+}
+
 .sliderNav {
   display: flex;
   height: 20px;

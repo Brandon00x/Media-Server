@@ -270,12 +270,14 @@ function cardBottom(
   i,
   descriptionOn,
   imgType,
-  photo
+  photo,
+  seasonNumber
 ) {
   // Set Button Classes for Description Cards
   let buttonSpanClass;
   let buttonClass;
   let buttonColor;
+  let seasonCount = seasonNumber;
   if (descriptionOn === "nodesc" || typeof descriptionOn === "undefined") {
     if (mediaType === "Photos") {
       buttonSpanClass = "mediaButtonSpanPhotos";
@@ -289,7 +291,7 @@ function cardBottom(
     buttonClass = "mediaButtonDescription";
     buttonColor = "black";
   }
-
+  console.log(seasonCount);
   // Action Button - TV Shows
   this.showTvSeason = (
     <Button
@@ -299,7 +301,7 @@ function cardBottom(
       name={title}
       title={`View ${title} Seasons`}
     >
-      Seasons{" "}
+      {seasonCount} Seasons{" "}
       <i
         className="fas fa-tv"
         style={{ color: buttonColor, marginLeft: "5px" }}

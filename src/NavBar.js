@@ -167,15 +167,14 @@ export default class NavBar extends Component {
                       className="navMediaOptions"
                       placeholder="Find..."
                       onChange={this.props.navSearch}
-                      style={{ backgroundColor: this.color1 }}
+                      style={{ backgroundColor: this.color1, height: "3vh" }}
                     />
                     <button
-                      className="navMediaOptions"
+                      className="navMediaOptions menuTitleGroup"
                       style={{
                         color: this.color4,
                         backgroundColor: this.color1,
                         borderColor: this.color4,
-                        fontWeight: 600,
                       }}
                     >
                       Sorted - {this.props.sortedBy}
@@ -229,12 +228,11 @@ export default class NavBar extends Component {
                     {this.props.isLoading ? null : (
                       <div>
                         <button
-                          className="navMediaOptions"
+                          className="navMediaOptions menuTitleGroup"
                           style={{
                             color: this.color4,
                             backgroundColor: this.color1,
                             borderColor: this.color4,
-                            fontWeight: 600,
                           }}
                         >
                           View Options
@@ -273,7 +271,7 @@ export default class NavBar extends Component {
                           Scroll Bottom
                         </button>
                         <button
-                          className="navMediaOptions"
+                          className="navMediaOptions menuTitleGroup"
                           style={{
                             color: this.color4,
                             backgroundColor: this.color1,

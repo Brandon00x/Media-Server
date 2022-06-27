@@ -252,6 +252,10 @@ export default class Template extends Component {
           };
           this.noDescription = "nodesc";
           this.descriptionOn = "desc";
+          this.seasonCount =
+            data[i].data[0].totalSeasons === null
+              ? 1
+              : data[i].data[0].totalSeasons;
 
           this.mediaCards.push(
             <Card
@@ -271,7 +275,6 @@ export default class Template extends Component {
                 this.photo,
                 this.style
               )}
-
               {this.cardBottom(
                 this.downloadValue,
                 mediaType,
@@ -280,7 +283,7 @@ export default class Template extends Component {
                 this.noDescription,
                 this.imgType,
                 this.photo,
-                this.key
+                this.seasonCount
               )}
             </Card>
           );
@@ -371,7 +374,8 @@ export default class Template extends Component {
                   i,
                   this.descriptionOn,
                   this.imgType,
-                  this.photo
+                  this.photo,
+                  this.seasonCount
                 )}
               </Card>
             </Draggable>
@@ -941,6 +945,8 @@ export default class Template extends Component {
                     {...this.state}
                     openInBrowser={this.openInBrowser.bind(this)}
                     showPhoto={this.showPhoto.bind(this)}
+                    closeBrowserMedia={this.closeBrowserMedia.bind(this)}
+                    getSeason={this.getSeason.bind(this)}
                   />
                 ) : (
                   this.mediaRows
