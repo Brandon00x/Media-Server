@@ -334,10 +334,13 @@ async function pinDescriptionCard(e) {
 // Scrolls to Page Top
 function scrollToTop() {
   const body = document.getElementById("top");
-  body.scrollIntoView({
-    behavior: "auto",
-    block: "end",
-  });
+  body.scrollIntoView(
+    {
+      behavior: "smooth",
+      block: "end",
+    },
+    500
+  );
 }
 
 // Scrolls to Page Bottom
@@ -346,6 +349,7 @@ function scrollToBottom() {
   body.scrollIntoView(
     {
       behavior: "smooth",
+      block: "end",
     },
     500
   );
@@ -359,6 +363,7 @@ function scrollToLocation(e) {
     body.scrollIntoView(
       {
         behavior: "smooth",
+        block: "end",
       },
       500
     );

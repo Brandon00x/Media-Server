@@ -7,6 +7,9 @@ async function getSeason(e) {
   try {
     this.seasonsJsx = [];
     this.episodeJsx = [];
+    this.episodeList = [];
+    this.seasonList = [];
+    this.episodeListValue = [];
     this.showProps = JSON.parse(e.target.value);
     this.showPropsJson = JSON.stringify(this.showProps);
 
@@ -63,30 +66,13 @@ async function getSeason(e) {
 
       for (let i = 0; i < this.singleSeasonEpisodes.length; i++) {
         this.episode = this.singleSeasonEpisodes[i].Episode;
+        this.season = this.singleSeasonEpisodes[i].Season;
         this.path = this.singleSeasonEpisodes[i].Path;
 
-        this.episodeJsx.push(
-          <div key={uuidv4()} className="episodesJsx">
-            <ul className="episodeJsxUl">Episode: {this.episode}</ul>
-            <ul className="episodeJsxUlPath">Path: {this.path}</ul>
-            <div className="episodesJsxButtonDiv">
-              <button
-                className="episodeJsxButton"
-                onClick={this.openInBrowser}
-                value={this.showPropsJson}
-              >
-                Stream
-              </button>
-              <button
-                className="episodeJsxButton"
-                onClick={this.openMedia}
-                value={this.showPropsJson}
-              >
-                Open
-              </button>
-              <button className="episodeJsxButton">Description</button>
-            </div>
-          </div>
+        this.episodeList.push(
+          <option value={this.path} key={uuidv4()}>
+            Season: {this.season}, Episode: {this.episode}
+          </option>
         );
       }
     } catch (err) {
@@ -106,6 +92,8 @@ async function getSeason(e) {
       for (let i = 0; i < this.allSeasonData.length; i++) {
         let x = 0;
         this.seasonEpisodeCount = this.allSeasonData[i].Episodes;
+        this.season = this.allSeasonData[i].Episodes[x].Season;
+
         // Push Season Information:
         this.episodeJsx.push(
           <div className="newSeasonBreak" key={uuidv4()}>
@@ -123,28 +111,10 @@ async function getSeason(e) {
           this.episode = this.allSeasonData[i].Episodes[x].Episode;
           this.path = this.allSeasonData[i].Episodes[x].Path;
 
-          this.episodeJsx.push(
-            <div key={uuidv4()} className="episodesJsx">
-              <ul className="episodeJsxUl">Episode: {this.episode}</ul>
-              <ul className="episodeJsxUlPath">Path: {this.path}</ul>
-              <div className="episodesJsxButtonDiv">
-                <button
-                  className="episodeJsxButton"
-                  onClick={this.openInBrowser}
-                  value={this.showPropsJson}
-                >
-                  Stream
-                </button>
-                <button
-                  className="episodeJsxButton"
-                  onClick={this.openMedia}
-                  value={this.showPropsJson}
-                >
-                  Open
-                </button>
-                <button className="episodeJsxButton">Description</button>
-              </div>
-            </div>
+          this.episodeList.push(
+            <option value={this.path} key={uuidv4()}>
+              Season: {this.season}, Episode: {this.episode}
+            </option>
           );
           x += 1;
         } while (x < this.seasonEpisodeCount.length);
@@ -166,18 +136,21 @@ async function getSeason(e) {
   // Define Season Preview JSX Element with Data Above
   this.seasonPreview = (
     <div id="seasonContainer" className="seasonContainer">
+      <img src={this.showProps.Img} alt="" className="seasonsPreviewImg" />
+
       <div className="seasonsPreview">
-        <div className="seasonsPreviewTitleDiv">
-          <div className="seasonTitleImageBlock">
-            <div className="seasonsShowTitle">{this.showProps.Title}</div>
-            <div className="seasonShowDescription">
-              {this.metaData.description}
-            </div>
-          </div>
+        <div className="seasonsShowTitle">
+          <div className="seasonShowTitleSpan">{this.showProps.Title}</div>
         </div>
+
+        <div className="seasonShowDescription">{this.metaData.description}</div>
 
         {/* ROW 1 */}
         <div className="seasonsInfoPanel">
+          <div className="seasonsShowSubTitle">
+            Local Seasons:{" "}
+            <span className="seasonsShowSubTitleInfo">{this.totalSeasons}</span>
+          </div>
           <div className="seasonsShowSubTitle">
             Actors:{" "}
             <span className="seasonsShowSubTitleInfo">
@@ -190,59 +163,11 @@ async function getSeason(e) {
               {this.metaData.genre}
             </span>
           </div>
-
-          <div className="seasonsYearDiv">
-            <div className="seasonsShowSubTitle">
-              Rating:
-              <br />
-              <span className="seasonsShowSubTitleInfo">
-                {this.metaData.rated}
-              </span>
-            </div>
-            <div className="seasonsShowSubTitle" style={{ marginLeft: "2vw" }}>
-              Local Seasons:
-              <br />
-              <span className="seasonsShowSubTitleInfo">
-                {this.totalSeasons}
-              </span>
-            </div>
-            <div className="seasonsShowSubTitle" style={{ marginLeft: "2vw" }}>
-              Episode Time:
-              <br />
-              <span className="seasonsShowSubTitleInfo">
-                {this.metaData.length}
-              </span>
-            </div>
-            <div className="seasonsShowSubTitle" style={{ marginLeft: "2vw" }}>
-              Released: <br />
-              <span className="seasonsShowSubTitleInfo">
-                {this.metaData.released}
-              </span>
-            </div>
-            <div className="seasonsShowSubTitle" style={{ marginLeft: "2vw" }}>
-              Years: <br />
-              <span className="seasonsShowSubTitleInfo">
-                {this.metaData.showDate}
-              </span>
-            </div>
-          </div>
-
-          {/* AWARDS ROW */}
-          <div className="seasonsAwards">
-            <div className="seasonsShowSubTitle">
-              IMDB Rating:
-              <br />
-              <span className="seasonsShowSubTitleInfo">
-                {this.metaData.imdbRating}
-              </span>
-            </div>
-            <div className="seasonsShowSubTitle" style={{ marginLeft: "2vw" }}>
-              Metascore:
-              <br />
-              <span className="seasonsShowSubTitleInfo">
-                {this.metaData.metaScoreRating}
-              </span>
-            </div>
+          <div className="seasonsShowSubTitle">
+            Episode Time:{" "}
+            <span className="seasonsShowSubTitleInfo">
+              {this.metaData.length}
+            </span>
           </div>
           <div className="seasonsShowSubTitle">
             Awards:{" "}
@@ -266,47 +191,114 @@ async function getSeason(e) {
               {this.metaData.country}
             </span>
           </div>
-          {this.metaData.creator === "N/A" ? null : (
-            <div className="seasonsShowSubTitle">
-              Creator:{" "}
-              <span className="seasonsShowSubTitleInfo">
-                {this.metaData.creator}
-              </span>
-            </div>
-          )}
-          {this.metaData.writers === null ? null : (
-            <div className="seasonsShowSubTitle">
-              Writers:{" "}
-              <span className="seasonsShowSubTitleInfo">
-                {this.metaData.writers}
-              </span>
-            </div>
-          )}
+          {/* {this.metaData.creator === "N/A" ? null : ( */}
+          <div className="seasonsShowSubTitle">
+            Creator:{" "}
+            <span className="seasonsShowSubTitleInfo">
+              {this.metaData.creator}
+            </span>
+          </div>
+          {/* )}
+          {this.metaData.writers === null ? null : ( */}
+          <div className="seasonsShowSubTitle">
+            Writers:{" "}
+            <span className="seasonsShowSubTitleInfo">
+              {this.metaData.writers}
+            </span>
+          </div>
+          {/* )} */}
         </div>
 
-        <div className="seasonsShowSubTitle">
-          File Location:{" "}
-          <button
-            value={this.showPropsJson}
-            onClick={this.openMedia}
-            style={{ background: "none", border: "none", color: "white" }}
-          >
-            Open{" "}
-          </button>
-          <button
-            className="fas fa-external-link-alt"
-            value={this.showPropsJson}
-            onClick={this.openMedia}
-          ></button>
+        {/* Play Episode Selection */}
+        <div className="seasonsPlayEpisode">
+          <div className="seasonsShowSubTitle">
+            Play Episode:
+            <div
+              className="seasonsShowSubTitleInfo"
+              onChange={(e) => {
+                console.log(e.target.value);
+              }}
+            >
+              <select className="episodeSelector">{this.episodeList}</select>
+            </div>
+          </div>
+          <div className="seasonsShowSubTitle">
+            View Episode Details:
+            <div
+              className="seasonsShowSubTitleInfo"
+              onChange={(e) => {
+                console.log(e.target.value);
+              }}
+            >
+              <select className="episodeSelector">{this.episodeList}</select>
+            </div>
+          </div>
+          <div className="seasonsShowSubTitle">
+            File Location:
+            <br />
+            <button
+              value={this.showPropsJson}
+              onClick={this.openMedia}
+              style={{
+                background: "none",
+                border: "none",
+                color: "white",
+                padding: "0",
+              }}
+            >
+              Open
+            </button>
+            <button
+              className="fas fa-external-link-alt"
+              value={this.showPropsJson}
+              onClick={this.openMedia}
+            ></button>
+          </div>
         </div>
+
+        {/* Bottom Status Bar */}
+        <div className="seasonStatusBar">
+          <div className="seasonsShowSubTitle">
+            Rating:
+            <br />
+            <span className="seasonsShowSubTitleInfo">
+              {this.metaData.rated}
+            </span>
+          </div>
+          <div className="seasonsShowSubTitle">
+            IMDB Rating:
+            <br />
+            <span className="seasonsShowSubTitleInfo">
+              {this.metaData.imdbRating}
+            </span>
+          </div>
+          <div className="seasonsShowSubTitle" style={{ marginLeft: "2vw" }}>
+            Metascore:
+            <br />
+            <span className="seasonsShowSubTitleInfo">
+              {this.metaData.metaScoreRating}
+            </span>
+          </div>
+          <div className="seasonsShowSubTitle" style={{ marginLeft: "2vw" }}>
+            Released: <br />
+            <span className="seasonsShowSubTitleInfo">
+              {this.metaData.released}
+            </span>
+          </div>
+          <div className="seasonsShowSubTitle" style={{ marginLeft: "2vw" }}>
+            Years: <br />
+            <span className="seasonsShowSubTitleInfo">
+              {this.metaData.showDate}
+            </span>
+          </div>
+        </div>
+
+        {/* Close Icon */}
         <i
           onClick={this.closeBrowserMedia}
           className="far fa-times-circle fa-2x closeCircle"
         ></i>
       </div>
-      <img src={this.showProps.Img} alt="" className="seasonsPreviewImg" />
-
-      <div className="episodesJsxRoot">{this.seasonsJsx}</div>
     </div>
   );
   // Render Season(s) In Component: Show In Browser
