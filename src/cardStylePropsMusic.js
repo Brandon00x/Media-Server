@@ -1,10 +1,6 @@
 module.exports = {
   // 2 Card Per Row
   rowCount2: {
-    rowProps: {
-      height: "30vh",
-      width: "100vw",
-    },
     cardProps: {
       img: {
         height: "21vh",
@@ -13,10 +9,6 @@ module.exports = {
     },
   },
   rowCount3: {
-    rowProps: {
-      height: "30vh",
-      width: "100vw",
-    },
     cardProps: {
       img: {
         height: "21vh",
@@ -25,10 +17,6 @@ module.exports = {
     },
   },
   rowCount4: {
-    rowProps: {
-      height: "30vh",
-      width: "100vw",
-    },
     cardProps: {
       img: {
         height: "21vh",
@@ -37,10 +25,6 @@ module.exports = {
     },
   },
   rowCount5: {
-    rowProps: {
-      height: "30vh",
-      width: "100vw",
-    },
     cardProps: {
       img: {
         height: "21vh",
@@ -49,10 +33,6 @@ module.exports = {
     },
   },
   rowCount6: {
-    rowProps: {
-      height: "29vh",
-      width: "100vw",
-    },
     cardProps: {
       img: {
         height: "21vh",
@@ -61,10 +41,6 @@ module.exports = {
     },
   },
   rowCount7: {
-    rowProps: {
-      height: "25.5vh",
-      width: "100vw",
-    },
     cardProps: {
       img: {
         height: "21vh",
@@ -73,10 +49,6 @@ module.exports = {
     },
   },
   rowCount8: {
-    rowProps: {
-      height: "22.7vh",
-      width: "100vw",
-    },
     cardProps: {
       img: {
         height: "21vh",
@@ -85,10 +57,6 @@ module.exports = {
     },
   },
   rowCount9: {
-    rowProps: {
-      height: "20vh",
-      width: "100vw",
-    },
     cardProps: {
       img: {
         height: "21vh",
@@ -97,10 +65,6 @@ module.exports = {
     },
   },
   rowCount10: {
-    rowProps: {
-      height: "18vh",
-      width: "100vw",
-    },
     cardProps: {
       img: {
         height: "21vh",
@@ -109,10 +73,6 @@ module.exports = {
     },
   },
   rowCount11: {
-    rowProps: {
-      height: "16vh",
-      width: "100vw",
-    },
     cardProps: {
       img: {
         height: "21vh",
@@ -121,10 +81,6 @@ module.exports = {
     },
   },
   rowCount12: {
-    rowProps: {
-      height: "14vh",
-      width: "100vw",
-    },
     cardProps: {
       img: {
         height: "21vh",
@@ -133,10 +89,6 @@ module.exports = {
     },
   },
   rowCount13: {
-    rowProps: {
-      height: "12vh",
-      width: "100vw",
-    },
     cardProps: {
       img: {
         height: "21vh",
@@ -145,10 +97,6 @@ module.exports = {
     },
   },
   rowCount14: {
-    rowProps: {
-      height: "10vh",
-      width: "100vw",
-    },
     cardProps: {
       img: {
         height: "21vh",
@@ -157,10 +105,6 @@ module.exports = {
     },
   },
   rowCount15: {
-    rowProps: {
-      height: "9.9vh",
-      width: "100vw",
-    },
     cardProps: {
       img: {
         height: "21vh",
@@ -169,10 +113,6 @@ module.exports = {
     },
   },
   rowCount16: {
-    rowProps: {
-      height: "9.9vh",
-      width: "100vw",
-    },
     cardProps: {
       img: {
         height: "21vh",

@@ -73,6 +73,18 @@ export default class NavBar extends Component {
               >
                 <a
                   className="navbarLinkButton"
+                  href="/"
+                  style={{
+                    color: this.color4,
+                    backgroundColor: this.color1,
+                    borderColor: this.color4,
+                  }}
+                  onClick={this.toggleDropDown}
+                >
+                  Home
+                </a>
+                <a
+                  className="navbarLinkButton"
                   href="/books"
                   style={{
                     color: this.color4,
@@ -147,7 +159,8 @@ export default class NavBar extends Component {
             </div>
           ) : null}
           {this.props.navtitle === "Settings" ||
-          this.props.navtitle === "Missing Media" ? null : (
+          this.props.navtitle === "Missing Media" ||
+          this.props.navtitle === "Home" ? null : (
             <div className="navTitleRight">
               <button
                 className="navOptions"
@@ -169,6 +182,7 @@ export default class NavBar extends Component {
                       onChange={this.props.navSearch}
                       style={{ backgroundColor: this.color1, height: "3vh" }}
                     />
+
                     <button
                       className="navMediaOptions menuTitleGroup"
                       style={{
@@ -292,7 +306,7 @@ export default class NavBar extends Component {
                           <input
                             type="range"
                             min="2"
-                            max={this.props.navtitle === "Music" ? 16 : 9}
+                            max={this.props.navtitle === "Music" ? 16 : 6}
                             step="1"
                             value={this.props.cardsPerRow}
                             className="navslider"

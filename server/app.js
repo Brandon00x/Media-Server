@@ -151,10 +151,13 @@ app.get("/api/open", cors(corsOptions), async function (req, res) {
     logger.info(`Platform was Windows? ${isWin}\nPath: ${finalPath}\n`);
     exec((isWin ? "start " : "open ") + finalPath, function (err) {
       if (err !== null) {
-        logger.error(`Error Opening File: ${err}.\nError Path: ${path}\n`);
+        logger.error(`Opening File: ${err}.\nError Path: ${path}\n`);
+        // Message Alerts Unable To Open.
+        res.send("error");
+      } else {
+        res.end();
       }
     });
-    res.end();
   } catch (err) {
     logger.error("Error Opening File: ", err);
   }
@@ -163,7 +166,7 @@ app.get("/api/open", cors(corsOptions), async function (req, res) {
 // Set Movie Stream Path
 app.get("/api/setvideo", async function (req, res) {
   videoSreamPath = req.query.data;
-  logger.info(`Set Video Stream Path:\n${videoSreamPath}`);
+  logger.info(`Set Video Stream Path: ${videoSreamPath}`);
   res.send(true);
 });
 
@@ -172,6 +175,7 @@ app.get("/api/setvideo", async function (req, res) {
 app.get("/api/video", async function (req, res) {
   try {
     let path = await videoSreamPath;
+    logger.info(`Starting Video Stream. Path: ${path}`);
     let stat = fs.statSync(path);
     let fileSize = stat.size;
     let range = req.headers.range;
@@ -199,6 +203,8 @@ app.get("/api/video", async function (req, res) {
     }
   } catch (err) {
     logger.error(`Error Streaming Video:\n${err}\n`);
+    res.status(400);
+    res.send(`Error Streaming Video:\n${err}\n`);
   }
 });
 

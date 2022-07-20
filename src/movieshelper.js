@@ -25,7 +25,16 @@ async function playInBrowser(e, isMovie) {
           autoPlay
           poster={this.poster}
         >
-          <source src={`/api/video/`} type="video/mp4" />
+          <source
+            src={`/api/video/`}
+            type="video/mp4"
+            onError={(e) => {
+              alert(
+                `Unable to stream ${this.name}. Please confirm drive is connected and file exists.`
+              );
+              this.getSeason(this.name);
+            }}
+          />
         </video>
       </div>
     );

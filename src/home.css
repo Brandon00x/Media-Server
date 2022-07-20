@@ -1,46 +1,55 @@
+.homeContainer {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  /* Scroll Vertical Disabled  */
+  overflow-y: hidden;
+  /* Scroll Horizontal Disabled */
+  overflow-x: hidden;
+}
+
 .homePage {
   display: flex;
-  margin-top: 53px;
   color: white;
-  justify-content: center;
-  text-align: center;
-  margin-top: 20vh;
-  max-height: 100vh;
-  max-width: 100vw;
+  flex-direction: column;
+  width: 78vw;
+  height: 100vh;
+  align-items: flex-start;
+  /* Scroll Vertical Allowed  */
+  overflow-y: scroll;
+  /* Scroll Horizontal Disabled */
+  overflow-x: hidden;
 }
 
-.homeTitle {
-  width: 15vw;
-  text-align: center;
-}
-
-.homeIcon {
-  margin-left: 20px;
-  margin-right: 20px;
+.homePageMediaRow {
+  margin-top: 2vh;
+  height: 57vh;
+  width: 78vw;
   text-decoration: none;
+}
+
+.homeTemplateSingleRow {
+  margin-top: -12vh;
+  margin-left: -10vw;
+  overflow-x: hidden;
+}
+
+.homeRowTitle {
+  display: flex;
+  margin-bottom: 1vh;
   color: white;
+  font-size: 1.8vw;
 }
 
-.fa-book {
-  color: blue;
+.homeRowType {
+  margin-right: 1vw;
 }
 
-.fa-tv {
-  color: silver;
+.homeTemplateRow {
+  margin-left: -1vw;
 }
 
-.fa-music {
-  color: red;
-}
-
-.fa-photo-film {
-  color: green;
-}
-
-.fa-film {
-  color: yellow;
-}
-
-.fa-cog{
-  color: brown
+.homeTemplateRowMusic {
+  margin-left: -5vw;
 }

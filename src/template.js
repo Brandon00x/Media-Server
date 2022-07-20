@@ -9,7 +9,13 @@ import Loading from "./Loading";
 import musicStyleProps from "./cardStylePropsMusic";
 import cardStyleProps from "./cardStyleProps";
 import Draggable from "react-draggable";
-import { createRows, cardTop, cardMiddle, cardBottom } from "./cardhelpers"; // Card Parts \ Create Rows
+import {
+  createHomeRows,
+  createRows,
+  cardTop,
+  cardMiddle,
+  cardBottom,
+} from "./cardhelpers"; // Card Parts \ Create Rows
 import {
   hideArtist,
   hideAlbumTitle,
@@ -51,8 +57,10 @@ export default class Template extends Component {
     this.pinnedStyleLeft = 0; // Pinned Side
     this.state = {
       navtitle: this.props.navtitle, // Navbar Main Title from Media Component
-      cardsPerRow: 4, // Zoom Level | Cards Per Row
+      cardsPerRow: 5, // Zoom Level | Cards Per Row
       scrollHidden: false, // Toggle Show Hide Scroll Bar
+      homeRowBooks: null,
+      homeRowCount: null,
 
       // Componenet Props | Loading / No Media Items / Show In Browser
       isLoading: true, // Toggle Show Loading Page
@@ -93,6 +101,7 @@ export default class Template extends Component {
     // See Comments Above Functions
     this.getMedia = this.getMedia.bind(this);
     this.createRows = createRows.bind(this);
+    this.createHomeRows = createHomeRows.bind(this);
     this.cardTop = cardTop.bind(this);
     this.cardMiddle = cardMiddle.bind(this);
     this.cardBottom = cardBottom.bind(this);
@@ -163,6 +172,8 @@ export default class Template extends Component {
   ////  Get Media and Create Media Cards
   async getMedia() {
     let mediaType = this.props.navtitle;
+    this.numRows = this.props.numRows;
+
     console.info("Template Media Type: ", mediaType);
     this.mediaCards = [];
     this.mediaCardsDescription = [];
@@ -265,7 +276,7 @@ export default class Template extends Component {
               title={this.title}
               year={this.year}
               length={this.length}
-              style={{ height: "auto" }}
+              // style={{ height: "auto" }}
             >
               {this.cardTop(
                 this.title,
@@ -305,13 +316,13 @@ export default class Template extends Component {
                   height: "30vw",
                   top: "20%",
                   border: "1px solid black",
-                  background: "burlywood",
+                  background: "white",
                 }}
               >
                 <div
                   className="mediaTopBar"
                   style={{
-                    backgroundColor: "goldenrod",
+                    backgroundColor: "skyblue",
                   }}
                 >
                   <div className="mediaTopBarButtons">
@@ -322,11 +333,15 @@ export default class Template extends Component {
                         action: "close",
                         key: this.key,
                       })}
-                      onClick={this.pinDescriptionCard}
+                      onClick={
+                        ((e) => this.minimizeDescriptionCard(e, true),
+                        this.pinDescriptionCard)
+                      }
                       style={{
                         background: "none",
                         border: "none",
-                        marginLeft: "5px",
+                        fontSize: "1vw",
+                        marginLeft: ".5em",
                       }}
                     />
                     <button
@@ -337,17 +352,19 @@ export default class Template extends Component {
                       style={{
                         background: "none",
                         border: "none",
+                        fontSize: "1vw",
                       }}
                     />
                     <button
                       className="far fa-window-minimize"
                       title="Minimize"
                       onClick={this.minimizeDescriptionCard}
-                      value={this.key}
+                      value={JSON.stringify(this.key)}
                       style={{
                         background: "none",
                         border: "none",
                         position: "relative",
+                        fontSize: "1vw",
                       }}
                     />
                   </div>
@@ -384,6 +401,7 @@ export default class Template extends Component {
 
         // Create this.state.cardsPerRow of Row
         this.createRows();
+        this.createHomeRows();
       } catch (err) {
         console.error(
           `Error Creating Media Cards: ${err}, Title: ${this.title}`
@@ -583,7 +601,8 @@ export default class Template extends Component {
               width: "30vw",
               height: "30vw",
               top: "20%",
-              backgroundColor: this.albumColor1,
+              backgroundColor:
+                this.albumColor1 === "#undefined" ? "white" : this.albumColor1,
               color: this.albumColor4,
               border: `2px solid ${this.albumColor4}`,
             }}
@@ -593,7 +612,7 @@ export default class Template extends Component {
               style={{
                 backgroundColor:
                   this.albumColor2 === "#undefined"
-                    ? "burlywood"
+                    ? "skyblue"
                     : this.albumColor2,
                 borderColor: this.albumColor4,
               }}
@@ -608,7 +627,8 @@ export default class Template extends Component {
                     color: this.albumColor4,
                     background: "none",
                     border: "none",
-                    marginLeft: "5px",
+                    fontSize: "1vw",
+                    marginLeft: ".5em",
                   }}
                 />
                 <button
@@ -620,6 +640,8 @@ export default class Template extends Component {
                     color: this.albumColor4,
                     background: "none",
                     border: "none",
+                    fontSize: "1vw",
+                    marginLeft: ".5em",
                   }}
                 />
                 <button
@@ -632,6 +654,8 @@ export default class Template extends Component {
                     background: "none",
                     border: "none",
                     position: "relative",
+                    fontSize: "1vw",
+                    marginLeft: ".5em",
                   }}
                 />
               </div>
@@ -737,6 +761,7 @@ export default class Template extends Component {
     }
 
     this.createRows();
+    this.createHomeRows();
   }
 
   // Photos Card
@@ -773,7 +798,7 @@ export default class Template extends Component {
             title={this.title}
             year={this.year}
             length={this.length}
-            style={{ height: "auto" }}
+            // style={{ height: "auto" }}
           >
             {this.cardTop(
               this.title,
@@ -813,13 +838,13 @@ export default class Template extends Component {
                 height: "30vw",
                 top: "20%",
                 border: "1px solid black",
-                background: "burlywood",
+                background: "white",
               }}
             >
               <div
                 className="mediaTopBar"
                 style={{
-                  backgroundColor: "goldenrod",
+                  backgroundColor: "skyblue",
                 }}
               >
                 <div className="mediaTopBarButtons">
@@ -834,7 +859,8 @@ export default class Template extends Component {
                     style={{
                       background: "none",
                       border: "none",
-                      marginLeft: "5px",
+                      fontSize: "1vw",
+                      marginLeft: ".5em",
                     }}
                   />
                   <button
@@ -845,6 +871,8 @@ export default class Template extends Component {
                     style={{
                       background: "none",
                       border: "none",
+                      fontSize: "1vw",
+                      marginLeft: ".5em",
                     }}
                   />
                   <button
@@ -856,6 +884,8 @@ export default class Template extends Component {
                       background: "none",
                       border: "none",
                       position: "relative",
+                      fontSize: "1vw",
+                      marginLeft: ".5em",
                     }}
                   />
                 </div>

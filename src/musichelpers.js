@@ -87,85 +87,103 @@ async function playLocalSong(e) {
       }}
     >
       <div className="musicTitleDiv" style={{ color: this.colors[0].color4 }}>
-        <h1 className="musicPlayerTitle">{this.songName}</h1>
-        <h4
+        <div className="musicPlayerTitle">{this.songName}</div>
+        <div
+          className="musicNavTitleArtist"
           style={{
             overflow: "hidden",
-            height: "24px",
+            height: "2vh",
           }}
         >
           {this.album} | {this.artist}
-        </h4>
+        </div>
       </div>
       <div className="musicControlsDiv">
         {/* Prev Icon */}
-        {this.trackNumber === 1 ? (
-          // Hidden Icon for Spacing
-          <i className="hiddenSpace musicControls" style={{ width: "36px" }} />
-        ) : (
-          <button
-            className="fas fa-angle-double-left fa-2x musicControls"
-            id="musicPrev"
-            title={`Previous: ${this.prevSong}`}
-            onClick={this.playLocalSong}
+        <div className="musicPlayerControlButtons">
+          {this.trackNumber === 1 ? (
+            // Hidden Icon for Spacing
+            <i
+              className="hiddenSpace musicControls"
+              style={{ width: "36px" }}
+            />
+          ) : (
+            <i
+              className="fas fa-angle-double-left musicControls"
+              id="musicPrev"
+              title={`Previous: ${this.prevSong}`}
+              onClick={this.playLocalSong}
+              style={{
+                color: this.colors[0].color4,
+                position: "relative",
+                background: "none",
+                border: "none",
+              }}
+              music={JSON.stringify(this.prevTrack)}
+            />
+          )}
+          {this.state.musicPlaying ? (
+            <i
+              className="fas fa-pause musicControls"
+              onClick={this.musicControls}
+              title="Pause"
+              style={{
+                color: this.colors[0].color4,
+                position: "relative",
+                background: "none",
+                border: "none",
+              }}
+            />
+          ) : (
+            <i
+              className="fas fa-play musicControls"
+              id="musicPlay"
+              title="Play"
+              onClick={this.musicControls}
+              style={{
+                color: this.colors[0].color4,
+                position: "relative",
+                background: "none",
+                border: "none",
+              }}
+            />
+          )}
+          <i
+            onClick={this.closeMusicPlayer}
+            title="Stop"
+            className="fas fa-stop musicControls"
             style={{
               color: this.colors[0].color4,
               position: "relative",
+              marginLeft: "10px",
               background: "none",
               border: "none",
             }}
-            music={JSON.stringify(this.prevTrack)}
           />
-        )}
-        {this.state.musicPlaying ? (
-          <i
-            className="fas fa-pause fa-2x musicControls"
-            onClick={this.musicControls}
-            title="Pause"
-            style={{
-              color: this.colors[0].color4,
-              position: "relative",
-            }}
-          />
-        ) : (
-          <i
-            className="fas fa-play fa-2x musicControls"
-            id="musicPlay"
-            title="Play"
-            onClick={this.musicControls}
-            style={{
-              color: this.colors[0].color4,
-              position: "relative",
-            }}
-          />
-        )}
-        <i
-          onClick={this.closeMusicPlayer}
-          title="Stop"
-          className="fas fa-stop fa-2x musicControls"
-          style={{
-            color: this.colors[0].color4,
-            position: "relative",
-            marginLeft: "10px",
-          }}
-        />
-        {/* Next Icon */}
-        {this.trackNumber === this.albumSongList.length ? null : (
-          <button
-            id="musicNext"
-            className="fas fa-angle-double-right fa-2x musicControls"
-            title={`Next: ${this.nextSong}`}
-            onClick={this.playLocalSong}
-            style={{
-              color: this.colors[0].color4,
-              position: "relative",
-              background: "none",
-              border: "none",
-            }}
-            music={JSON.stringify(this.nextTrack)}
-          />
-        )}
-        {/* Volume Slider */}
+          {/* Next Icon */}
+          {this.trackNumber === this.albumSongList.length ? (
+            // Hidden Icon for Spacing
+            <i
+              className="hiddenSpace musicControls"
+              style={{ width: "36px" }}
+            />
+          ) : (
+            <i
+              id="musicNext"
+              className="fas fa-angle-double-right musicControls"
+              title={`Next: ${this.nextSong}`}
+              onClick={this.playLocalSong}
+              style={{
+                color: this.colors[0].color4,
+                position: "relative",
+                background: "none",
+                border: "none",
+              }}
+              music={JSON.stringify(this.nextTrack)}
+            />
+          )}
+          {/* Volume Slider */}
+        </div>
         <div className="musicVolumeSlider">
           <input
             id="musicSlider"

@@ -10,7 +10,6 @@ const hex2rgba = (hex, alpha = 0.5) => {
 //// Sorting Options - Movies, TV, Books, Music, Photos
 // Sort By Year
 async function sortYear() {
-  console.log("Sorting By Year");
   if (this.state.isSortedByYear === false) {
     // Sort Cards
     if (this.props.navtitle === "Photos") {
@@ -106,7 +105,6 @@ async function sort() {
 
 // Sort By Length | Time, Pages, Tracks
 async function sortLength() {
-  console.log("Sorting By Length");
   if (this.state.isSortedByLength === false) {
     this.mediaCards.sort(function (a, b) {
       let spaceIndex1 = a.props.length.indexOf(" ");
@@ -180,10 +178,16 @@ async function changeRowCount(e, value) {
 }
 
 // Open Media File/Folder Locally
-function openMedia(e) {
+async function openMedia(e) {
   let values = JSON.parse(e.target.value);
   let path = values.Path;
-  axios.get(`/api/open`, { params: { data: path } });
+  let res = await axios.get(`/api/open`, { params: { data: path } });
+  // Unable To Open
+  if (res.data === "error") {
+    alert(
+      `Unable to open file. Please confirm drive is accessable to system.\n\nFile Path: ${path}`
+    );
+  }
 }
 
 // Close Pinned Card
@@ -208,19 +212,37 @@ async function closeDescriptionCard(key) {
     }
     return false;
   } catch (err) {
-    console.log("Closing Pinned Card Error: ", err);
+    console.error("Closing Pinned Card Error: ", err);
   }
 }
 
 // Minimizes Description Card View
-function minimizeDescriptionCard(e) {
-  let key = e.target.value;
+function minimizeDescriptionCard(e, isClose) {
+  let key;
   let mediaCard;
   let mediaCardKey;
   let initialStyle;
 
+  if (isClose === true) {
+    key = e;
+  } else {
+    try {
+      key = JSON.parse(e.target.value);
+    } catch (err) {}
+    try {
+      if (key === undefined) {
+        key = e.target.value;
+      }
+    } catch (err) {
+      console.error(`Unable to set Card Minimize Key ${err}`);
+    }
+  }
+
   for (let i = 0; i < this.mediaCardsDescription.length; i++) {
-    if (key === this.mediaCardsDescription[i].key) {
+    if (
+      key === this.mediaCardsDescription[i].key ||
+      (key === this.mediaCardsDescription[i].key && isClose === true)
+    ) {
       mediaCardKey = this.mediaCardsDescription[i].props.children.key;
       mediaCard = document.getElementById(mediaCardKey);
       initialStyle = mediaCard.getAttribute("style");
@@ -236,27 +258,44 @@ function minimizeDescriptionCard(e) {
 
         // Revert Media Card Bot Attributes
         if (this.props.navtitle !== "Music") {
-          let descriptionSpan =
-            this.mediaCardsDescription[i].props.children.props.children[3].key;
+          let mediaCardMiddle =
+            this.mediaCardsDescription[i].props.children.props.children[1].props
+              .id;
+          let mediaCardBottom =
+            this.mediaCardsDescription[i].props.children.props.children[2].props
+              .id;
+
           document
-            .getElementById(descriptionSpan)
-            .setAttribute("style", "display: ''");
+            .getElementById(mediaCardMiddle)
+            .removeAttribute("style", "display: none;");
+          document
+            .getElementById(mediaCardBottom)
+            .removeAttribute("style", "display: none;");
         }
       }
       // Hide Elements
       else {
-        // Change Media Card Attributes
+        // Change Media Card Attributes to Hidden
         mediaCard.setAttribute(
           "style",
           `${initialStyle} height: 0; width: 15vw; border: none;`
         );
 
-        // Change Media Card Bottom Attributes
+        // Change Media Card Bottom Attributes to Hidden
         if (this.props.navtitle !== "Music") {
-          let descriptionSpan =
-            this.mediaCardsDescription[i].props.children.props.children[3].key;
+          let mediaCardMiddle =
+            this.mediaCardsDescription[i].props.children.props.children[1].props
+              .id;
+          let mediaCardBottom =
+            this.mediaCardsDescription[i].props.children.props.children[2].props
+              .id;
+
           document
-            .getElementById(descriptionSpan)
+            .getElementById(mediaCardMiddle)
+            .setAttribute("style", "display: none;");
+
+          document
+            .getElementById(mediaCardBottom)
             .setAttribute("style", "display: none;");
         }
       }
@@ -269,6 +308,7 @@ function minimizeDescriptionCard(e) {
 async function pinDescriptionCard(e) {
   let key;
   let action;
+
   try {
     key = JSON.parse(e.target.value).key;
     action = JSON.parse(e.target.value).action;
@@ -282,6 +322,7 @@ async function pinDescriptionCard(e) {
   } finally {
     // If Key is still Undefined - Return.
     if (typeof key === "undefined") {
+      console.error("KEY STILL UNDEFINED");
       return;
     }
   }
@@ -313,7 +354,7 @@ async function pinDescriptionCard(e) {
         }
       }
     } catch (err) {
-      console.log("Creating Album Pin Error: ", err);
+      console.error("Creating Album Pin Error: ", err);
     }
   }
   // Open 1 Card
@@ -506,15 +547,15 @@ async function hotKeys(e) {
       return;
     } else if (
       this.props.navtitle !== "Music" &&
-      this.state.cardsPerRow === 9
+      this.state.cardsPerRow === 6
     ) {
-      return;
+      await this.changeRowCount(null, parseInt(this.state.cardsPerRow) - 1);
     }
     await this.changeRowCount(null, parseInt(this.state.cardsPerRow) + 1);
   } else if (e.key === this.state.hotkeyZoomOut) {
     // Do not decrease below min values
     if (this.state.cardsPerRow - 1 === 1) {
-      return;
+      await this.changeRowCount(null, parseInt(this.state.cardsPerRow) + 1);
     } else {
       await this.changeRowCount(null, this.state.cardsPerRow - 1);
     }

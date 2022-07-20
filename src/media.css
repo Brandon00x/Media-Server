@@ -16,7 +16,7 @@ body {
 }
 
 #mediaContentContainer {
-  margin-top: 62px;
+  margin-top: 10vh;
 }
 
 .scrollBarButton {
@@ -91,9 +91,99 @@ body {
   flex-direction: row;
   align-content: center;
   justify-content: center;
-  align-items: center;
+  width: 100vw;
+  align-items: flex-start;
   z-index: 0;
-  margin: 10px 0px 10px 0px;
+  margin: 2vh 0px 2vh 0px;
+  height: auto;
+}
+
+.mediaImg {
+  margin-top: 10px;
+}
+
+@media (min-width: 480px) and (max-width: 720px) {
+  .mediaRowMusic {
+    height: 30vh;
+  }
+  .mediaImg {
+    height: 40vh;
+    width: 15vw;
+  }
+}
+@media (min-width: 720px) and (max-width: 950px) {
+  .mediaRowMusic {
+    height: 30vh;
+  }
+  .mediaImg {
+    height: 40vh;
+    width: 15vw;
+  }
+}
+@media (min-width: 950px) and (max-width: 1150px) {
+  .mediaRowMusic {
+    height: 30vh;
+  }
+  .mediaImg {
+    height: 40vh;
+    width: 15vw;
+  }
+}
+@media (min-width: 1150px) and (max-width: 1350px) {
+  .mediaRowMusic {
+    height: 30vh;
+  }
+  .mediaImg {
+    height: 40vh;
+    width: 15vw;
+  }
+}
+@media (min-width: 1350px) and (max-width: 1920px) {
+  .mediaRowMusic {
+    height: 30vh;
+  }
+  .mediaImg {
+    height: 40vh;
+    width: 15vw;
+  }
+}
+/* 1080p */
+@media (min-width: 1920px) and (max-width: 2300px) {
+  .mediaRowMusic {
+    height: 30vh;
+  }
+  .mediaImg {
+    height: 40vh;
+    width: 15vw;
+  }
+}
+/* 2440p */
+@media (min-width: 2300px) and (max-width: 3200px) {
+  .mediaRowMusic {
+    height: 30vh;
+  }
+  .mediaImg {
+    height: 43vh;
+    width: 15vw;
+  }
+}
+@media (min-width: 3200px) and (max-width: 3700px) {
+  .mediaRowMusic {
+    height: 41vh;
+  }
+  .mediaImg {
+    height: 55vh;
+    width: 15vw;
+  }
+}
+@media (min-width: 3700px) and (max-width: 9999px) {
+  .mediaRowMusic {
+    height: 30vh;
+  }
+  .mediaImg {
+    height: 45vh;
+    width: 15vw;
+  }
 }
 
 .showFullSizeImage {
@@ -139,6 +229,8 @@ body {
 .mediaTopBarButtons {
   position: relative;
   display: flex;
+  justify-content: space-between;
+  width: 7vw;
 }
 
 .mediaDescBarTitle {
@@ -188,6 +280,7 @@ body {
 
 .mediaCardMiddle {
   margin: 0.5vw;
+  overflow: scroll;
 }
 
 .mediaCreator {
@@ -231,12 +324,11 @@ body {
 }
 
 .mediaDescription {
-  width: auto;
   margin: 0.5vw;
   overflow: scroll;
   overflow-y: scroll;
   overflow-x: hidden;
-  height: 32vh;
+  height: 24.5vh;
 }
 
 .mediaDescriptionMusic {
@@ -296,12 +388,13 @@ body {
 /* TV Seasons Popup */
 
 .seasonContainer {
-  width: 64vw;
-  height: 54vh;
-  margin-top: 5vh;
+  width: auto;
+  height: auto;
   border: 2px solid white;
   border-radius: 15px;
   background: rgb(255 255 255 / 11%);
+  display: flex;
+  flex-direction: row-reverse;
 }
 
 .newSeasonBreak {
@@ -321,40 +414,36 @@ body {
   font-size: 1vw;
 }
 
-.seasonsPreview {
-  width: 43vw;
-  height: 54vh;
-  display: flex;
-  flex-direction: column;
-  position: relative;
+.seasonsPreviewImg {
+  width: 20vw;
+  border: 2px solid white;
+  border-radius: 13px;
 }
 
-.seasonsPreviewImg {
-  height: 54.05vh;
-  width: 21vw;
-  left: 61.4%;
-  top: 11.9vh;
-  position: absolute;
-  border: 2px solid white;
-  border-radius: 15px;
+.seasonsPreview {
+  width: 46vw;
+  height: inherit;
+  position: relative;
 }
 
 .seasonsShowTitle {
   font-size: 2.5vmax;
   font-weight: bold;
   margin-bottom: 1vw;
-  background: #000000c2;
   color: white;
   border-top-left-radius: 10px;
   border-bottom: 2px solid white;
-  width: 45vw;
+  width: 46vw;
   max-height: 13vh;
   z-index: -1;
+  display: flex;
+  align-items: center;
 }
 
 .seasonShowTitleSpan {
   margin-left: 10px;
   width: 42vw;
+  background-color: #000000c2;
 }
 
 .seasonsShowSubTitle {
@@ -366,17 +455,17 @@ body {
 }
 
 .episodeSelector {
-  width: 12vw;
+  width: 10vw;
+  height: 3vh;
 }
 
 .seasonStatusBar {
   display: flex;
-  position: absolute;
-  bottom: 1%;
-  width: 43.5vw;
-  height: 5vh;
   border-top: 2px solid white;
   justify-content: space-between;
+  position: relative;
+  width: inherit;
+  margin-top: 1vh;
 }
 
 .seasonsShowSubTitleInfo {
@@ -387,10 +476,6 @@ body {
   font-size: 1.3vw;
   margin-right: 10px;
   margin-left: 10px;
-  max-height: 10vh;
-  overflow: scroll;
-  overflow-y: hidden;
-  overflow-x: hidden;
 }
 
 .seasonsPlayEpisode {
@@ -461,6 +546,7 @@ body {
 
 .descriptionPara {
   width: 25vw;
+  font-size: 1vw;
 }
 
 .musicTrackHolder {
@@ -468,6 +554,7 @@ body {
   flex-direction: column;
   align-items: center;
   margin-bottom: 10px;
+  font-size: 1vw;
 }
 
 .musicTracks {
@@ -475,7 +562,6 @@ body {
   flex-direction: row;
   justify-content: space-between;
   width: 25vw;
-  /* border: 1px solid; */
 }
 
 .musicTrack {
@@ -493,6 +579,7 @@ body {
   border: none;
   background: none;
   font-weight: bold;
+  font-size: 1vw;
 }
 
 .musicButtonDiv {
@@ -506,27 +593,49 @@ body {
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 10px;
+  margin-left: 1vw;
+  margin-right: 2vw;
 }
 
 /* Music Player */
 .musicPlayer {
   display: flex;
   width: 55vw;
-  height: 54px;
-  flex-direction: row;
+  height: 6vh;
   justify-content: center;
   align-items: center;
   position: fixed;
-  left: 15%;
+  left: 21.5%;
   z-index: 11;
 }
 
 .musicControlsDiv {
-  margin-left: 50px;
-  width: 45vw;
+  margin-left: 2vw;
   display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.musicPlayerTitle {
+  width: 39vw;
+  text-align: right;
+  height: 3.5vh;
+  overflow: hidden;
+  font-size: 1.75vw;
+}
+
+.musicNavTitleArtist {
+  overflow: hidden;
+  font-size: 1vw;
+  height: 2vh;
+}
+
+.musicPlayerControlButtons {
+  font-size: 1.5vw;
+  width: 12vw;
+  display: flex;
+  justify-content: space-around;
 }
 
 .musicTitleDiv {
@@ -539,14 +648,6 @@ body {
 .musicControls {
   margin-left: 5px;
   margin-right: 5px;
-}
-
-.musicPlayerTitle {
-  margin-bottom: -25px;
-  width: 39vw;
-  text-align: right;
-  height: 38px;
-  overflow: hidden;
 }
 
 .volumeSlider[type="range"] {
@@ -580,8 +681,8 @@ body {
 
 .pinnedItems {
   position: absolute;
-  top: 56px;
-  left: 5px;
+  bottom: 58vh;
+  left: 1vw;
   z-index: 3;
 }
 
@@ -589,4 +690,12 @@ body {
   position: absolute;
   top: 25%;
   left: 35vw;
+}
+
+.fa-folder-open {
+  font-size: 1vw;
+}
+
+.fa-play {
+  font-size: 1vw;
 }

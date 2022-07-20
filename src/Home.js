@@ -2,45 +2,74 @@ import React, { Component } from "react";
 import NavBar from "./NavBar";
 import { Link } from "react-router-dom";
 import "./home.css";
+import Template from "./template";
 
 export default class Home extends Component {
   constructor(props) {
     super(props);
+    this.books = { navtitle: "Books", numRows: 1 };
+    this.movies = { navtitle: "Movies", numRows: 1 };
+    this.tvShows = { navtitle: "TV Shows", numRows: 1 };
+    this.music = { navtitle: "Music", numRows: 1 };
+
     this.state = {
-      navtitle: "Media Server",
+      navtitle: "Home",
     };
   }
 
   render() {
     return (
       <div className="homeContainer">
-        <NavBar {...this.state} />
         <div className="homePage">
-          <Link className="homeIcon" to="/books">
-            <h1 className="homeTitle">Books</h1>
-            <i className="fa-solid fa-book fa-10x"></i>
+          <Link
+            className="homePageMediaRow"
+            to="/books"
+            style={{ marginTop: "10vh" }}
+          >
+            <div className="homeRowTitle">
+              <div className="homeRowType">Books</div>
+              <i className="fa-solid fa-book"></i>
+            </div>
+
+            <div className="homeTemplateRow">
+              <Template {...this.books} />
+            </div>
           </Link>
-          <Link className="homeIcon" to="movies">
-            <h1 className="homeTitle">Movies</h1>
-            <i className="fa-solid fa-film fa-10x"></i>
+
+          <Link className="homePageMediaRow" to="movies">
+            <div className="homeRowTitle">
+              <div className="homeRowType">Movies</div>
+              <i className="fa-solid fa-film"></i>
+            </div>
+
+            <div className="homeTemplateRow">
+              <Template {...this.movies} />
+            </div>
           </Link>
-          <Link className="homeIcon" to="/tv">
-            <h1 className="homeTitle">TV Shows</h1>
-            <i className="fa-solid fa-tv fa-10x"></i>
+
+          <Link className="homePageMediaRow" to="/tv">
+            <div className="homeRowTitle">
+              <div className="homeRowType">TV Shows</div>
+              <i className="fa-solid fa-tv"></i>
+            </div>
+
+            <div className="homeTemplateRow">
+              <Template {...this.tvShows} />
+            </div>
           </Link>
-          <Link className="homeIcon" to="/music">
-            <h1 className="homeTitle">Music</h1>
-            <i className="fa-solid fa-music fa-10x"></i>
-          </Link>
-          <Link className="homeIcon" to="/photos">
-            <h1 className="homeTitle">Photos</h1>
-            <i className="fa-solid fa-photo-film fa-10x"></i>
-          </Link>
-          <Link className="homeIcon" to="/settings">
-            <h1 className="homeTitle">Settings</h1>
-            <i className="fa fa-cog fa-10x"></i>
+
+          <Link className="homePageMediaRow" to="/music">
+            <div className="homeRowTitle" style={{ marginRight: "5.5vw" }}>
+              <div className="homeRowType">Music</div>
+              <i className="fa-solid fa-music"></i>
+            </div>
+
+            <div className="homeTemplateRow">
+              <Template {...this.music} />
+            </div>
           </Link>
         </div>
+        <NavBar {...this.state} />
       </div>
     );
   }

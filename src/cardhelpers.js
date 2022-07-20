@@ -5,6 +5,20 @@ import { Button } from "react-bootstrap";
 import { hex2rgba } from "./utilhelpers"; // Reusable Utils
 
 //// Create Card Rows
+function createHomeRows() {
+  if (this.numRows === 1) {
+    this.oldMediaRows = this.mediaRows;
+    this.mediaRows = (
+      <div
+        className={`homeTemplateSingleRow ${
+          this.props.navtitle === "Music" ? "homeTemplateRowMusic" : null
+        }`}
+      >
+        {this.mediaRows[Math.floor(Math.random() * this.mediaRows.length)]}
+      </div>
+    );
+  }
+}
 // Create Rows of Media Cards. Cards Per Row = state.cardsPerRow
 function createRows() {
   let rowCountProps = `rowCount${this.state.cardsPerRow}`;
@@ -18,6 +32,10 @@ function createRows() {
   this.mediaRowItemDescription = []; // Description Card Row Items
   let rowAlphabet; // Scroll Bar A-Z Index
   let z = 1;
+  let mediaRowClassName;
+  this.props.navtitle === "Music"
+    ? (mediaRowClassName = "mediaRow mediaRowMusic")
+    : (mediaRowClassName = "mediaRow");
 
   do {
     z++;
@@ -38,28 +56,12 @@ function createRows() {
       } catch (err) {}
 
       this.mediaRows.push(
-        <div
-          id={rowAlphabet}
-          className="mediaRow"
-          key={uuidv4()}
-          style={{
-            height: style.height,
-            width: style.width,
-          }}
-        >
+        <div id={rowAlphabet} className={mediaRowClassName} key={uuidv4()}>
           {this.mediaRowItem}
         </div>
       );
       this.mediaRowsDescription.push(
-        <div
-          id={rowAlphabet}
-          className="mediaRow"
-          key={uuidv4()}
-          style={{
-            height: style.height,
-            width: style.width,
-          }}
-        >
+        <div id={rowAlphabet} className={mediaRowClassName} key={uuidv4()}>
           {this.mediaRowItemDescription}
         </div>
       );
@@ -114,12 +116,7 @@ function cardTop(title, mediaType, imgType, imgUrl, photo, style) {
           alt=""
           onError={(e) => {
             e.target.src = "altimage.png";
-            e.target.style = `border: 1px solid white; width: ${style.img.width}; height: ${style.img.height}; margin-top: 10px`;
-          }}
-          style={{
-            width: style.img.width,
-            height: style.img.height,
-            marginTop: "10px",
+            //e.target.style = `border: 1px solid white; width: ${style.img.width}; height: ${style.img.height}; margin-top: 10px`;
           }}
         />
       )}
@@ -151,6 +148,8 @@ function cardMiddle(
   let lengthName;
   let categoriesName;
   let released;
+  let multiCreators = [];
+
   if (mediaType === "Movies") {
     lengthName = (
       <span style={{ fontWeight: "bold" }}>
@@ -178,6 +177,12 @@ function cardMiddle(
       </span>
     );
     categoriesName = "Categories";
+    try {
+      for (let i = 0; i < creator.length; i++) {
+        multiCreators.push(creator[i] + " ");
+      }
+    } catch (err) {}
+    creator = multiCreators;
   } else if (mediaType === "Music") {
     lengthName = `Tracks: ${length}`;
     released = (
@@ -209,9 +214,13 @@ function cardMiddle(
     released = year;
     categoriesName = "Photos";
   }
-
+  this.idKey = uuidv4(); // For Toggle Minimize
   const cardMiddle = (
-    <div className="mediaCardMiddle">
+    <div
+      id={this.idKey}
+      className="mediaCardMiddle"
+      style={mediaType === "Music" ? undefined : undefined}
+    >
       {mediaType === "Music" ? (
         <span
           id="mediaCreator"
@@ -291,7 +300,7 @@ function cardBottom(
     buttonClass = "mediaButtonDescription";
     buttonColor = "black";
   }
-  console.log(seasonCount);
+
   // Action Button - TV Shows
   this.showTvSeason = (
     <Button
@@ -398,4 +407,4 @@ function cardBottom(
 }
 //// End Create Card Sections
 
-export { createRows, cardTop, cardMiddle, cardBottom };
+export { createHomeRows, createRows, cardTop, cardMiddle, cardBottom };

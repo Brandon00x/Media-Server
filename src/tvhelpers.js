@@ -152,13 +152,16 @@ async function getSeason(e) {
   // Define Season Preview JSX Element with Data Above
   this.seasonPreview = (
     <div id="seasonContainer" className="seasonContainer">
-      <img src={this.showProps.Img} alt="" className="seasonsPreviewImg" />
-
+      {/* Right - Information */}
       <div className="seasonsPreview">
         <div className="seasonsShowTitle">
           <div className="seasonShowTitleSpan">{this.showProps.Title}</div>
+          {/* Close Icon */}
+          <i
+            className="far fa-times-circle closeCircle"
+            onClick={this.closeBrowserMedia}
+          ></i>
         </div>
-
         <div className="seasonShowDescription">{this.metaData.description}</div>
 
         {/* ROW 1 */}
@@ -309,13 +312,11 @@ async function getSeason(e) {
             </span>
           </div>
         </div>
-
-        {/* Close Icon */}
-        <i
-          onClick={this.closeBrowserMedia}
-          className="far fa-times-circle fa-2x closeCircle"
-        ></i>
       </div>
+      {/* Left - Image Preview */}
+      {/* <div className="tvseasonpreviewright"> */}
+      <img src={this.showProps.Img} alt="" className="seasonsPreviewImg" />
+      {/* </div> */}
     </div>
   );
   // Render Season(s) In Component: Show In Browser

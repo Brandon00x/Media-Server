@@ -1,15 +1,13 @@
 /* Global */
 .settingsContainer {
-  color: white;
-  padding-top: 40px;
   height: 100vh;
+  width: 79vw;
+  color: white;
+  margin-left: 11vw;
+  margin-top: 7vh;
   overflow-y: scroll;
 }
 
-.settingsComponents {
-  margin: 20px 10px 10px 50px;
-  display: block;
-}
 /* End Global */
 
 /* Scan Options */
@@ -19,8 +17,8 @@
 }
 
 .mediaDirectoryTitle {
-  font-size: 17px;
-  width: 115px;
+  font-size: 1vw;
+  width: 7.5vw;
   display: inline-block;
 }
 
